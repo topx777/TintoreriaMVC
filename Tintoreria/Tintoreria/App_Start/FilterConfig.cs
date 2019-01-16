@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Tintoreria
+namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC
 {
     public class FilterConfig
     {

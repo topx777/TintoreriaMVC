@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Tintoreria.Controllers
+namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class HomeController : Controller
     {

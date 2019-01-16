@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Tintoreria
+namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC
 {
     public class MvcApplication : System.Web.HttpApplication
     {

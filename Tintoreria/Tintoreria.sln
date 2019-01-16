@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tintoreria", "Tintoreria\Tintoreria.csproj", "{3F2A63F7-E1FB-4F71-B90C-C2AC6FC0CDF8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{74413A06-3CDD-43DE-B619-2555EB17C2C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A9F31E18-4145-47FC-9CAE-5BD992EE46E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{3F2A63F7-E1FB-4F71-B90C-C2AC6FC0CDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F2A63F7-E1FB-4F71-B90C-C2AC6FC0CDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F2A63F7-E1FB-4F71-B90C-C2AC6FC0CDF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F31E18-4145-47FC-9CAE-5BD992EE46E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F31E18-4145-47FC-9CAE-5BD992EE46E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F31E18-4145-47FC-9CAE-5BD992EE46E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F31E18-4145-47FC-9CAE-5BD992EE46E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A9F31E18-4145-47FC-9CAE-5BD992EE46E4} = {74413A06-3CDD-43DE-B619-2555EB17C2C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FCB1B08-D3A5-4906-8F5D-A58FD77DBBF9}
