@@ -7,5 +7,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class Persona
     {
+        
     }
 }
