@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core
+namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
 {
-    public class Class1
+    public class Persona
     {
+        public int edad;
     }
 }
