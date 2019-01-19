@@ -18,6 +18,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             try
             {
                 lista = CategoriaListDal.Get();
+
             }
             catch (SqlException ex)
             {
