@@ -1,0 +1,46 @@
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaModel
+@{
+    ViewBag.Title = "Crear Categoria";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Crear Categoria</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div class="row">
+            <div class="col s6">
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Nombre)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nombre Categoria" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Descripcion)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "validate", @placeholder = "Descripcion Categoria" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Precio)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Precio, new { @class = "validate", @placeholder = "Precio Categoria" })
+                    </div>
+                </div>
+                <button type="submit" class="waves-effect waves-light btn">
+                    <i class="material-icons left">add</i> Crear Categoria
+                </button>
+            </div>
+        </div>
+    </fieldset>
+}
+
