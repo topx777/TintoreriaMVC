@@ -11,7 +11,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            string hola = "Hola Mundo";
+            string hola = "Hola Mundo , soy Mauricio";
             return View();
         }
     }
