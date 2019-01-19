@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaModel>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -12,10 +13,10 @@
 <table class="table table-striped">
     <tr>
         <th>
-            Nombre
+            @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
-            Precio
+            @Html.DisplayNameFor(model => model.Precio)
         </th>
         <th>Actions</th>
     </tr>

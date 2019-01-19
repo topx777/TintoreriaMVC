@@ -13,12 +13,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         [Display (Name = "ID")]
         public int IdCategoria { get; set; }
 
+        [Required]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
         [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
 
+        [Required]
         [Display(Name = "Precio")]
         public double Precio { get; set; }
 
