@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="CategoriaDal.cs" />
     <Compile Include="CategoriaListDal.cs" />
+    <Compile Include="ClienteDal.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrabajoDal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
