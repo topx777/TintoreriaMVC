@@ -94,7 +94,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE PACIENTES SET Cliente=@cliente, 
+            string queryString = @"UPDATE Trabajo SET Cliente=@cliente, 
                                     FechaTrabajo=@fechaTrabajo,
                                     TotalPrecio=@totalPrecio, 
                                     FechaEntrega=@fechaEntrega, 
@@ -152,7 +152,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     res = new Trabajo()
                     {
                         IdTrabajo=dr.GetInt32(0),
-                        //Cliente=Cliente.Get(dr.GetInt32(1)),
+                        Cliente=ClienteDal.Get(dr.GetInt32(1)),
                         FechaTrabajo=dr.GetDateTime(2),
                         //PedidoDistancia=Pedido.Get(dr.GetInt32(3)),
                         EntregaDomicilio=dr.GetBoolean(4),
