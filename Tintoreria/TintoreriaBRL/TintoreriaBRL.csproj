@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="CategoriaBrl.cs" />
     <Compile Include="CategoriaListBrl.cs" />
+    <Compile Include="PersonalBrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrabajoBrl.cs" />
   </ItemGroup>
