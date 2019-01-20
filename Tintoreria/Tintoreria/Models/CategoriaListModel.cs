@@ -15,7 +15,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         public static CategoriaListModel Get()
         {
             CategoriaListModel _categoriaListModel = new CategoriaListModel();
-            foreach (var categoria in Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL.CategoriaListBrl.Get())
+            foreach (var categoria in CategoriaListBrl.Get())
             {
                 _categoriaListModel.Add(new CategoriaModel
                 {
