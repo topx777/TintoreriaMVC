@@ -44,12 +44,16 @@
     <Compile Include="CategoriaDal.cs" />
     <Compile Include="CategoriaListDal.cs" />
     <Compile Include="ClienteDal.cs" />
+    <Compile Include="DireccionDal.cs" />
     <Compile Include="Methods.cs" />
+    <Compile Include="PedidoDal.cs" />
+    <Compile Include="PersonaDal.cs" />
     <Compile Include="PersonalDal.cs" />
     <Compile Include="PersonalListDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TelefonoDal.cs" />
     <Compile Include="TrabajoDal.cs" />
+    <Compile Include="TrabajoDetalleDal.cs" />
     <Compile Include="UsuarioDal.cs" />
   </ItemGroup>
   <ItemGroup>

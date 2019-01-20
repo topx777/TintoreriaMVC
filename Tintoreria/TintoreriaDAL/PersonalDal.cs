@@ -10,7 +10,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
     public class PersonalDal
     {
-        public static void InsertarPersonal(Personal personal )
+        public static void Insertar(Personal personal, List<Telefono> telefonos, List<Direccion> direcciones)
         {
             Methods.GenerateLogsDebug("PersonalaDal", "InsertarPersonal", string.Format("{0} Info: {1}", 
             DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un personal"));
@@ -18,31 +18,32 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             //Consulta para insertar datos de personal
-            string queryString = @"INSERT INTO Usuario(Username, Password, EsAdmin) VALUES(@username, @password, @esAdmin)";
-            string queryString1 = @"INSERT INTO Persona(Nombre, PrimerApellido, SegundoApellido, Sexo, FechaNacimiento, Correo, Usuario)
-                                  VALUES(@nombre, @primerApellido, @segundoApellido, @sexo, @fechaNacimiento, @correo, @usuario)";
-            string queryString2 = @"INSERT INTO Cliente(IdPersona, Nit, Razon, FechaRegistro) VALUES (@idPersona ,@nit, @razon, @fechaRagistro)";
+            string queryString = @"INSERT INTO Personal(IdPersona, CodPersonal, Ci, FechaIngreso, Cargo, Sueldo, Turno) 
+                               VALUES (@idPersona ,@codPersonal, @ci, @fechaIngreso, @cargo, @sueldo, @turno)";
             try
             {
-                command = Methods.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@username", personal.Usuario.Username);
-                command.Parameters.AddWithValue("@password", personal.Usuario.Password);
-                command.Parameters.AddWithValue("@esAdmin", personal.Usuario.EsAdmin);
-                Methods.ExecuteBasicCommand(command);
+                UsuarioDal.Insertar(personal.Usuario);
+                
                 personal.Usuario.IdUsuario = Methods.GetActIDTable("Usuario");
 
-                command = Methods.CreateBasicCommand(queryString1);
-                command.Parameters.AddWithValue("@nombre", personal.Nombre);
-                command.Parameters.AddWithValue("@primerApellido", personal.PrimerApellido);
-                command.Parameters.AddWithValue("@segundoApellido", personal.SegundoApellido);
-                command.Parameters.AddWithValue("@sexo", personal.Sexo);
-                command.Parameters.AddWithValue("@fechaNacimiento", personal.FechaNacimiento);
-                command.Parameters.AddWithValue("@correo", personal.Correo);
-                command.Parameters.AddWithValue("@usuario", personal.Usuario.IdUsuario);
-                Methods.ExecuteBasicCommand(command);
+                Persona persona = personal;
+                PersonaDal.Insertar(persona);
+
                 personal.IdPersona = Methods.GetActIDTable("Persona");
 
-                command = Methods.CreateBasicCommand(queryString2);
+                //Insertar telefonos
+                foreach(Telefono telf in telefonos)
+                {
+                    TelefonoDal.Insertar(telf, personal.IdPersona);
+                }
+
+                //Insertar direcciones
+                foreach(Direccion direc in direcciones)
+                {
+                    DireccionDal.Insertar(direc, personal.IdPersona);
+                }
+
+                command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@idPersona", personal.IdPersona);
                 command.Parameters.AddWithValue("@codPersonal", personal.CodPersonal);
                 command.Parameters.AddWithValue("@ci", personal.Ci);

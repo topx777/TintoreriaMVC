@@ -10,7 +10,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
     public class TelefonoDal
     {
-        public static void Insertar(Telefono telefono)
+        public static void Insertar(Telefono telefono, int idPersona)
         {
             Methods.GenerateLogsDebug("TelefonoDal", "Insertar", string.Format("{0} Info: {1}",
             DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un telefono"));
@@ -18,7 +18,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             //Consulta para insertar telefonos
-            string queryString = @"INSERT INTO Telefono(idTelefono, Numero, tipo, idPersona) VALUES(@idTelefono, @numero, @tipo, @idPersona)";
+            string queryString = @"INSERT INTO Telefono(idTelefono, Numero, Tipo, idPersona) VALUES(@idTelefono, @numero, @tipo, @idPersona)";
         
             try
             {
@@ -26,7 +26,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@idTelefono", telefono.IdTelefono);
                 command.Parameters.AddWithValue("@numero", telefono.IdTelefono);
                 command.Parameters.AddWithValue("@tipo", telefono.Tipo);
-                command.Parameters.AddWithValue("@idPersona", telefono.idPersona);
+                command.Parameters.AddWithValue("@idPersona", idPersona);
                 Methods.ExecuteBasicCommand(command);
 
             }

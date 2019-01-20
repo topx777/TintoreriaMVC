@@ -14,8 +14,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Personal
         public ActionResult Index()
         {
-            PersonalListModel lista = PersonalListModel.Get();
+            //PersonalListModel lista = PersonalListModel.Get();
             return View();
         }
+
+
     }
 }

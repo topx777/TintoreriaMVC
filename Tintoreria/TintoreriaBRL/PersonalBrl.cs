@@ -11,11 +11,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 {
     class PersonalBrl
     {
-        public static void InsertarPersonal(Personal personal)
+        public static void InsertarPersonal(Personal personal, List<Telefono> telefonos, List<Direccion> direcciones)
         {
             try
             {
-                PersonalDal.InsertarPersonal(personal);
+                PersonalDal.Insertar(personal, telefonos, direcciones);
             }
             catch (SqlException ex)
             {
