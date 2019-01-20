@@ -1,10 +1,12 @@
 ﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaModel
+
 @{
-    ViewBag.Title = "Crear Categoria";
+    ViewBag.Title = "Editar Categoria";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Crear Categoria</h2>
+<h2>Editar Categoria</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -40,10 +42,11 @@
                     </div>
                 </div>
                 <button type="submit" class="waves-effect waves-light btn">
-                    <i class="material-icons left">add</i> Crear Categoria
+                    <i class="material-icons left">edit</i> Modificar Categoria
                 </button>
             </div>
         </div>
     </fieldset>
 }
+
 

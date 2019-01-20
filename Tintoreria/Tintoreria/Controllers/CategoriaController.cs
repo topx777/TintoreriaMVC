@@ -41,6 +41,45 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
                 CategoriaBrl.Insertar(categoria);
                 return RedirectToAction("../Categoria/Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Ver Modificar Categoria
+        public ActionResult Editar(int mCodigo)
+        {
+            Categoria cat = CategoriaBrl.Get(mCodigo);
+            CategoriaModel model = new CategoriaModel()
+            {
+                IdCategoria = cat.IdCategoria,
+                Nombre = cat.Nombre,
+                Descripcion = cat.Descripcion,
+                Precio = cat.Precio
+            };
+
+            return View(model);
+        }
+
+        //POST: Modificar Categoria
+        [HttpPost]
+        public ActionResult Editar(int mCodigo, CategoriaModel model)
+        {
+            try
+            {
+                Categoria categoria = new Categoria()
+                {
+                    IdCategoria = mCodigo,
+                    Nombre = model.Nombre,
+                    Descripcion = model.Descripcion,
+                    Precio = model.Precio
+                };
+
+                CategoriaBrl.Actualizar(categoria);
+
+                return RedirectToAction("../Categoria/Index");
 
             }
             catch
@@ -49,5 +88,42 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             }
         }
 
+        //GET Ver Categoria
+        public ActionResult Ver(int mCodigo)
+        {
+            Categoria cat = CategoriaBrl.Get(mCodigo);
+            CategoriaModel model = new CategoriaModel()
+            {
+                IdCategoria = cat.IdCategoria,
+                Nombre = cat.Nombre,
+                Descripcion = cat.Descripcion,
+                Precio = cat.Precio
+            };
+
+            return View(model);
+        }
+
+        // GET: Categoria/Delete/5
+        public ActionResult Eliminar()
+        {
+            return View();
+        }
+
+        // POST: Categoria/Delete/5
+        [HttpPost]
+        public ActionResult Eliminar(int mCodigo)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                CategoriaBrl.Eliminar(mCodigo);
+                return RedirectToAction("../Categoria/Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

@@ -1,10 +1,12 @@
 ﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaModel
+
 @{
-    ViewBag.Title = "Crear Categoria";
+    ViewBag.Title = "Ver Categoria";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Crear Categoria</h2>
+<h2>Ver Categoria</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -17,7 +19,7 @@
                         @Html.LabelFor(model => model.Nombre)
                     </div>
                     <div class="input-field col s10">
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nombre Categoria" })
+                        @Html.TextBoxFor(model => model.Nombre, new { @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.Nombre)
                     </div>
                 </div>
@@ -26,7 +28,7 @@
                         @Html.LabelFor(model => model.Descripcion)
                     </div>
                     <div class="input-field col s10">
-                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "validate", @placeholder = "Descripcion Categoria" })
+                        @Html.TextBoxFor(model => model.Descripcion, new { @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.Descripcion)
                     </div>
                 </div>
@@ -35,13 +37,13 @@
                         @Html.LabelFor(model => model.Precio)
                     </div>
                     <div class="input-field col s10">
-                        @Html.TextBoxFor(model => model.Precio, new { @class = "validate", @placeholder = "Precio Categoria" })
+                        @Html.TextBoxFor(model => model.Precio, new { @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.Precio)
                     </div>
                 </div>
-                <button type="submit" class="waves-effect waves-light btn">
-                    <i class="material-icons left">add</i> Crear Categoria
-                </button>
+                <a href="@Url.Action("../Categoria/Index")" class="waves-effect waves-light btn red">
+                    <i class="material-icons left">arrow_back</i> Volver Atras
+                </a>
             </div>
         </div>
     </fieldset>

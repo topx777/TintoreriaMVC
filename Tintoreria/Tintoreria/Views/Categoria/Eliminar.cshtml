@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Eliminar Categoria</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div class="row">
+            <div class="s6">
+                @Html.Label("Esta seguro que desea eliminar la categoria?", new { @style = "font-size: 17px;" })
+                <br />
+                <div class="row">
+                    <div class="s6">
+                        <button type="submit" class="waves-effect waves-light btn red">
+                            <i class="material-icons left">delete</i> Eliminar Categoria
+                        </button>
+                    </div>
+                    <div class="s6">
+                        <a href="@Url.Action("../Categoria/Index")" class="waves-effect waves-light btn blue">
+                            <i class="material-icons left">arrow_back</i> Volver Atras
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}

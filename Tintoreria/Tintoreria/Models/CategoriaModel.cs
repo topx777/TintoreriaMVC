@@ -22,9 +22,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
 
-        [Required(ErrorMessage = "Campo precio no debe estar vacio.")]
+        [Range(1, double.MaxValue, ErrorMessage = "El rango del precio es invalido.")]
         [Display(Name = "Precio")]
-        [Range(0, 99999999.99, ErrorMessage = "El rango del precio es invalido.")]
         public double Precio { get; set; }
 
         #endregion
