@@ -166,8 +166,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Cliente res = new Cliente();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"Select * From Usuario 
-                            INNER JOIN Persona ON Usuario.IdUsuario=Persona.Usuario
+            string query = @"Select Persona.*,
+                                    Cliente.Nit, Cliente.Razon, Cliente.FechaRegistro
+                            FROM Persona 
                             INNER JOIN Cliente ON Persona.IdPersona=Cliente.IdPersona
                             WHERE Cliente.IdPersona=@id";
             try
@@ -180,16 +181,20 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     res = new Cliente()
                     {
                         IdPersona=dr.GetInt32(0),
-                        Nit=dr.GetInt32(1),
-                        Razon=dr.GetString(2),
-                        FechaRegistro=dr.GetDateTime(4),
-                        Nombre=dr.GetString(5),
-                        PrimerApellido=dr.GetString(6),
-                        SegundoApellido=dr.GetInt32(7),
-                        //Sexo=SexoDal.Get(dr.GetInt32(8))
-                       FechaNacimiento=dr.GetInt32(9),
-                       Correo=dr.GetInt32(10),
-                        //Usuario=UsuarioDal.Get(dr.GetInt32(11))
+                        Nombre=dr.GetString(1),
+                        PrimerApellido=dr.GetString(2),
+                        SegundoApellido=dr.GetString(3),
+                        Sexo=dr.GetString(4),
+                        FechaNacimiento=dr.GetDateTime(5),
+                        Correo=dr.GetString(6),
+                        //Usuario=UsuarioDal.Get(dr.GetInt32(7)),
+                        //Direcciones=DireccionListDal(dr.GetInt32(0)),
+                        //Telefonos=TelefonoListDal(dr.GetInt32(0)),
+                        Borrado=dr.GetBoolean(7),
+                        Nit=dr.GetInt32(8),
+                        Razon=dr.GetString(9),
+                        FechaRegistro=dr.GetDateTime(10)
+                        
 
                     };
                 }
