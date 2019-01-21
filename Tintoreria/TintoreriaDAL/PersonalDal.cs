@@ -67,5 +67,34 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
             Methods.GenerateLogsDebug("PersonalDal", "InsertarPersonal", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un personal"));
         }
+
+        //Eliminado logico de Personal
+        public static void Eliminar (int id)
+        {
+            //Methods.GenerateLogsDebug("PersonalDal", "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un personal"));
+
+            SqlCommand command = null;
+
+            // Proporcionar la cadena de consulta 
+            string queryString = "UPDATE Persona SET Borrado = 1 WHERE IdPersona=@id";
+
+            try
+            {
+                command = Methods.CreateBasicCommand(queryString);
+                command.Parameters.AddWithValue("@id", id);
+                Methods.ExecuteBasicCommand(command);
+            }
+            catch (SqlException ex)
+            {
+                //Methods.GenerateLogsRelease("PersonalDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                //Methods.GenerateLogsRelease("PersonalDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            //Methods.GenerateLogsDebug("PersonalDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un paciente"));
+        }
     }
 }

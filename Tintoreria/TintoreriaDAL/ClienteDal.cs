@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
@@ -10,57 +11,51 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Inserta nuevo Cliente a la base  de datos
         /// </summary>
         /// <param name="cliente"></param>
-        public static void Insertar(Cliente cliente)
+        public static void Insertar(Cliente cliente, List<Telefono> telefonos, List<Direccion> direcciones)
         {
-            //Methods.GenerateLogsDebug("PacienteDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un paciente"));
+            Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Insertar un paciente"));
 
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"INSERT INTO Usuario(Username, Password, EsAdmin) VALUES(@username, @password, @esAdmin)";
-            string queryString1 = @"INSERT INTO Persona(Nombre, PrimerApellido, SegundoApellido, Sexo, FechaNacimiento, Correo, Usuario)
-                                  VALUES(@nombre, @primerApellido, @segundoApellido, @sexo, @fechaNacimiento, @correo, @usuario)";
-            string queryString2 = @"INSERT INTO Cliente(IdPersona, Nit, Razon, FechaRegistro) VALUES (@idPersona ,@nit, @razon, @fechaRagistro)";
+            string queryString = @"INSERT INTO Cliente(IdPersona, Nit, Razon, FechaRegistro) VALUES (@idPersona ,@nit, @razon, @fechaRagistro)";
             try
             {
-                command = Methods.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@username", cliente.Usuario.Username);
-                command.Parameters.AddWithValue("@password", cliente.Usuario.Password);
-                command.Parameters.AddWithValue("@esAdmin", cliente.Usuario.EsAdmin);
-                Methods.ExecuteBasicCommand(command);
+                UsuarioDal.Insertar(cliente.Usuario);
                 cliente.Usuario.IdUsuario = Methods.GetActIDTable("Usuario");
 
-                command = Methods.CreateBasicCommand(queryString1);
-                command.Parameters.AddWithValue("@nombre", cliente.Nombre );
-                command.Parameters.AddWithValue("@primerApellido", cliente.PrimerApellido );
-                command.Parameters.AddWithValue("@segundoApellido", cliente.SegundoApellido );
-                command.Parameters.AddWithValue("@sexo", cliente.Sexo );
-                command.Parameters.AddWithValue("@fechaNacimiento", cliente.FechaNacimiento );
-                command.Parameters.AddWithValue("@correo", cliente.Correo );
-                command.Parameters.AddWithValue("@usuario", cliente.Usuario.IdUsuario);
-                Methods.ExecuteBasicCommand(command);
+                Persona persona = cliente;
+                PersonaDal.Insertar(persona);
                 cliente.IdPersona = Methods.GetActIDTable("Persona");
 
-                command = Methods.CreateBasicCommand(queryString2);
+                command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@idPersona",cliente.IdPersona);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
                 command.Parameters.AddWithValue("@fechaRegistro", cliente.FechaRegistro);
                 Methods.ExecuteBasicCommand(command);
 
+                foreach (Telefono telefono in telefonos)
+                {
+                    TelefonoDal.Insertar(telefono, cliente.IdPersona);
+                }
+                foreach (Direccion direccion in direcciones)
+                {
+                    DireccionDal.Insertar(direccion, cliente.IdPersona);
+                }
             }
             catch (SqlException ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            //Methods.GenerateLogsDebug("PacienteDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un paciente"));
+            Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un Cliente"));
 
         }
 
@@ -70,7 +65,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <param name="id"></param>
         public static void Eliminar(int id)
         {
-            //Methods.GenerateLogsDebug("PacienteDal", "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un paciente"));
+            Methods.GenerateLogsDebug("ClienteDal", "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un Cliente"));
 
             SqlCommand command = null;
 
@@ -84,16 +79,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (SqlException ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            //Methods.GenerateLogsDebug("PacienteDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un paciente"));
+                Methods.GenerateLogsDebug("ClienteDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un Cliente"));
 
         }
 
@@ -103,7 +98,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <param name="cliente"></param>
         public static void Actualizar(Cliente cliente)
         {
-            //Methods.GenerateLogsDebug("PacienteDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar un paciente"));
+            Methods.GenerateLogsDebug("ClienteDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar un Cliente"));
 
             SqlCommand command = null;
 
@@ -143,16 +138,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (SqlException ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            //Methods.GenerateLogsDebug("PacienteDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Actualizar un paciente"));
+                Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Actualizar un paciente"));
 
         }
 
@@ -201,7 +196,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Obteber", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Obtenet(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             finally
