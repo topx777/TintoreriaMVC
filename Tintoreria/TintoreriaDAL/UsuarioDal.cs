@@ -13,7 +13,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <param name="usuario"></param>
         public static void Insertar(Usuario usuario)
         {
-            //Methods.GenerateLogsDebug("PacienteDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un paciente"));
+            Methods.GenerateLogsDebug("UsuarioDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un usuario"));
 
             SqlCommand command = null;
 
@@ -30,16 +30,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (SqlException ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("UsuarioDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("UsuarioDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            //Methods.GenerateLogsDebug("PacienteDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un paciente"));
+            Methods.GenerateLogsDebug("UsuarioDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un usuario"));
 
         }
 
@@ -49,7 +49,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <param name="usuario"></param>
         public static void Actualizar(Usuario usuario)
         {
-            //Methods.GenerateLogsDebug("PacienteDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar un paciente"));
+            Methods.GenerateLogsDebug("UsuarioDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar un usuario"));
 
             SqlCommand command = null;
 
@@ -67,18 +67,61 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (SqlException ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("UsuarioDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("UsuarioDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
-            //Methods.GenerateLogsDebug("PacienteDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Actualizar un paciente"));
+            Methods.GenerateLogsDebug("UsuarioDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Actualizar un usuario"));
 
         }
+
+        /// <summary>
+        /// Metodo para login de usuario
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static Usuario Auth(string username, string password)
+        {
+            Usuario res = new Usuario();
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = "SELECT * FROM Usuario WHERE Username = @username AND Password = @pass";
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@pass", password);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+                while (dr.Read())
+                {
+                    res = new Usuario()
+                    {
+                        IdUsuario = dr.GetInt32(0),
+                        Username = dr.GetString(1),
+                        Password = dr.GetString(2),
+                        EsAdmin = dr.GetBoolean(3)
+                    };
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("UsuarioDal", "Login", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return res;
+        }
+
 
         /// <summary>
         /// Obtiene un Trabajo de la base de datos
@@ -87,6 +130,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <returns></returns>
         public static Usuario Get(int id)
         {
+
+
             Usuario res = new Usuario();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
@@ -109,7 +154,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PacienteDal", "Obteber", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("UsuarioDal", "Obteber", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             finally
