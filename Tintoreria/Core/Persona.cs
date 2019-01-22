@@ -8,12 +8,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
         #region Atributos
 
         public int IdPersona { get; set; }
+        public string Ci { get; set; }
         public string Nombre { get; set; }
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
-        public string Sexo { get; set; }
+        public Sexo Sexo { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public string Correo { get; set; }
+        public List<Correo> Correos  { get; set; }
         public Usuario Usuario { get; set; }
         public List<Direccion> Direcciones { get; set; }
         public List<Telefono> Telefonos { get; set; }
