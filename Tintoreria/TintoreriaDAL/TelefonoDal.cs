@@ -123,7 +123,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         }
 
         /// <summary>
-        /// Obtiene un Cliente de la base de datos
+        /// Obtiene un Telefono de la base de datos
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
