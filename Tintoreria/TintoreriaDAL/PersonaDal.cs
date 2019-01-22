@@ -161,9 +161,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         Nombre = dr.GetString(2),
                         PrimerApellido = dr.GetString(3),
                         SegundoApellido = dr.GetString(4),
-                        Sexo = Sexo.Get(dr.GetInt32(5)),
+                        Sexo = SexoDal.Get(dr.GetInt32(5)),
                         FechaNacimiento = dr.GetDateTime(6),
-                        Usuario = Usuario.Get(dr.GetInt32(7)),
+                        Usuario = UsuarioDal.Get(dr.GetInt32(7)),
                         Borrado = dr.GetBoolean(8)
                     };
                 }
