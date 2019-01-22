@@ -12,14 +12,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
     {
         public static void Insertar(Personal personal, List<Telefono> telefonos, List<Direccion> direcciones)
         {
-            Methods.GenerateLogsDebug("PersonalaDal", "InsertarPersonal", string.Format("{0} Info: {1}", 
+            Methods.GenerateLogsDebug("PersonalDal", "InsertarPersonal", string.Format("{0} Info: {1}", 
             DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un personal"));
 
             SqlCommand command = null;
 
             //Consulta para insertar datos de personal
-            string queryString = @"INSERT INTO Personal(IdPersona, CodPersonal, Ci, FechaIngreso, Cargo, Sueldo, Turno) 
-                               VALUES (@idPersona ,@codPersonal, @ci, @fechaIngreso, @cargo, @sueldo, @turno)";
+            string queryString = @"INSERT INTO Personal(IdPersona, CodPersonal, FechaIngreso, Cargo, Sueldo) 
+                               VALUES (@idPersona ,@codPersonal, @fechaIngreso, @cargo, @sueldo)";
             try
             {
                 UsuarioDal.Insertar(personal.Usuario);
@@ -46,9 +46,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@idPersona", personal.IdPersona);
                 command.Parameters.AddWithValue("@codPersonal", personal.CodPersonal);
-                command.Parameters.AddWithValue("@ci", personal.Ci);
                 command.Parameters.AddWithValue("@fechaIngreso", personal.FechaIngreso);
-                command.Parameters.AddWithValue("@fechaIngreso", personal.Cargo);
+                command.Parameters.AddWithValue("@cargo", personal.Cargo.IdCargo);
                 command.Parameters.AddWithValue("@sueldo", personal.Sueldo);
                 Methods.ExecuteBasicCommand(command);
                 
@@ -70,30 +69,100 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         //Eliminado logico de Personal
         public static void Eliminar (int id)
         {
-            //Methods.GenerateLogsDebug("PersonalDal", "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un personal"));
+            PersonaDal.Eliminar(id);
+            Methods.GenerateLogsDebug("PersonalDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un personal"));
+        }
+
+        /// <summary>
+        /// Actualiza los datos del personal en la base de datos
+        /// </summary>
+        /// <param name="personal"></param>
+        public static void Actualizar(Personal personal)
+        {
+            Methods.GenerateLogsDebug("PersonalDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar un personal"));
 
             SqlCommand command = null;
 
-            // Proporcionar la cadena de consulta 
-            string queryString = "UPDATE Persona SET Borrado = 1 WHERE IdPersona=@id";
+            //realizar la consulta de actualiza a personal
+            Persona persona = personal;
+            PersonaDal.Actualizar(persona);
 
+            // Proporcionar la cadena de consulta 
+            string queryString = @"UPDATE Personal SET CodPersonal=@codPersonal, FechaIngreso=@fechaIngreso, Cargo=@cargo, Sueldo=@sueldo WHERE IdPersona=@idPersona";
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@codPersonal", personal.CodPersonal);
+                command.Parameters.AddWithValue("@fechaIngreso", personal.FechaIngreso);
+                command.Parameters.AddWithValue("@cargo", personal.Cargo.IdCargo);
+                command.Parameters.AddWithValue("@sueldo", personal.Sueldo);
+                command.Parameters.AddWithValue("@idPersona", personal.IdPersona);
                 Methods.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
             {
-                //Methods.GenerateLogsRelease("PersonalDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("PersonalDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                //Methods.GenerateLogsRelease("PersonalDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("PersonalDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
-            //Methods.GenerateLogsDebug("PersonalDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un paciente"));
+
+            Methods.GenerateLogsDebug("PersonalDal", "Actualizar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Actualizar un personal"));
+
+        }
+
+
+        /// <summary>
+        /// Obtine  la informacion de un personal
+        /// </summary>
+        /// <param name="id">identificador del personal </param>
+        /// <returns></returns>
+        public static Personal Get(int id)
+        {
+            Personal res = new Personal();
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = "SELECT * FROM Personal WHERE IdPersona = @id";
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@id", id);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+                while (dr.Read())
+                {
+                    res = new Personal()
+                    {
+                        IdPersona = dr.GetInt32(0),
+                        CodPersonal = dr.GetString(1),
+                        FechaIngreso = dr.GetDateTime(2),
+                        Cargo = Cargo.Get(dr.GetInt32(3)),
+                        Sueldo = dr.GetSqlDecimal(4).ToDouble()
+                    };
+                }
+
+                Persona persona = PersonaDal.Get(res.IdPersona);
+                res.Ci = persona.Ci;
+                res.Nombre = persona.Nombre;
+                res.PrimerApellido = persona.PrimerApellido;
+                res.SegundoApellido = persona.SegundoApellido;
+                res.Sexo = persona.Sexo;
+                res.FechaNacimiento = persona.FechaNacimiento;
+                res.Usuario = persona.Usuario;
+                res.Borrado = persona.Borrado;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("PersonalDal", "Obtener", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return res;
         }
     }
 }

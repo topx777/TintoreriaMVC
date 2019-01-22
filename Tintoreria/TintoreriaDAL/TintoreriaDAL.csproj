@@ -44,6 +44,7 @@
     <Compile Include="CategoriaDal.cs" />
     <Compile Include="CategoriaListDal.cs" />
     <Compile Include="ClienteDal.cs" />
+    <Compile Include="CorreoDal.cs" />
     <Compile Include="DireccionDal.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="PedidoDal.cs" />
