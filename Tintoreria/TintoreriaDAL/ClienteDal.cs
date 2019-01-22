@@ -11,7 +11,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Inserta nuevo Cliente a la base  de datos
         /// </summary>
         /// <param name="cliente"></param>
-        public static void Insertar(Cliente cliente, List<Telefono> telefonos, List<Direccion> direcciones)
+        public static void Insertar(Cliente cliente, List<Telefono> telefonos, List<Direccion> direcciones, List<Correo> correos)
         {
             Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Insertar un paciente"));
 
@@ -42,6 +42,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 foreach (Direccion direccion in direcciones)
                 {
                     DireccionDal.Insertar(direccion, cliente.IdPersona);
+                }
+                foreach (Correo correo in correos)
+                {
+                    CorreoDal.Insertar(correo);
                 }
             }
             catch (SqlException ex)
@@ -103,38 +107,20 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Usuario SET Username=@username, Password=@password, EsAdmin=@esAdmin 
-                                    WHERE IdUsuario=@idUsuario";
-            string queryString1 = @"UPDATE Persona SET Nombre=@nombre, PrimerApellido=@primerApellido, SegundoApellido=@segundoApellido, 
-                                    Sexo=@sexo, FechaNacimiento=@fechaNacimiento, Correo=@correo, Usuario=@usuario
-                                    WHERE IdPersona=@idPersona";
-            string queryString2 = @"UPDATE Cliente SET Nit=@nit, Razon=@razon, FechaRegistro=@fechaRegistro 
+            string queryString = @"UPDATE Cliente SET Nit=@nit, Razon=@razon, FechaRegistro=@fechaRegistro 
                                     WHERE @IdPersona=@idPersona";
             try
             {
+                UsuarioDal.Actualizar(cliente.Usuario);
+                Persona persona = cliente;
+                PersonaDal.Actualizar(persona);
+
                 command = Methods.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@username", cliente.Usuario.Username);
-                command.Parameters.AddWithValue("@password", cliente.Usuario.Password);
-                command.Parameters.AddWithValue("@esAdmin", cliente.Usuario.EsAdmin);
-                command.Parameters.AddWithValue("@idUsuario", cliente.Usuario.IdUsuario);
-                Methods.ExecuteBasicCommand(command);
-
-                command = Methods.CreateBasicCommand(queryString1);
-                command.Parameters.AddWithValue("@nombre", cliente.Nombre);
-                command.Parameters.AddWithValue("@primerApellido", cliente.PrimerApellido);
-                command.Parameters.AddWithValue("@segundoApellido", cliente.SegundoApellido);
-                command.Parameters.AddWithValue("@sexo",cliente.Sexo);
-                command.Parameters.AddWithValue("@fechaNacimiento", cliente.FechaNacimiento);
-                command.Parameters.AddWithValue("@correo", cliente.Correo);
-                command.Parameters.AddWithValue("@usuario",cliente.Usuario.IdUsuario);
-                command.Parameters.AddWithValue("@idPersona", cliente.IdPersona);
-                Methods.ExecuteBasicCommand(command);
-
-                command = Methods.CreateBasicCommand(queryString2);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
                 command.Parameters.AddWithValue("@fechaRegistro", cliente.FechaRegistro);
                 command.Parameters.AddWithValue("@idPersona", cliente.IdPersona);
+                Methods.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
             {
@@ -176,19 +162,20 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     res = new Cliente()
                     {
                         IdPersona=dr.GetInt32(0),
-                        Nombre=dr.GetString(1),
-                        PrimerApellido=dr.GetString(2),
-                        SegundoApellido=dr.GetString(3),
-                        //Sexo=SexoDal.Get(dr.GetInt32(4)),
-                        FechaNacimiento=dr.GetDateTime(5),
-                        Correo=dr.GetString(6),
-                        //Usuario=UsuarioDal.Get(dr.GetInt32(7)),
+                        Ci=dr.GetString(1),
+                        Nombre=dr.GetString(2),
+                        PrimerApellido=dr.GetString(3),
+                        SegundoApellido=dr.GetString(4),
+                        Sexo=SexoDal.Get(dr.GetInt32(5)),
+                        FechaNacimiento=dr.GetDateTime(6),
+                        Usuario=UsuarioDal.Get(dr.GetInt32(7)),
+                        Borrado=dr.GetBoolean(8),
                         //Direcciones=DireccionListDal(dr.GetInt32(0)),
                         //Telefonos=TelefonoListDal(dr.GetInt32(0)),
-                        Borrado=dr.GetBoolean(7),
-                        Nit=dr.GetInt32(8),
-                        Razon=dr.GetString(9),
-                        FechaRegistro=dr.GetDateTime(10)
+                        //Correos=CorreosListDal(dr.GetInt32(0)),
+                        Nit=dr.GetInt32(9),
+                        Razon=dr.GetString(10),
+                        FechaRegistro=dr.GetDateTime(11)
                         
 
                     };

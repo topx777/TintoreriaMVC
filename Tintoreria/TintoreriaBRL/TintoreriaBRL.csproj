@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CargoBrl.cs" />
     <Compile Include="CategoriaBrl.cs" />
     <Compile Include="CategoriaListBrl.cs" />
     <Compile Include="PersonalBrl.cs" />
