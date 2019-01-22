@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
 {
-    class Correo
+    public class Correo
     {
         #region atributos
 
-        public int IdCorreos { get; set; }
+        public int IdCorreo { get; set; }
         public string Nombre { get; set; }
         public bool Principal { get; set; }
 
