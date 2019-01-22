@@ -10,7 +10,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
     public class PersonalDal
     {
-        public static void Insertar(Personal personal, List<Telefono> telefonos, List<Direccion> direcciones)
+        public static void Insertar(Personal personal, List<Telefono> telefonos, List<Direccion> direcciones, List<Correo> correos)
         {
             Methods.GenerateLogsDebug("PersonalDal", "InsertarPersonal", string.Format("{0} Info: {1}", 
             DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un personal"));
@@ -41,6 +41,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 foreach(Direccion direc in direcciones)
                 {
                     DireccionDal.Insertar(direc, personal.IdPersona);
+                }
+
+                //Insertar correos
+                foreach (Correo correo in correos)
+                {
+                    CorreoDal.Insertar(correo, personal.IdPersona);
                 }
 
                 command = Methods.CreateBasicCommand(queryString);
