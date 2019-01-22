@@ -50,7 +50,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@fechaIngreso", personal.FechaIngreso);
                 command.Parameters.AddWithValue("@fechaIngreso", personal.Cargo);
                 command.Parameters.AddWithValue("@sueldo", personal.Sueldo);
-                command.Parameters.AddWithValue("@turno", personal.Turno);
                 Methods.ExecuteBasicCommand(command);
                 
             }
