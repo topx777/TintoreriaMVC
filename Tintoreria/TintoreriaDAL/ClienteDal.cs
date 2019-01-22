@@ -45,7 +45,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 }
                 foreach (Correo correo in correos)
                 {
-                    CorreoDal.Insertar(correo);
+                    CorreoDal.Insertar(correo, cliente.IdPersona);
                 }
             }
             catch (SqlException ex)
