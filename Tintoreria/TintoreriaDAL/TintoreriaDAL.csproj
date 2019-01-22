@@ -51,6 +51,7 @@
     <Compile Include="PersonalDal.cs" />
     <Compile Include="PersonalListDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SexoDal.cs" />
     <Compile Include="TelefonoDal.cs" />
     <Compile Include="TipoDal.cs" />
     <Compile Include="TrabajoDal.cs" />
