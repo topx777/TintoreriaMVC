@@ -4,7 +4,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
-    public class DireccionDal
+    class TipoDal
     {
         /// <summary>
         /// Inserta una direccion a una persona
@@ -140,10 +140,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     res = new Direccion()
                     {
                         IdDireccion = dr.GetInt32(0),
-                        Descripcion=dr.GetString(1),
+                        Descripcion = dr.GetString(1),
                         //Tipo=Tipo.Get(dr.GetInt32(2)),
-                        Latitud=dr.GetDouble(3),
-                        Longitud=dr.GetDouble(4),
+                        Latitud = dr.GetDouble(3),
+                        Longitud = dr.GetDouble(4),
                     };
                 }
             }
