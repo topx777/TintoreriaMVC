@@ -14,14 +14,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
         {
             Console.WriteLine("Insertando Cargo");
 
-            Cargo cargo = new Cargo()
-            {
-                Nombre = "Secretaria"
-            };
+            
 
             Console.Write("Insertar nuevo cargo?");
             Console.ReadKey();
-            CargoBrl.Insertar(cargo);
+            CargoBrl.Eliminar(2);
 
             Console.Write("Cargo Insertado");
             Console.ReadKey();
