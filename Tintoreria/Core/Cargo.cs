@@ -9,8 +9,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
     public class Cargo
     {
         #region Atributos
+
         public int idCargo { get; set; }
         public string Nombre { get; set; }
+
         #endregion
     }
 }

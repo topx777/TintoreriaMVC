@@ -12,5 +12,5 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
         public double Sueldo { get; set; }
 
         #endregion
-    }
+    } 
 }
