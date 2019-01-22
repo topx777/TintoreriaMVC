@@ -10,7 +10,7 @@
         public Categoria Categoria { get; set; }
         public double PrecioFinal { get; set; }
         public double Peso { get; set; }
-        public int Estado { get; set; }
+        public Estado Estado { get; set; }
         public bool Borrado { get; set; }
 
         #endregion
