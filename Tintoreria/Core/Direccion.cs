@@ -6,7 +6,7 @@
 
         public int IdDireccion { get; set; }
         public string Descripcion { get; set; }
-        public string Tipo { get; set; }
+        public Tipo Tipo { get; set; }
         public double Latitud { get; set; }
         public double Longitud { get; set; }
 
