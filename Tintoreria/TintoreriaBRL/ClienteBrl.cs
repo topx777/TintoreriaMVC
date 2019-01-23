@@ -19,12 +19,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             }
             catch (SqlException ex)
             {
-                Methods.GenerateLogsRelease("CargoBrl", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("CargoBrl", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
         }
@@ -65,31 +65,34 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             }
             catch (SqlException ex)
             {
-                Methods.GenerateLogsRelease("CargoBrl", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("clienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("CargoBrl", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
         }
 
-        //metodo para eliminar un cargo
+        /// <summary>
+        /// Metodo para eliminar logicamente un Cliente
+        /// </summary>
+        /// <param name="id"></param>
         public static void Eliminar(int id)
         {
             try
             {
-                CargoDal.Eliminar(id);
+                ClienteDal.Eliminar(id);
             }
             catch (SqlException ex)
             {
-                Methods.GenerateLogsRelease("CargoBrl", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("CargoBrl", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("ClienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
 
