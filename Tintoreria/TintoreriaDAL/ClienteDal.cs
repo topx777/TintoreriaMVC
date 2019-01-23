@@ -103,7 +103,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Actualiza un Cliente de la base de datos
         /// </summary>
         /// <param name="cliente"></param>
-        public static void Actualizar(Cliente cliente)
+        public static void Actualizar(Cliente cliente)  
         {
             Methods.GenerateLogsDebug("ClienteDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar un Cliente"));
 
