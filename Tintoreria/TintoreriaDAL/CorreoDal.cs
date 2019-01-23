@@ -92,7 +92,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Eliminar Correo de la BD
         /// </summary>
         /// <param name="id"></param>
-        //Eliminado logico de Persona
         public static void Eliminar(int id)
         {
             Methods.GenerateLogsDebug("CorreoDal", "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un correo"));

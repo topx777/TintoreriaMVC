@@ -10,7 +10,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
     public class PersonalDal
     {
-        public static void Insertar(Personal personal, List<Telefono> telefonos, List<Direccion> direcciones, List<Correo> correos)
+        public static void Insertar(Personal personal)
         {
             Methods.GenerateLogsDebug("PersonalDal", "InsertarPersonal", string.Format("{0} Info: {1}", 
             DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un personal"));
@@ -32,19 +32,19 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 personal.IdPersona = Methods.GetActIDTable("Persona");
 
                 //Insertar telefonos
-                foreach(Telefono telf in telefonos)
+                foreach(Telefono telf in personal.Telefonos)
                 {
                     TelefonoDal.Insertar(telf, personal.IdPersona);
                 }
 
                 //Insertar direcciones
-                foreach(Direccion direc in direcciones)
+                foreach(Direccion direc in personal.Direcciones)
                 {
                     DireccionDal.Insertar(direc, personal.IdPersona);
                 }
 
                 //Insertar correos
-                foreach (Correo correo in correos)
+                foreach (Correo correo in persona.Correos)
                 {
                     CorreoDal.Insertar(correo, personal.IdPersona);
                 }
@@ -122,7 +122,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
 
         /// <summary>
-        /// Obtine  la informacion de un personal
+        /// Obtiene la informacion de un personal
         /// </summary>
         /// <param name="id">identificador del personal </param>
         /// <returns></returns>

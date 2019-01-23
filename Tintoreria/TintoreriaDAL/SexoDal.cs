@@ -6,6 +6,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
     class SexoDal
     {
+        /// <summary>
+        /// Get Sexo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Sexo Get(int id)
         {
             Sexo res = new Sexo();

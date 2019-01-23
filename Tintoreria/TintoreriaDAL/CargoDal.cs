@@ -9,6 +9,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
     public class CargoDal
     {
+        /// <summary>
+        /// Metodo para Insertar un nuevo cargo en la BD.
+        /// </summary>
+        /// <param name="cargo">Objeto Cargo</param>
         public static void Insertar(Cargo cargo)
         {
             Methods.GenerateLogsDebug("CargoDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear una cargo"));
@@ -39,9 +43,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("CargoDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un paciente"));
 
         }
-         //Obtiene la informacion de un cargo
-            public static Cargo Get(int id)
-            {
+
+        /// <summary>
+        /// Obtiene la informacion de un cargo
+        /// </summary>
+        /// <param name="id">Id cargo</param>
+        /// <returns></returns>
+        public static Cargo Get(int id)
+        {
             Cargo res = new Cargo();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
@@ -72,6 +81,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             return res;
         }
 
+        /// <summary>
+        /// Actualizar Cargo en la Base de datos
+        /// </summary>
+        /// <param name="cargo"></param>
         public static void Actualizar(Cargo cargo)
         {
             Methods.GenerateLogsDebug("CargoDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar una categoria"));
@@ -102,8 +115,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
         }
 
-        //Eliminar cargo
-
+        /// <summary>
+        /// Eliminar cargo
+        /// </summary>
+        /// <param name="id">Id de Cargo</param>
         public static void Eliminar(int id)
         {
             Methods.GenerateLogsDebug("CargoDal", "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar una categoria"));

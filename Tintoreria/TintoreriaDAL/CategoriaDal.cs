@@ -11,9 +11,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
     public class CategoriaDal
     {
         /// <summary>
-        /// Metodo que sirve para insertar a la base de datos
+        /// Metodo que sirve para insertar categoria a la base de datos
         /// </summary>
-        /// <param name="categoria">Objeto paciente</param>
+        /// <param name="categoria">Objeto Categoria</param>
         public static void Insertar(Categoria categoria)
         {
             Methods.GenerateLogsDebug("CategoriaDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear una categoria"));
