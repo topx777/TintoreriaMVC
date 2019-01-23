@@ -11,7 +11,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Inserta nuevo Cliente a la base  de datos
         /// </summary>
         /// <param name="cliente"></param>
-        public static void Insertar(Cliente cliente, List<Telefono> telefonos, List<Direccion> direcciones, List<Correo> correos)
+        public static void Insertar(Cliente cliente)
         {
             Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Insertar un paciente"));
 
@@ -21,13 +21,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             string queryString = @"INSERT INTO Cliente(IdPersona, Nit, Razon, FechaRegistro) VALUES (@idPersona ,@nit, @razon, @fechaRagistro)";
             try
             {
+                //Registro Usuario
                 UsuarioDal.Insertar(cliente.Usuario);
                 cliente.Usuario.IdUsuario = Methods.GetActIDTable("Usuario");
 
+                //Registro Persona
                 Persona persona = cliente;
                 PersonaDal.Insertar(persona);
                 cliente.IdPersona = Methods.GetActIDTable("Persona");
 
+                //Registro Cliente
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@idPersona",cliente.IdPersona);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
@@ -35,15 +38,15 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@fechaRegistro", cliente.FechaRegistro);
                 Methods.ExecuteBasicCommand(command);
 
-                foreach (Telefono telefono in telefonos)
+                foreach (Telefono telefono in cliente.Telefonos)
                 {
                     TelefonoDal.Insertar(telefono, cliente.IdPersona);
                 }
-                foreach (Direccion direccion in direcciones)
+                foreach (Direccion direccion in cliente.Direcciones)
                 {
                     DireccionDal.Insertar(direccion, cliente.IdPersona);
                 }
-                foreach (Correo correo in correos)
+                foreach (Correo correo in cliente.Correos)
                 {
                     CorreoDal.Insertar(correo, cliente.IdPersona);
                 }
@@ -111,10 +114,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                                     WHERE @IdPersona=@idPersona";
             try
             {
+                //Actualiza Usuario
                 UsuarioDal.Actualizar(cliente.Usuario);
+
+                //Actualiza Persona
                 Persona persona = cliente;
                 PersonaDal.Actualizar(persona);
 
+                //Actualiza Cliente
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
