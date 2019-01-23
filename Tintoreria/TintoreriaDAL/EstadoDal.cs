@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
-    public class SexoDal
+    public class EstadoDal
     {
         /// <summary>
-        /// Get Sexo
+        /// Get Estado
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Sexo Get(int id)
+        public static Estado Get(int id)
         {
-            Sexo res = new Sexo();
+            Estado res = new Estado();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT * FROM Sexo WHERE IdSexo=@id";
+            string query = @"SELECT * FROM Estado WHERE IdEstado=@id";
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
@@ -25,16 +28,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 dr = Methods.ExecuteDataReaderCommand(cmd);
                 while (dr.Read())
                 {
-                    res = new Sexo()
+                    res = new Estado()
                     {
-                        IdSexo=dr.GetInt32(0),
-                        Nombre=dr.GetString(1)
+                        IdEstado = dr.GetInt32(0),
+                        Nombre = dr.GetString(1)
                     };
                 }
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("SexoDal", "Obtenet(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("EstadoDal", "Obtener(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             finally
@@ -45,27 +48,27 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         }
 
         /// <summary>
-        /// Obtiene Lista de Sexos
+        /// Obtiene Lista de Estados
         /// </summary>
-        /// <returns>Lista de Objetos Sexo</returns>
-        public static List<Sexo> GetList()
+        /// <returns>Lista de Objetos Estado</returns>
+        public static List<Estado> GetList()
         {
-            List<Sexo> res = new List<Sexo>();
+            List<Estado> res = new List<Estado>();
 
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT * FROM Sexo";
+            string query = @"SELECT * FROM Estado";
 
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
                 dr = Methods.ExecuteDataReaderCommand(cmd);
 
-                while(dr.Read())
+                while (dr.Read())
                 {
-                    res.Add(new Sexo()
+                    res.Add(new Estado()
                     {
-                        IdSexo = dr.GetInt32(0),
+                        IdEstado = dr.GetInt32(0),
                         Nombre = dr.GetString(1)
                     });
                 }
@@ -73,12 +76,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (SqlException ex)
             {
-                Methods.GenerateLogsRelease("SexoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                Methods.GenerateLogsRelease("EstadoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
                 throw ex;
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("SexoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                Methods.GenerateLogsRelease("EstadoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
                 throw ex;
             }
             finally
@@ -88,6 +91,5 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
             return res;
         }
-
     }
 }

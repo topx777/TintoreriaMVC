@@ -147,6 +147,53 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("CargoDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar una categoria"));
 
         }
+
+        /// <summary>
+        /// Obtiene Lista de Cargo
+        /// </summary>
+        /// <returns>Lista de Objetos Cargo</returns>
+        public static List<Cargo> GetList()
+        {
+            List<Cargo> res = new List<Cargo>();
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Cargo";
+
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+
+                while (dr.Read())
+                {
+                    res.Add(new Cargo()
+                    {
+                        IdCargo = dr.GetInt32(0),
+                        Nombre = dr.GetString(1)
+                    });
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("CargoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("CargoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return res;
+        }
+
+
     }
     
     

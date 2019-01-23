@@ -29,7 +29,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@recepcion", pedido.Recepcion);
                 command.Parameters.AddWithValue("@precioPedido", pedido.PrecioPedido);
-                command.Parameters.AddWithValue("@direccionPedido", pedido.);
+                command.Parameters.AddWithValue("@direccionPedido", pedido.DireccionPedido);
                 Methods.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
