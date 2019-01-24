@@ -20,9 +20,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"INSERT INTO Trabajo(Cliente, FechaTrabajo, TotalPrecio, FechaEntrega, PedidoDistancia, EntregaDomicilio, TrabajoDetalle)
+            string queryString = @"INSERT INTO Trabajo(Cliente, FechaTrabajo, TotalPrecio, FechaEntrega, PedidoDistancia, EntregaDomicilio)
                                     VALUES
-                                   (@Cliente, @FechaTrabajo, @TotalPrecio, @FechaEntrega, @PedidoDistancia, @EntregaDomicilio, @TrabajoDetalle)";
+                                   (@Cliente, @FechaTrabajo, @TotalPrecio, @FechaEntrega, @PedidoDistancia, @EntregaDomicilio)";
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
@@ -30,9 +30,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@FechaTrabajo", DateTime.Now);
                 command.Parameters.AddWithValue("@TotalPrecio", trabajo.TotalPrecio);
                 command.Parameters.AddWithValue("@FechaEntrega", trabajo.FechaEntrega);
-                command.Parameters.AddWithValue("@PedidoDistancia", trabajo.PedidoDistancia.IdPedido);
+                //command.Parameters.AddWithValue("@PedidoDistancia", trabajo.PedidoDistancia != null ? trabajo.PedidoDistancia.IdPedido : null);
                 command.Parameters.AddWithValue("@EntregaDomicilio", trabajo.EntregaDomicilio);
-                command.Parameters.AddWithValue("@TrabajoDetalle", trabajo.TrabajoDetalle);
                 Methods.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)
