@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
@@ -156,6 +157,56 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             {
                 cmd.Connection.Close();
             }
+            return res;
+        }
+
+        /// <summary>
+        /// Obtiene una lista de direcciones por id de Persona
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static List<Direccion> GetList(int id)
+        {
+            List<Direccion> res = new List<Direccion>();
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Direccion WHERE IdPersona=@idPersona";
+
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@idPersona", id);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+
+                while (dr.Read())
+                {
+                    res.Add(new Direccion()
+                    {
+                        IdDireccion = dr.GetInt32(0),
+                        Descripcion = dr.GetString(1),
+                        Tipo = TipoDal.Get(dr.GetInt32(2)),
+                        Latitud = dr.GetSqlDecimal(3).ToDouble(),
+                        Longitud = dr.GetSqlDecimal(4).ToDouble()
+                    });
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("DireccionDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("DireccionDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
             return res;
         }
     }

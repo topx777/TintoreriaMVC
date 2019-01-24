@@ -160,5 +160,54 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             return res;
         }
+
+        /// <summary>
+        /// Obtiene una lista de Telefonos por id de Persona
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static List<Telefono> GetList(int id)
+        {
+            List<Telefono> res = new List<Telefono>();
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Telefono WHERE IdPersona=@idPersona";
+
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@idPersona", id);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+
+                while (dr.Read())
+                {
+                    res.Add(new Telefono()
+                    {
+                        IdTelefono = dr.GetInt32(0),
+                        Numero = dr.GetString(1),
+                        Tipo = TipoDal.Get(dr.GetInt32(2))
+                    });
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("TelefonoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("TelefonoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return res;
+        }
+
     }
 }

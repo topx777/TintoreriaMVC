@@ -159,6 +159,54 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             return res;
         }
 
+        /// <summary>
+        /// Obtiene una lista de Correos por id de Persona
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static List<Correo> GetList(int id)
+        {
+            List<Correo> res = new List<Correo>();
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Correo WHERE IdPersona=@idPersona";
+
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@idPersona", id);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+
+                while (dr.Read())
+                {
+                    res.Add(new Correo()
+                    {
+                        IdCorreo = dr.GetInt32(0),
+                        Nombre = dr.GetString(1),
+                        Principal = dr.GetBoolean(2)
+                    });
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("CorreoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("CorreoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return res;
+        }
+
 
     }
 }
