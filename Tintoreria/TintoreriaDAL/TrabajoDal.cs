@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
@@ -15,7 +16,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <param name="trabajo"></param>
         public static void Insertar(Trabajo trabajo)
         {
-            Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un Trabajo"));
+            Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para insertar un Trabajo"));
 
             SqlCommand command = null;
 
@@ -30,9 +31,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@FechaTrabajo", DateTime.Now);
                 command.Parameters.AddWithValue("@TotalPrecio", trabajo.TotalPrecio);
                 command.Parameters.AddWithValue("@FechaEntrega", trabajo.FechaEntrega);
-                //command.Parameters.AddWithValue("@PedidoDistancia", trabajo.PedidoDistancia != null ? trabajo.PedidoDistancia.IdPedido : null);
+                command.Parameters.AddWithValue("@PedidoDistancia", trabajo.PedidoDistancia != null ? trabajo.PedidoDistancia.IdPedido : null);
                 command.Parameters.AddWithValue("@EntregaDomicilio", trabajo.EntregaDomicilio);
                 Methods.ExecuteBasicCommand(command);
+
+                int idTrabajo = Methods.GetActIDTable("Trabajo");
+
+                foreach(TrabajoDetalle x in trabajo.TrabajoDetalle)
+                {
+                    TrabajoDetalleDal.Insertar(x, idTrabajo);
+                }
             }
             catch (SqlException ex)
             {
@@ -45,14 +53,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 throw ex;
             }
 
-                Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un paciente"));
+            Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un trabajo"));
 
         }
 
         /// <summary>
         /// Elimina trabajo ya existente
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Identificador de Trabajo</param>
         public static void Eliminar(int id)
         {
             Methods.GenerateLogsDebug("TrabajoDal", "Eliminar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un Trabajo"));
@@ -60,7 +68,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = "UPDATE Trabajo SET Eliminado = 1 WHERE IdTrabajo=@id";
+            string queryString = "UPDATE Trabajo SET Borrado = 1 WHERE IdTrabajo=@id";
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
@@ -98,8 +106,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                                     TotalPrecio=@totalPrecio, 
                                     FechaEntrega=@fechaEntrega, 
                                     PedidoDistancia=@pedidoDistancia, 
-                                    EntregaDomicilio=@entregaDomicilio, 
-                                    Borrado=@borrado 
+                                    EntregaDomicilio=@entregaDomicilio
                                     Where IdTrabajo=@idTrabajo";
             try
             {
@@ -108,9 +115,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@fechaTrabajo", trabajo.FechaTrabajo);
                 command.Parameters.AddWithValue("@totalPrecio", trabajo.TotalPrecio);
                 command.Parameters.AddWithValue("@fechaEntrega", trabajo.FechaEntrega);
-                command.Parameters.AddWithValue("@pedidoDistancia", trabajo.PedidoDistancia);
+                command.Parameters.AddWithValue("@pedidoDistancia", trabajo.PedidoDistancia.IdPedido);
                 command.Parameters.AddWithValue("@entregaDomicilio", trabajo.EntregaDomicilio);
-                command.Parameters.AddWithValue("@borrado", trabajo.Borrado);
                 command.Parameters.AddWithValue("@idTrabajo", trabajo.IdTrabajo);
 
                 Methods.ExecuteBasicCommand(command);
@@ -133,7 +139,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <summary>
         /// Obtiene un Trabajo de la base de datos
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Idenficador de Trabajo</param>
         /// <returns></returns>
         public static Trabajo Get(int id)
         {
@@ -153,7 +159,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         IdTrabajo=dr.GetInt32(0),
                         Cliente=ClienteDal.Get(dr.GetInt32(1)),
                         FechaTrabajo=dr.GetDateTime(2),
-                        //PedidoDistancia=Pedido.Get(dr.GetInt32(3)),
+                        PedidoDistancia=PedidoDal.Get(dr.GetInt32(3)),
                         EntregaDomicilio=dr.GetBoolean(4),
                         Borrado=dr.GetBoolean(5)
                     };
@@ -161,13 +167,67 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("PacienteDal", "Obtener", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("TrabajoDal", "Obtener", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             finally
             {
                 cmd.Connection.Close();
             }
+            return res;
+        }
+
+
+        /// <summary>
+        /// Obtiene Lista de Personal
+        /// </summary>
+        /// <returns>Lista de Objetos Personal</returns>
+        public static List<Trabajo> GetList()
+        {
+            List<Trabajo> res = new List<Trabajo>();
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Trabajo WHERE Borrado = 0";
+
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+
+                while (dr.Read())
+                {
+                    int idTrabajo = dr.GetInt32(0);
+
+                    res.Add(new Trabajo()
+                    {
+                        IdTrabajo = idTrabajo,
+                        Cliente = ClienteDal.Get(dr.GetInt32(1)),
+                        FechaTrabajo = dr.GetDateTime(2),
+                        TotalPrecio = dr.GetSqlDecimal(3).ToDouble(),
+                        FechaEntrega = dr.GetDateTime(4),
+                        PedidoDistancia = PedidoDal.Get(dr.GetInt32(5)),
+                        EntregaDomicilio = dr.GetBoolean(6),
+                        TrabajoDetalle = TrabajoDetalleDal.GetList(idTrabajo),
+                        Borrado = dr.GetBoolean(7)
+                    });
+                }
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("TrabajoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("TrabajoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
             return res;
         }
 
