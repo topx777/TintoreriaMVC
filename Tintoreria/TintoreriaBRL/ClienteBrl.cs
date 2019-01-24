@@ -108,14 +108,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             }
             catch (SqlException ex)
             {
-                Methods.GenerateLogsRelease("PersonalBrl", "InsertarPersonal",
+                Methods.GenerateLogsRelease("ClienteBrl", "ListCliente",
                 string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(),
                 DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("PersonalBrl", "InsertarPersonal", string.Format("{0} {1} Error: {2}",
+                Methods.GenerateLogsRelease("ClienteBrl", "ListCliente", string.Format("{0} {1} Error: {2}",
                 DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
