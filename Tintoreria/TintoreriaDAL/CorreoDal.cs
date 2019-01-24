@@ -8,7 +8,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
-    class CorreoDal
+    public class CorreoDal
     {
         /// <summary>
         /// Método para agregar un nuevo correo a la BD.
