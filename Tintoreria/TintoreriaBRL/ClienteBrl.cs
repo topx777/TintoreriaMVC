@@ -6,7 +6,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 {
-    class ClienteBrl
+    public class ClienteBrl
     {
         /// <summary>
         /// Metodo para Insertar un Cliente
@@ -99,6 +99,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 
         }
 
+        /// <summary>
+        /// Metodo para obtener una lista de clientes de la base de datos
+        /// </summary>
+        /// <returns>List<Cliente></returns>
         public static List<Cliente> ListCliente()
         {
             List < Cliente > clientes= null;
