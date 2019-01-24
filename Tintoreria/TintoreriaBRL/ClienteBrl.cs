@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 {
-    class ClienteBrl
+    public class ClienteBrl
     {
         /// <summary>
         /// Metodo para Insertar un Cliente
@@ -95,6 +96,34 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
                 Methods.GenerateLogsRelease("ClienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
+
+        }
+
+        /// <summary>
+        /// Metodo para obtener una lista de clientes de la base de datos
+        /// </summary>
+        /// <returns>List<Cliente></returns>
+        public static List<Cliente> ListCliente()
+        {
+            List < Cliente > clientes= null;
+            try
+            {
+                clientes=ClienteDal.GetList();
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("ClienteBrl", "ListCliente",
+                string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(),
+                DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("ClienteBrl", "ListCliente", string.Format("{0} {1} Error: {2}",
+                DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            return clientes;
 
         }
     }

@@ -31,7 +31,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@nombre", persona.Nombre);
                 command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
                 command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
-                command.Parameters.AddWithValue("@sexo", persona.Sexo);
+                command.Parameters.AddWithValue("@sexo", persona.Sexo.IdSexo);
                 command.Parameters.AddWithValue("@fechaNacimiento", persona.FechaNacimiento);
                 command.Parameters.AddWithValue("@usuario", persona.Usuario.IdUsuario);
                 Methods.ExecuteBasicCommand(command);
