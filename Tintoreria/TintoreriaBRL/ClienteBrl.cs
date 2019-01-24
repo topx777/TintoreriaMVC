@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
@@ -95,6 +96,30 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
                 Methods.GenerateLogsRelease("ClienteDal", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
+
+        }
+
+        public static List<Cliente> ListCliente()
+        {
+            List < Cliente > clientes= null;
+            try
+            {
+                clientes=ClienteDal.GetList();
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("PersonalBrl", "InsertarPersonal",
+                string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(),
+                DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("PersonalBrl", "InsertarPersonal", string.Format("{0} {1} Error: {2}",
+                DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            return clientes;
 
         }
     }
