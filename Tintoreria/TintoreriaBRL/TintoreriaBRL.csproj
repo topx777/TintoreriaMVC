@@ -44,8 +44,15 @@
     <Compile Include="CategoriaBrl.cs" />
     <Compile Include="CategoriaListBrl.cs" />
     <Compile Include="ClienteBrl.cs" />
+    <Compile Include="CorreoBrl.cs" />
+    <Compile Include="DireccionBrl.cs" />
+    <Compile Include="EstadoBrl.cs" />
+    <Compile Include="PedidoBrl.cs" />
+    <Compile Include="PersonaBrl.cs" />
     <Compile Include="PersonalBrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SexoBrl.cs" />
+    <Compile Include="TelefonoBrl.cs" />
     <Compile Include="TrabajoBrl.cs" />
     <Compile Include="UsuarioBrl.cs" />
   </ItemGroup>
