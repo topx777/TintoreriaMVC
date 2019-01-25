@@ -18,7 +18,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"INSERT INTO Cliente(IdPersona, Nit, Razon, FechaRegistro) VALUES (@idPersona ,@nit, @razon, @fechaRagistro)";
+            string queryString = @"INSERT INTO Cliente(IdPersona, Nit, Razon, FechaRegistro)
+                                    VALUES(@idPersona, @nit, @razon, @fechaRagistro)";
             try
             {
                 //Registro Usuario
@@ -35,7 +36,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@idPersona",cliente.IdPersona);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
-                command.Parameters.AddWithValue("@fechaRegistro", cliente.FechaRegistro);
+                command.Parameters.AddWithValue("@fechaRagistro", cliente.FechaRegistro);
                 Methods.ExecuteBasicCommand(command);
 
                 foreach (Telefono telefono in cliente.Telefonos)

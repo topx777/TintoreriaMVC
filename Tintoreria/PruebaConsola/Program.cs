@@ -17,29 +17,67 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
             //CargoBrl.Eliminar(2);
 
             //Console.Write("Cargo Insertado");
-            //Cliente cliente = new Cliente()
-            //{
-            //    Ci = "999999999",
-            //    Nombre = "Pepito",
-            //    PrimerApellido = "Fuentes",
-            //    SegundoApellido = "Ramirez",
-            //    Sexo = new Sexo()
-            //    {
-            //        IdSexo = 1
-            //    },
-            //    FechaNacimiento = new DateTime(1999, 10, 11),
-            //    Usuario = new Usuario()
-            //    {
-            //        Username = "Pep123",
-            //        Password = "prueba123",
-            //        EsAdmin = false
-            //    },
-            //    Borrado = false,
-            //    Nit = 9999016,
-            //    Razon = "Razon",
-            //    FechaRegistro = DateTime.Today
-            //};
-            //ClienteBrl.Insertar(cliente);
+            Cliente cliente = new Cliente()
+            {
+                Ci = "999999999",
+                Nombre = "Cliente",
+                PrimerApellido = "cl",
+                SegundoApellido = "te",
+                Sexo = new Sexo()
+                {
+                    IdSexo = 1
+                },
+                FechaNacimiento = new DateTime(1999, 10, 11),
+                Usuario = new Usuario()
+                {
+                    Username = "cli123",
+                    Password = "prueba123",
+                    EsAdmin = false
+                },
+                Borrado = false,
+                Nit = 9999016,
+                Razon = "Razon",
+                FechaRegistro = DateTime.Now,
+                Correos = new List<Correo>()
+                    {
+                        new Correo()
+                        {
+                            Nombre = "cliente1@gmail.com",
+                            Principal = true
+                        },
+                        new Correo()
+                        {
+                            Nombre = "cliente1@hotmail.com",
+                            Principal = false
+                        }
+                    },
+                Direcciones = new List<Direccion>()
+                    {
+                        new Direccion()
+                        {
+                            Descripcion = "Av. de las casas",
+                            Latitud = 16.2555,
+                            Longitud = 33.667,
+                            Tipo = new Tipo()
+                            {
+                                IdTipo = 1
+                            }
+                        }
+                    },
+                Telefonos = new List<Telefono>()
+                    {
+                        new Telefono()
+                        {
+                            Numero = "4414017",
+                            Tipo = new Tipo()
+                            {
+                                IdTipo = 1
+                            }
+                        }
+                    }
+
+            };
+            ClienteBrl.Insertar(cliente);
 
             //Personal personal = new Personal()
             //{
@@ -107,28 +145,28 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
 
             //PersonalBrl.Insertar(personal);
 
-            Personal personal = PersonalBrl.Get(15);
+            //Personal personal = PersonalBrl.Get(15);
 
-            personal.Dump(Console.Out);
-            personal.Usuario.Dump(Console.Out);
-            personal.Cargo.Dump(Console.Out);
+            //personal.Dump(Console.Out);
+            //personal.Usuario.Dump(Console.Out);
+            //personal.Cargo.Dump(Console.Out);
 
-            foreach (Telefono x in personal.Telefonos)
-            {
-                x.Dump(Console.Out);
-            }
+            //foreach (Telefono x in personal.Telefonos)
+            //{
+            //    x.Dump(Console.Out);
+            //}
 
-            foreach (Direccion x in personal.Direcciones)
-            {
-                x.Dump(Console.Out);
-            }
+            //foreach (Direccion x in personal.Direcciones)
+            //{
+            //    x.Dump(Console.Out);
+            //}
 
-            foreach (Correo x in personal.Correos)
-            {
-                x.Dump(Console.Out);
-            }
+            //foreach (Correo x in personal.Correos)
+            //{
+            //    x.Dump(Console.Out);
+            //}
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }
