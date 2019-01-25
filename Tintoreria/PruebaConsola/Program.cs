@@ -8,6 +8,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
     {
         static void Main(string[] args)
         {
+
+            Correo correo = new Correo()
+            {
+                Nombre = "mauricio@gmail.com",
+                Principal=true
+            };
+            CorreoBrl.Insertar(correo, 26);
             //Console.WriteLine("Insertando Cargo");
 
 
@@ -17,6 +24,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
             //CargoBrl.Eliminar(2);
 
             //Console.Write("Cargo Insertado");
+            /*
             Cliente cliente = new Cliente()
             {
                 Ci = "999999999",
@@ -172,7 +180,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
                 x.Dump(Console.Out);
             }
 
-            //Console.ReadKey();
+            //Console.ReadKey();*/
         }
     }
 }
