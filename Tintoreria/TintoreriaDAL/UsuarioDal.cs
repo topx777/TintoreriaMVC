@@ -54,7 +54,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE SET Username=@username, Password=@password, EsAdmin=@esAdmin
+            string queryString = @"UPDATE Usuario SET Username=@username, Password=@password, EsAdmin=@esAdmin
                                    WHERE IdUsuario=@idUsuario";
             try
             {
