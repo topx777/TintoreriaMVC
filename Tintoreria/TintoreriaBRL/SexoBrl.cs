@@ -28,5 +28,28 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 
             return sexo;
         }
+
+        public static List<Sexo> Get()
+        {
+            List<Sexo> sexoList = null;
+            try
+            {
+                sexoList = SexoDal.GetList();
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("SexoBrl", "ListSexo",
+                string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(),
+                DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("SexoBrl", "ListSexo", string.Format("{0} {1} Error: {2}",
+                DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            return sexoList;
+        }
     }
 }
