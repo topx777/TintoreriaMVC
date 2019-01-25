@@ -33,7 +33,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@categoria", trabajoDetalle.Categoria.IdCategoria);
                 command.Parameters.AddWithValue("@precioFinal", trabajoDetalle.PrecioFinal);
                 command.Parameters.AddWithValue("@peso", trabajoDetalle.Peso);
-                command.Parameters.AddWithValue("@estado", trabajoDetalle.Estado);
+                command.Parameters.AddWithValue("@estado", trabajoDetalle.Estado.IdEstado);
                 Methods.ExecuteBasicCommand(command);
             }
             catch (SqlException ex)

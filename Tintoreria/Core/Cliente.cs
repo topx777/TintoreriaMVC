@@ -6,7 +6,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
     {
         #region Atributos
 
-        public int Nit { get; set; }
+        public string Nit { get; set; }
         public string Razon { get; set; }
         public DateTime FechaRegistro { get; set; }
 

@@ -37,9 +37,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
                 int idTrabajo = Methods.GetActIDTable("Trabajo");
 
-                foreach(TrabajoDetalle x in trabajo.TrabajoDetalle)
+                foreach(TrabajoDetalle trabajod in trabajo.TrabajoDetalle)
                 {
-                    TrabajoDetalleDal.Insertar(x, idTrabajo);
+                    TrabajoDetalleDal.Insertar(trabajod, idTrabajo);
                 }
             }
             catch (SqlException ex)

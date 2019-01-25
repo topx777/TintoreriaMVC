@@ -181,11 +181,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         //Direcciones=DireccionListDal(dr.GetInt32(0)),
                         //Telefonos=TelefonoListDal(dr.GetInt32(0)),
                         //Correos=CorreosListDal(dr.GetInt32(0)),
-                        Nit=dr.GetInt32(9),
-                        Razon=dr.GetString(10),
+                        Nit= dr.GetString(9),
+                        Razon= dr.GetString(10),
                         FechaRegistro=dr.GetDateTime(11)
-                        
-
                     };
                 }
             }
@@ -237,7 +235,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         Direcciones = persona.Direcciones,
                         Telefonos = persona.Telefonos,
                         Borrado = persona.Borrado,
-                        Nit = dr.GetInt32(1),
+                        Nit = dr.GetString(1),
                         Razon = dr.GetString(2),
                         FechaRegistro = dr.GetDateTime(3)                                
                     });
