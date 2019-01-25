@@ -68,7 +68,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                                 PrimerApellido=@primerApellido, 
                                 SegundoApellido=@segundoApellido, 
                                 Sexo=@sexo, 
-                                FechaNacimiento=@fechaNacimiento, 
+                                FechaNacimiento=@fechaNacimiento 
                                 WHERE IdPersona=@idPersona";
 
             Usuario usuario = persona.Usuario;

@@ -41,89 +41,94 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
             //};
             //ClienteBrl.Insertar(cliente);
 
-            //Personal personal = new Personal()
-            //{
-            //    Ci = "9511301",
-            //    Nombre = "Abel",
-            //    PrimerApellido = "Lopez",
-            //    SegundoApellido = "Paniagua",
-            //    Sexo = new Sexo
-            //    {
-            //        IdSexo = 1,
-            //    },
-            //    FechaNacimiento = new DateTime(1995, 5, 29),
-            //    Correos = new List<Correo>()
-            //    {
-            //        new Correo()
-            //        {
-            //            Nombre = "topxsan@gmail.com",
-            //            Principal = true
-            //        },
-            //        new Correo()
-            //        {
-            //            Nombre = "topx555@hotmail.com",
-            //            Principal = false
-            //        }
-            //    },
-            //    Usuario = new Usuario()
-            //    {
-            //        Username = "topx777",
-            //        Password = "slr8830213",
-            //        EsAdmin = false
-            //    },
-            //    Direcciones = new List<Direccion>()
-            //    {
-            //        new Direccion()
-            //        {
-            //            Descripcion = "Av. Dorvigni 1827",
-            //            Latitud = 17.25555345,
-            //            Longitud = 36.66778812,
-            //            Tipo = new Tipo()
-            //            {
-            //                IdTipo = 1
-            //            }
-            //        }
-            //    },
-            //    Telefonos = new List<Telefono>()
-            //    {
-            //        new Telefono()
-            //        {
-            //            Numero = "4414017",
-            //            Tipo = new Tipo()
-            //            {
-            //                IdTipo = 1
-            //            }
-            //        }
-            //    },
-            //    Borrado = false,
-            //    CodPersonal = "FX12222",
-            //    FechaIngreso = DateTime.Now,
-            //    Cargo = new Cargo()
-            //    {
-            //        IdCargo = 3
-            //    },
-            //    Sueldo = 2100
-            //};
+            Personal personal = new Personal()
+            {
+                IdPersona = 15,
+                Ci = "9511300",
+                Nombre = "Jaunito",
+                PrimerApellido = "Agreda",
+                SegundoApellido = "Paniagua",
+                Sexo = new Sexo
+                {
+                    IdSexo = 1,
+                },
+                FechaNacimiento = new DateTime(1995, 5, 29),
+                Correos = new List<Correo>()
+                {
+                    new Correo()
+                    {
+                        Nombre = "topxsan@gmail.com",
+                        Principal = true
+                    },
+                    new Correo()
+                    {
+                        Nombre = "topx555@hotmail.com",
+                        Principal = false
+                    }
+                },
+                Usuario = new Usuario()
+                {
+                    Username = "topx777",
+                    Password = "slr8830213",
+                    EsAdmin = false
+                },
+                Direcciones = new List<Direccion>()
+                {
+                    new Direccion()
+                    {
+                        Descripcion = "Av. Dorvigni 1827",
+                        Latitud = 17.25555345,
+                        Longitud = 36.66778812,
+                        Tipo = new Tipo()
+                        {
+                            IdTipo = 1
+                        }
+                    }
+                },
+                Telefonos = new List<Telefono>()
+                {
+                    new Telefono()
+                    {
+                        Numero = "4414017",
+                        Tipo = new Tipo()
+                        {
+                            IdTipo = 1
+                        }
+                    }
+                },
+                Borrado = false,
+                CodPersonal = "FX12222",
+                FechaIngreso = DateTime.Now,
+                Cargo = new Cargo()
+                {
+                    IdCargo = 3
+                },
+                Sueldo = 2500
+            };
 
             //PersonalBrl.Insertar(personal);
 
-            Personal personal = PersonalBrl.Get(15);
+            //PersonalBrl.Actualizar(personal);
 
-            personal.Dump(Console.Out);
-            personal.Usuario.Dump(Console.Out);
-            personal.Cargo.Dump(Console.Out);
+            PersonalBrl.Eliminar(15);
 
-            foreach (Telefono x in personal.Telefonos)
+            Personal personale = PersonalBrl.Get(15);
+
+            personale.Dump(Console.Out);
+            personale.Usuario.Dump(Console.Out);
+            personale.Cargo.Dump(Console.Out);
+
+            foreach (Telefono x in personale.Telefonos)
             {
                 x.Dump(Console.Out);
             }
 
-            foreach (Direccion x in personal.Direcciones)
+            foreach (Direccion x in personale.Direcciones)
             {
                 x.Dump(Console.Out);
             }
 
-            foreach (Correo x in personal.Correos)
+            foreach (Correo x in personale.Correos)
             {
                 x.Dump(Console.Out);
             }

@@ -62,5 +62,50 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             return personal;
         }
 
+        /// <summary>
+        /// Actualiza datos de cargo en la base de datos 
+        /// </summary>
+        /// <param name="personal"></param>
+        public static void Actualizar(Personal personal)
+        {
+            try
+            {
+                PersonalDal.Actualizar(personal);
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("PersonalBrl", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("PersonalBrl", "Actualizar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// metodo para eliminar un Personal
+        /// </summary>
+        /// <param name="id"></param>
+        public static void Eliminar(int id)
+        {
+            try
+            {
+                PersonalDal.Eliminar(id);
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("PersonalBrl", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("PersonalBrl", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+
+        }
+
     }
 }
