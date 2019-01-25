@@ -54,7 +54,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Cargo res = new Cargo();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = "SELECT * FROM Categoria WHERE IdCategoria = @id";
+            string query = "SELECT * FROM Cargo WHERE IdCargo = @id";
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
@@ -65,7 +65,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     res = new Cargo()
                     {
                         IdCargo = dr.GetInt32(0),
-                        Nombre = dr.GetString(1),
+                        Nombre = dr.GetString(1)
                     };
                 }
             }

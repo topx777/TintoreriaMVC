@@ -20,14 +20,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             //Consulta para insertar telefonos
-            string queryString = @"INSERT INTO Direccion(IdDireccion, Descripcion, Tipo, Latitud, Longitud, idPersona) VALUES(@idDireccion, @desc, @tipo, @latitud, @longitud, @idPersona)";
+            string queryString = @"INSERT INTO Direccion(Descripcion, Tipo, Latitud, Longitud, idPersona) VALUES(@desc, @tipo, @latitud, @longitud, @idPersona)";
 
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@idTelefono", direccion.IdDireccion);
                 command.Parameters.AddWithValue("@desc", direccion.Descripcion);
-                command.Parameters.AddWithValue("@tipo", direccion.Tipo);
+                command.Parameters.AddWithValue("@tipo", direccion.Tipo.IdTipo);
                 command.Parameters.AddWithValue("@latitud", direccion.Latitud);
                 command.Parameters.AddWithValue("@longitud", direccion.Longitud);
                 command.Parameters.AddWithValue("@idPersona", idPersona);
@@ -98,7 +97,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             {
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@descripcion", direccion.Descripcion);
-                command.Parameters.AddWithValue("@tipo", direccion.Tipo);
+                command.Parameters.AddWithValue("@tipo", direccion.Tipo.IdTipo);
                 command.Parameters.AddWithValue("@latitud", direccion.Latitud);
                 command.Parameters.AddWithValue("@longitud", direccion.Longitud);
                 command.Parameters.AddWithValue("@idDireccion", direccion.IdDireccion);

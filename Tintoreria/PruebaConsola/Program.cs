@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
@@ -16,29 +17,117 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
             //CargoBrl.Eliminar(2);
 
             //Console.Write("Cargo Insertado");
-            Cliente cliente = new Cliente()
+            //Cliente cliente = new Cliente()
+            //{
+            //    Ci = "999999999",
+            //    Nombre = "Pepito",
+            //    PrimerApellido = "Fuentes",
+            //    SegundoApellido = "Ramirez",
+            //    Sexo = new Sexo()
+            //    {
+            //        IdSexo = 1
+            //    },
+            //    FechaNacimiento = new DateTime(1999, 10, 11),
+            //    Usuario = new Usuario()
+            //    {
+            //        Username = "Pep123",
+            //        Password = "prueba123",
+            //        EsAdmin = false
+            //    },
+            //    Borrado = false,
+            //    Nit = 9999016,
+            //    Razon = "Razon",
+            //    FechaRegistro = DateTime.Today
+            //};
+            //ClienteBrl.Insertar(cliente);
+
+            //Personal personal = new Personal()
+            //{
+            //    Ci = "9511301",
+            //    Nombre = "Abel",
+            //    PrimerApellido = "Lopez",
+            //    SegundoApellido = "Paniagua",
+            //    Sexo = new Sexo
+            //    {
+            //        IdSexo = 1,
+            //    },
+            //    FechaNacimiento = new DateTime(1995, 5, 29),
+            //    Correos = new List<Correo>()
+            //    {
+            //        new Correo()
+            //        {
+            //            Nombre = "topxsan@gmail.com",
+            //            Principal = true
+            //        },
+            //        new Correo()
+            //        {
+            //            Nombre = "topx555@hotmail.com",
+            //            Principal = false
+            //        }
+            //    },
+            //    Usuario = new Usuario()
+            //    {
+            //        Username = "topx777",
+            //        Password = "slr8830213",
+            //        EsAdmin = false
+            //    },
+            //    Direcciones = new List<Direccion>()
+            //    {
+            //        new Direccion()
+            //        {
+            //            Descripcion = "Av. Dorvigni 1827",
+            //            Latitud = 17.25555345,
+            //            Longitud = 36.66778812,
+            //            Tipo = new Tipo()
+            //            {
+            //                IdTipo = 1
+            //            }
+            //        }
+            //    },
+            //    Telefonos = new List<Telefono>()
+            //    {
+            //        new Telefono()
+            //        {
+            //            Numero = "4414017",
+            //            Tipo = new Tipo()
+            //            {
+            //                IdTipo = 1
+            //            }
+            //        }
+            //    },
+            //    Borrado = false,
+            //    CodPersonal = "FX12222",
+            //    FechaIngreso = DateTime.Now,
+            //    Cargo = new Cargo()
+            //    {
+            //        IdCargo = 3
+            //    },
+            //    Sueldo = 2100
+            //};
+
+            //PersonalBrl.Insertar(personal);
+
+            Personal personal = PersonalBrl.Get(15);
+
+            personal.Dump(Console.Out);
+            personal.Usuario.Dump(Console.Out);
+            personal.Cargo.Dump(Console.Out);
+
+            foreach (Telefono x in personal.Telefonos)
             {
-                Ci = "999999999",
-                Nombre = "Pepito",
-                PrimerApellido = "Fuentes",
-                SegundoApellido = "Ramirez",
-                Sexo = new Sexo()
-                {
-                    IdSexo = 1
-                },
-                FechaNacimiento = new DateTime(1999, 10, 11),
-                Usuario = new Usuario()
-                {
-                    Username = "Pep123",
-                    Password = "prueba123",
-                    EsAdmin = false
-                },
-                Borrado = false,
-                Nit = 9999016,
-                Razon = "Razon",
-                FechaRegistro = DateTime.Today
-            };
-            ClienteBrl.Insertar(cliente);
+                x.Dump(Console.Out);
+            }
+
+            foreach (Direccion x in personal.Direcciones)
+            {
+                x.Dump(Console.Out);
+            }
+
+            foreach (Correo x in personal.Correos)
+            {
+                x.Dump(Console.Out);
+            }
+
             Console.ReadKey();
         }
     }

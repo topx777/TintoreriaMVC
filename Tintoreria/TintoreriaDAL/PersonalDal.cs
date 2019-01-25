@@ -28,6 +28,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
                 personal.IdPersona = Methods.GetActIDTable("Persona");
 
+
                 //Insertar telefonos
                 foreach(Telefono telf in personal.Telefonos)
                 {
@@ -155,6 +156,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 res.FechaNacimiento = persona.FechaNacimiento;
                 res.Usuario = persona.Usuario;
                 res.Borrado = persona.Borrado;
+
+                res.Correos = CorreoDal.GetList(res.IdPersona);
+                res.Telefonos = TelefonoDal.GetList(res.IdPersona);
+                res.Direcciones = DireccionDal.GetList(res.IdPersona);
             }
             catch (Exception ex)
             {

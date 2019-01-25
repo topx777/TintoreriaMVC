@@ -23,14 +23,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             //Consulta para insertar telefonos
-            string queryString = @"INSERT INTO Telefono(idTelefono, Numero, Tipo, idPersona) VALUES(@idTelefono, @numero, @tipo, @idPersona)";
+            string queryString = @"INSERT INTO Telefono(Numero, Tipo, idPersona) VALUES(@numero, @tipo, @idPersona)";
         
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@idTelefono", telefono.IdTelefono);
-                command.Parameters.AddWithValue("@numero", telefono.IdTelefono);
-                command.Parameters.AddWithValue("@tipo", telefono.Tipo);
+                command.Parameters.AddWithValue("@numero", telefono.Numero);
+                command.Parameters.AddWithValue("@tipo", telefono.Tipo.IdTipo);
                 command.Parameters.AddWithValue("@idPersona", idPersona);
                 Methods.ExecuteBasicCommand(command);
 
@@ -87,14 +86,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Actualiza un Telefono de la base de datos
         /// </summary>
         /// <param name="telefono"></param>
-        public static void Actualizar(Telefono telefono, int idPersona)
+        public static void Actualizar(Telefono telefono)
         {
             Methods.GenerateLogsDebug("TelefonoDal", "Actualizar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Actualizar un Telefono"));
 
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Telefono SET Numero=@numero, Tipo=@tipo, IdPersona=@idPersona
+            string queryString = @"UPDATE Telefono SET Numero=@numero, Tipo=@tipo
                                     WHERE IdTelefono=@idTelefono";
             try
             {
@@ -102,7 +101,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@numero", telefono.Numero);
                 command.Parameters.AddWithValue("@tipo", telefono.Tipo.IdTipo);
-                command.Parameters.AddWithValue("@idPersona", idPersona);
                 command.Parameters.AddWithValue("@idTelefono", telefono.IdTelefono);
 
                 Methods.ExecuteBasicCommand(command);

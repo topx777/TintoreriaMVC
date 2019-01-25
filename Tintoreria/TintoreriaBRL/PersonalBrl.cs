@@ -9,9 +9,13 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 {
-    class PersonalBrl
+    public class PersonalBrl
     {
-        public static void InsertarPersonal(Personal personal)
+        /// <summary>
+        /// Inserta un nuevo Personal a la BD
+        /// </summary>
+        /// <param name="personal"></param>
+        public static void Insertar(Personal personal)
         {
             try
             {
@@ -32,5 +36,31 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             }
          
         }
+
+
+        /// <summary>
+        /// METODO PARA Obtener un personal basado en el id
+        /// </summary>
+        /// <param name="id">Identificador Personal</param>
+        /// <returns></returns>
+        public static Personal Get(int id)
+        {
+            Personal personal = null;
+            try
+            {
+                personal = PersonalDal.Get(id);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return personal;
+        }
+
     }
 }

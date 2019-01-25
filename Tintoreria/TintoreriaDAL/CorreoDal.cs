@@ -23,12 +23,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             //Consulta para insertar telefonos
-            string queryString = @"INSERT INTO Correo(idCorreo, Nombre, Principal, idPersona) VALUES(@idCorreo, @nombre, @principal, @idPersona)";
+            string queryString = @"INSERT INTO Correo(Nombre, Principal, idPersona) VALUES(@nombre, @principal, @idPersona)";
         
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
-                command.Parameters.AddWithValue("@idCorreo", correo.IdCorreo);
                 command.Parameters.AddWithValue("@nombre", correo.Nombre);
                 command.Parameters.AddWithValue("@principal", correo.Principal);
                 command.Parameters.AddWithValue("@idPersona", idPersona);
@@ -63,7 +62,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             string queryString = @"UPDATE Correo SET 
                                 Nombre=@nombre, 
                                 Principal=@principal 
-                                WHERE IdPersona=@idCorreo";
+                                WHERE IdCorreo=@idCorreo";
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
