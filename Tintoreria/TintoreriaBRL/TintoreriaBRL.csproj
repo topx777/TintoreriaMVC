@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CargoBrl.cs" />
+    <Compile Include="CargoListBrl.cs" />
     <Compile Include="CategoriaBrl.cs" />
     <Compile Include="CategoriaListBrl.cs" />
     <Compile Include="ClienteBrl.cs" />
