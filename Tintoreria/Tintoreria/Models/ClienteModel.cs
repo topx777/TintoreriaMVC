@@ -7,7 +7,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class ClienteModel
     {
-        #region Proppiedades
+        #region Propiedades
 
         [Display(Name ="IdPersona")]
         public int IdPersona { get; set; }
