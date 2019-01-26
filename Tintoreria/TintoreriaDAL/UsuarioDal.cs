@@ -5,7 +5,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
-    class UsuarioDal
+    public class UsuarioDal
     {
         /// <summary>
         /// Inserta nuevo usuario
@@ -131,7 +131,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         Password = dr.GetString(2),
                         EsAdmin = dr.GetBoolean(3)
                     };
-
                 }
             }
             catch (Exception ex)
@@ -154,8 +153,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <returns></returns>
         public static Usuario Get(int id)
         {
-
-
             Usuario res = new Usuario();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
@@ -178,7 +175,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (Exception ex)
             {
-                Methods.GenerateLogsRelease("UsuarioDal", "Obteber", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                Methods.GenerateLogsRelease("UsuarioDal", "Login", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             finally
