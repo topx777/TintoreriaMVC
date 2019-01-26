@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CargoDal.cs" />
+    <Compile Include="CargoListDal.cs" />
     <Compile Include="CategoriaDal.cs" />
     <Compile Include="CategoriaListDal.cs" />
     <Compile Include="ClienteDal.cs" />
