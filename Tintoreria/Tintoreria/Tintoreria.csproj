@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Models\CategoriaListModel.cs" />
     <Compile Include="Models\CategoriaModel.cs" />
+    <Compile Include="Models\ClienteListModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\PersonalListModel.cs" />
     <Compile Include="Models\PersonalModel.cs" />
