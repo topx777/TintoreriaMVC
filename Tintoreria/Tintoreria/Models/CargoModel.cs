@@ -10,7 +10,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
     {
         #region propiedades
         [Display(Name = "ID")]
-        public int IdCategoria { get; set; }
+        public int IdCargo { get; set; }
 
         [Required(ErrorMessage = "Campo nombre no debe estar vacio.")]
         [Display(Name = "Nombre")]
