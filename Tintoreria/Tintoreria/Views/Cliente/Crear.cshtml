@@ -1,0 +1,45 @@
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.ClienteModel
+
+@{
+    ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Crear</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="input-field">
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nombre" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+                <div class="input-field">
+                    @Html.TextBoxFor(model => model.PrimerApellido, new { @class = "validate", @placeholder = "Primer Apellido" })
+                    @Html.ValidationMessageFor(model => model.SegundoApellido)
+                </div>
+                <div class="input-field">
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Segundo Apellido" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+                <div>
+                    <h5>Sexo</h5>
+                    <div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col s12 m4">
+                 
+            </div>
+            <div class="col s12 m4">
+
+            </div>
+        </div>
+    </fieldset>
+}
+
