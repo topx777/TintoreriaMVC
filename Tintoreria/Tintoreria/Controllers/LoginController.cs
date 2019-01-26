@@ -46,9 +46,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                     return View();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                ViewBag.Error = "Error Desconocido";
+                ViewBag.Error = "Error Desconocido: " + ex.Message;
                 return View();
             }
         }

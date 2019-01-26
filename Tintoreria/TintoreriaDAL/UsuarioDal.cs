@@ -115,7 +115,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Usuario res = new Usuario();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = "SELECT * FROM Usuario WHERE Username = @username AND Password = @pass";
+            string query = "SELECT * FROM Usuario WHERE Username = @username AND Password = @pass LIMIT 1";
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
