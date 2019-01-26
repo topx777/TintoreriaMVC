@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
+@using reCAPTCHA.MVC
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -33,6 +34,12 @@
                             <div class="input-field col s12">
                                 @Html.ValidationMessageFor(model => model.Password)
                                 @Html.PasswordFor(model => model.Password, new { @class = "validate", @placeholder = Resource.Resource.Password })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                @Html.Recaptcha()
+                                @Html.ValidationMessage("ReCaptcha")
                             </div>
                         </div>
                         <br />

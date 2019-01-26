@@ -61,6 +61,15 @@ namespace Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Captcha Field is Required.
+        /// </summary>
+        public static string CaptchaError {
+            get {
+                return ResourceManager.GetString("CaptchaError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
