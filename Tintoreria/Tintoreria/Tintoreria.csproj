@@ -222,6 +222,7 @@
     <Content Include="Views\Cargo\Crear.cshtml" />
     <Content Include="Views\Cargo\Editar.cshtml" />
     <Content Include="Views\Cargo\Ver.cshtml" />
+    <Content Include="Views\Cargo\Eliminar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
