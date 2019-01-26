@@ -8,14 +8,18 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class CargoListModel : List<CargoModel>
     {
+        /// <summary>
+        /// Necesita ser public, cuidado todo en poner public
+        /// </summary>
+        /// <returns></returns>
         public static CargoListModel Get()
         {
-            CargoListModel _categoriaListModel = new CargoListModel();
+            CargoListModel _cargoListModel = new CargoListModel();
             foreach (var cargo in CargoListBrl.Get())
             {
-                _categoriaListModel.Add(new CategoriaModel
+                _cargoListModel.Add(new CargoModel
                 {
-                    IdCargo= cargo.IdCargo,
+                    IdCargo = cargo.IdCargo,
                     Nombre = cargo.Nombre,
                 });
             }

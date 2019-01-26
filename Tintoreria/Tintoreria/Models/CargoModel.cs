@@ -8,7 +8,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class CargoModel
     {
-        #region Propiedades
+        #region propiedades
         [Display(Name = "ID")]
         public int IdCargo { get; set; }
 
