@@ -162,6 +162,7 @@
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\PersonalListModel.cs" />
     <Compile Include="Models\PersonalModel.cs" />
+    <Compile Include="Models\SexoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
