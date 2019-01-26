@@ -14,6 +14,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            ViewBag.Error = "";
             UsuarioModel model = new UsuarioModel();
 
             return View(model);
@@ -28,23 +29,26 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 if(ModelState.IsValid)
                 {
                     Usuario usuario = UsuarioBrl.Auth(model.Username, model.Password);
-                    if (usuario != null)
+                    if (usuario.IdUsuario != 0)
                     {
-
+                        Session["Key"] = usuario;
                         return RedirectToAction("../Categoria/Index");
                     }
                     else
                     {
+                        ViewBag.Error = "Credenciales Incorrectas";
                         return View();
                     }
                 }
                 else
                 {
+                    ViewBag.Error = "Error";
                     return View();
                 }
             }
             catch
             {
+                ViewBag.Error = "Error Desconocido";
                 return View();
             }
         }
