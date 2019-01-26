@@ -83,13 +83,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         //GET Ver Categoria
         public ActionResult Ver(int mCodigo)
         {
-            Categoria cat = CategoriaBrl.Get(mCodigo);
-            CategoriaModel model = new CategoriaModel()
+            Cargo car = CargoBrl.Get(mCodigo);
+            CargoModel model = new CargoModel()
             {
-                IdCategoria = cat.IdCategoria,
-                Nombre = cat.Nombre,
-                Descripcion = cat.Descripcion,
-                Precio = cat.Precio
+                IdCargo = car.IdCargo,
+                Nombre = car.Nombre,
+
             };
 
             return View(model);

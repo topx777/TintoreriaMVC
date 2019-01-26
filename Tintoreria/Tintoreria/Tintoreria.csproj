@@ -216,6 +216,9 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cargo\Index.cshtml" />
+    <Content Include="Views\Cargo\Crear.cshtml" />
+    <Content Include="Views\Cargo\Editar.cshtml" />
+    <Content Include="Views\Cargo\Ver.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
