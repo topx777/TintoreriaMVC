@@ -18,5 +18,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
             return View(lista);
         }
+        // GET: Crear Cargo
+        public ActionResult Crear()
+        {
+            CargoModel cargo = new CargoModel();
+            return View(cargo);
+        }
     }
 }
