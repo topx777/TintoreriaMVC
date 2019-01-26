@@ -15,6 +15,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         {
             Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Insertar un paciente"));
 
+            //List<SqlCommand> commands = new List<SqlCommand>();
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
@@ -51,6 +52,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 {
                     CorreoDal.Insertar(correo, cliente.IdPersona);
                 }
+
+                //Methods
+
             }
             catch (SqlException ex)
             {

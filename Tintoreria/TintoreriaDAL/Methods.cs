@@ -314,11 +314,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             }
             catch (SqlException ex)
             {
+                tran.Rollback();
                 GenerateLogsRelease("Methods", "SqlException in ExecuteNBasicCommand", ex.Message + " " + ex.StackTrace);
                 throw ex;
             }
             catch (Exception ex)
             {
+                tran.Rollback();
                 GenerateLogsRelease("Methods", "Exception in ExecuteNBasicCommand", ex.Message + " " + ex.StackTrace);
                 throw ex;
             }

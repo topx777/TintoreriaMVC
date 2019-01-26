@@ -9,12 +9,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
         static void Main(string[] args)
         {
 
-            Correo correo = new Correo()
-            {
-                Nombre = "mauricio@gmail.com",
-                Principal=true
-            };
-            CorreoBrl.Insertar(correo, 26);
+            //Correo correo = new Correo()
+            //{
+            //    Nombre = "mauricio@gmail.com",
+            //    Principal=true
+            //};
+            //CorreoBrl.Insertar(correo, 26);
             //Console.WriteLine("Insertando Cargo");
 
 
@@ -24,13 +24,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
             //CargoBrl.Eliminar(2);
 
             //Console.Write("Cargo Insertado");
-            /*
+            
             Cliente cliente = new Cliente()
             {
                 Ci = "999999999",
                 Nombre = "Cliente",
-                PrimerApellido = "cl",
-                SegundoApellido = "te",
+                PrimerApellido = "Mauri",
+                SegundoApellido = "Gama",
                 Sexo = new Sexo()
                 {
                     IdSexo = 1
@@ -43,7 +43,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
                     EsAdmin = false
                 },
                 Borrado = false,
-                Nit = 9999016,
+                Nit = "222333",
                 Razon = "Razon",
                 FechaRegistro = DateTime.Now,
                 Correos = new List<Correo>()
@@ -86,6 +86,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
 
             };
             ClienteBrl.Insertar(cliente);
+
+            /*
 
             Personal personal = new Personal()
             {
