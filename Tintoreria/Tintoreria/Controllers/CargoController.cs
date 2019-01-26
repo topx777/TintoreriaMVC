@@ -16,7 +16,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         {
             CargoListModel lista = CargoListModel.Get();
 
-            return View(Cargo);
+            return View(lista);
         }
     }
 }
