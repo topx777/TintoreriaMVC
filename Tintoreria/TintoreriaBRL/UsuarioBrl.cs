@@ -9,7 +9,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 {
-    class UsuarioBrl
+    public class UsuarioBrl
     {
 
         /// <summary>
