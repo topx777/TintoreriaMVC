@@ -12,6 +12,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

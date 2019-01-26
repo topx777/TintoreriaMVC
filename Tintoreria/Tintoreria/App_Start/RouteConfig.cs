@@ -43,7 +43,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC
             routes.MapRoute(
                 name: "SingleCulture",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "KeyValuePacienteList", action = "Index", id = UrlParameter.Optional }).RouteHandler = new SingleCultureMvcRouteHandler();
+                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }).RouteHandler = new SingleCultureMvcRouteHandler();
         }
     }
 }
