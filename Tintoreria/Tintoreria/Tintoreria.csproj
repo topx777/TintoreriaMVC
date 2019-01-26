@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -157,6 +158,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CargoListModel.cs" />
+    <Compile Include="Models\CargoModel.cs" />
     <Compile Include="Models\CategoriaListModel.cs" />
     <Compile Include="Models\CategoriaModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
@@ -183,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cargo\" />
     <Folder Include="Views\Cliente\" />
     <Folder Include="Views\Personal\" />
   </ItemGroup>
