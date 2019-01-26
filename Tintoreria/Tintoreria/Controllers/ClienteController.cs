@@ -11,7 +11,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         public ActionResult Index()
         {
             ClienteListModel lista = new ClienteListModel();
-            return View();
+            return View(lista);
         }
     }
 }
