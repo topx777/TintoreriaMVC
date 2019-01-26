@@ -1,4 +1,5 @@
-﻿using System;
+﻿using reCAPTCHA.MVC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,7 +23,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
         // POST: Login
         [HttpPost]
-        public ActionResult Index(UsuarioModel model)
+        [CaptchaValidator]
+        public ActionResult Index(UsuarioModel model, bool captchaValid)
         {
             try
             {
@@ -32,24 +34,24 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                     if (usuario.IdUsuario != 0)
                     {
                         Session["Key"] = usuario;
-                        return RedirectToAction("../Categoria/Index");
+                        return RedirectToAction("../Home/Index");
                     }
                     else
                     {
                         ViewBag.Error = "Credenciales Incorrectas";
-                        return View();
+                        return View(model);
                     }
                 }
                 else
                 {
                     ViewBag.Error = "Error";
-                    return View();
+                    return View(model);
                 }
             }
             catch(Exception ex)
             {
                 ViewBag.Error = "Error Desconocido: " + ex.Message;
-                return View();
+                return View(model);
             }
         }
     }

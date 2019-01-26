@@ -1,40 +1,7 @@
-﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaModel>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Upds.Sistemas.ProgWeb2.Tintoreria.Core.Usuario usuario = ViewBag.Usuario;
 }
 
-<h2>Lista Categorias</h2>
-@*<a class="waves-effect waves-light btn">button</a>
-<a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>
-<a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>button</a>*@
-
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>Actions</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }) |
-            </td>
-        </tr>
-    }
-
-</table>
-
+<h2>Bienvenido @usuario.Username</h2>
