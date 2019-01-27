@@ -12,6 +12,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("PersonalDal", "InsertarPersonal", string.Format("{0} Info: {1}", 
             DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un personal"));
 
+            //List<SqlCommand> commands = new List<SqlCommand>();
+
             SqlCommand command = null;
 
             //Consulta para insertar datos de personal
