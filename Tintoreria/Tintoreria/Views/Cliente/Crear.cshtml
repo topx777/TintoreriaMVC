@@ -15,49 +15,47 @@
             <div class="col s12 m4">
                 <div class="input-field">
                     @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nombre" })
-                    @Html.ValidationMessageFor(model => model.Nombre)
+                    @*@Html.ValidationMessageFor(model => model.Nombre)*@
                 </div>
                 <div class="input-field">
                     @Html.TextBoxFor(model => model.PrimerApellido, new { @class = "validate", @placeholder = "Primer Apellido" })
-                    @Html.ValidationMessageFor(model => model.SegundoApellido)
+                    @*@Html.ValidationMessageFor(model => model.SegundoApellido)*@
                 </div>
                 <div class="input-field">
-                    @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Segundo Apellido" })
-                    @Html.ValidationMessageFor(model => model.SegundoApellido)
-                </div>
-                <div>
-                    <h5>Sexo</h5>
-                    <div>
-
-                    </div>
+                    @Html.TextBoxFor(model => model.SegundoApellido, new { @class = "validate", @placeholder = "Segundo Apellido" })
+                    @*@Html.ValidationMessageFor(model => model.SegundoApellido)*@
                 </div>
                 <div class="input-field">
+                    @Html.DropDownListFor(model => model.Sexo.IdSexo,(IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { @style = "display:block" })
+                </div>
+           
+                @*<div class="input-field">
                     @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Fecha de Nacimiento" })
                     @Html.ValidationMessageFor(model => model.FechaNacimiento)
                 </div>
                 <div class="input-field">
                     @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Correos" })
                     @Html.ValidationMessageFor(model => model.Correos)
-                </div>
+                </div>*@
             </div>
             <div class="col s12 m4">
                 <div>
                     <div class="input-field">
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nombre Usuario" })
-                        @Html.ValidationMessageFor(model => model.Username)
+                        @Html.TextBoxFor(model => model.Username, new { @class = "validate", @placeholder = "Nombre Usuario" })
+                        @*@Html.ValidationMessageFor(model => model.Username)*@
                     </div>
                     <div class="input-field">
                         @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Contraseña" })
-                        @Html.ValidationMessageFor(model => model.Password)
+                        @*@Html.ValidationMessageFor(model => model.Password)*@
                     </div>
                     <br />
                     <div class="input-field">
                         @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nit" })
-                        @Html.ValidationMessageFor(model => model.Nit)
+                        @*@Html.ValidationMessageFor(model => model.Nit)*@
                     </div>
                     <div class="input-field">
                         @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Razon" })
-                        @Html.ValidationMessageFor(model => model.Razon)
+                        @*@Html.ValidationMessageFor(model => model.Razon)*@
                     </div>
 
                 </div>
@@ -83,4 +81,5 @@
         </div>
     </fieldset>
 }
+
 

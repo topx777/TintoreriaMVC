@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="Controllers\SexoController.cs" />
     <Compile Include="Controllers\TrabajoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -210,12 +211,15 @@
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\CorreoModel.cs" />
     <Compile Include="Models\DireccionModel.cs" />
+    <Compile Include="Models\PedidoModel.cs" />
     <Compile Include="Models\PersonalListModel.cs" />
     <Compile Include="Models\PersonalModel.cs" />
     <Compile Include="Models\PersonaModel.cs" />
     <Compile Include="Models\SexoModel.cs" />
     <Compile Include="Models\TelefonoModel.cs" />
     <Compile Include="Models\TipoModel.cs" />
+    <Compile Include="Models\TrabajoDetalleModel.cs" />
+    <Compile Include="Models\TrabajoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -240,6 +244,7 @@
     <Content Include="Views\Cliente\Editar.cshtml" />
     <Content Include="Views\Cliente\Ver.cshtml" />
     <Content Include="Views\Trabajo\Index.cshtml" />
+    <Content Include="Views\Trabajo\Nuevo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -250,6 +255,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Personal\" />
+    <Folder Include="Views\Sexo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
