@@ -14,14 +14,17 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if(Session["Key"] == null)
-            {
-               return RedirectToAction("../Login/Index");
-            }
+            //if(Session["Key"] == null)
+            //{
+            //   return RedirectToAction("../Login/Index");
+            //}
 
-            ViewBag.Usuario = Session["Key"] as Usuario;
+            //ViewBag.Usuario = Session["Key"] as Usuario;
+
+
 
             return View();
         }
+
     }
 }

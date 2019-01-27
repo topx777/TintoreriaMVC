@@ -43,10 +43,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         public bool EsAdmin { get; set; }
 
         [Display(Name ="Direcciones")]
-        public List<Direccion> Direcciones { get; set; }
+        public List<DireccionModel> Direcciones { get; set; }
 
         [Display(Name ="Telefonos")]
-        public List<Telefono> Telefonos { get; set; }
+        public List<TelefonoModel> Telefonos { get; set; }
 
         [Display(Name ="Nit")]
         public string Nit { get; set; }

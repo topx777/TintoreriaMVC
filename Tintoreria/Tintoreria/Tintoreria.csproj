@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="Controllers\SexoController.cs" />
     <Compile Include="Controllers\TrabajoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -249,6 +250,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Personal\" />
+    <Folder Include="Views\Sexo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
-using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
@@ -16,12 +16,31 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
 
         // GET: Crear Cliente
-        public ActionResult Crsear()
+        public ActionResult Crear()
         {
+            CargarSexo();
             ClienteModel client = new ClienteModel();
+            client.Correos = new List<CorreoModel>();
+            client.Correos.Add(new CorreoModel());
+            client.Telefonos = new List<TelefonoModel>();
+            client.Telefonos.Add(new TelefonoModel());
+            client.Direcciones = new List<DireccionModel>();
+            client.Direcciones.Add(new DireccionModel());
             return View(client);
         }
-
+        public void CargarSexo()
+        {
+            ViewBag.ListaSexos = new SelectList(
+                        (
+                            from t in SexoController.ListaSexo
+                            select new SelectListItem
+                            {
+                                Text = t.Nombre,
+                                Value = t.IdSexo.ToString()
+                            }
+                        )
+                        , "Value", "Text");
+        }
         // GET: Ver Modificar Cliente
         public ActionResult Editar(int mCodigo)
         {
