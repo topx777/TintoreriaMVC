@@ -51,6 +51,7 @@
     <Compile Include="Pedido.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Personal.cs" />
+    <Compile Include="PersonalList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sexo.cs" />
     <Compile Include="Telefono.cs" />
