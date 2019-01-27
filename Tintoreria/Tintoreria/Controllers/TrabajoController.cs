@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
@@ -19,6 +20,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
         public ActionResult Nuevo()
         {
+            Trab
             return View();
         }
     }
