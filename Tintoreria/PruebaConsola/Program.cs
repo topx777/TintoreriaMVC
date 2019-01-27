@@ -8,17 +8,17 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Lista Clientes");
-            var listaClientes = ClienteBrl.ListCliente();
+            //Console.WriteLine("Lista Clientes");
+            //var listaClientes = ClienteBrl.ListCliente();
 
-            foreach (Cliente cli in listaClientes)
-            {
-                Console.Write(cli.IdPersona);
-                Console.Write(cli.Nombre);
-                Console.WriteLine(cli.FechaRegistro);
-                Console.WriteLine();
-            }
-            Console.Read();
+            //foreach (Cliente cli in listaClientes)
+            //{
+            //    Console.Write(cli.IdPersona);
+            //    Console.Write(cli.Nombre);
+            //    Console.WriteLine(cli.FechaRegistro);
+            //    Console.WriteLine();
+            //}
+            //Console.Read();
             //Correo correo = new Correo()
             //{
             //    Nombre = "mauricio@gmail.com",
@@ -34,7 +34,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
             //CargoBrl.Eliminar(2);
 
             //Console.Write("Cargo Insertado");
-            
+
             //Cliente cliente = new Cliente()
             //{
             //    Ci = "999999999",
@@ -97,81 +97,81 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
             //};
             //ClienteBrl.Insertar(cliente);
 
-            /*
 
-            Personal personal = new Personal()
-            {
-                IdPersona = 15,
-                Ci = "9511300",
-                Nombre = "Jaunito",
-                PrimerApellido = "Agreda",
-                SegundoApellido = "Paniagua",
-                Sexo = new Sexo
-                {
-                    IdSexo = 1,
-                },
-                FechaNacimiento = new DateTime(1995, 5, 29),
-                Correos = new List<Correo>()
-                {
-                    new Correo()
-                    {
-                        Nombre = "topxsan@gmail.com",
-                        Principal = true
-                    },
-                    new Correo()
-                    {
-                        Nombre = "topx555@hotmail.com",
-                        Principal = false
-                    }
-                },
-                Usuario = new Usuario()
-                {
-                    Username = "topx777",
-                    Password = "slr8830213",
-                    EsAdmin = false
-                },
-                Direcciones = new List<Direccion>()
-                {
-                    new Direccion()
-                    {
-                        Descripcion = "Av. Dorvigni 1827",
-                        Latitud = 17.25555345,
-                        Longitud = 36.66778812,
-                        Tipo = new Tipo()
-                        {
-                            IdTipo = 1
-                        }
-                    }
-                },
-                Telefonos = new List<Telefono>()
-                {
-                    new Telefono()
-                    {
-                        Numero = "4414017",
-                        Tipo = new Tipo()
-                        {
-                            IdTipo = 1
-                        }
-                    }
-                },
-                Borrado = false,
-                CodPersonal = "FX12222",
-                FechaIngreso = DateTime.Now,
-                Cargo = new Cargo()
-                {
-                    IdCargo = 3
-                },
-                Sueldo = 2500
-            };
+
+            //Personal personal = new Personal()
+            //{
+            //    IdPersona = 15,
+            //    Ci = "78582573",
+            //    Nombre = "Mauricio",
+            //    PrimerApellido = "Gamarra",
+            //    SegundoApellido = "Vargas",
+            //    Sexo = new Sexo
+            //    {
+            //        IdSexo = 1,
+            //    },
+            //    FechaNacimiento = new DateTime(1995, 5, 26),
+            //    Correos = new List<Correo>()
+            //    {
+            //        new Correo()
+            //        {
+            //            Nombre = "mgamarrav@gmail.com",
+            //            Principal = true
+            //        },
+            //        new Correo()
+            //        {
+            //            Nombre = "boyca123@hotmail.com",
+            //            Principal = false
+            //        }
+            //    },
+            //    Usuario = new Usuario()
+            //    {
+            //        Username = "mgamarra",
+            //        Password = "sfakhalhlsan2323",
+            //        EsAdmin = false
+            //    },
+            //    Direcciones = new List<Direccion>()
+            //    {
+            //        new Direccion()
+            //        {
+            //            Descripcion = "Av. America Edificio Karen",
+            //            Latitud = 17.25555345,
+            //            Longitud = 36.66778812,
+            //            Tipo = new Tipo()
+            //            {
+            //                IdTipo = 1
+            //            }
+            //        }
+            //    },
+            //    Telefonos = new List<Telefono>()
+            //    {
+            //        new Telefono()
+            //        {
+            //            Numero = "42993292",
+            //            Tipo = new Tipo()
+            //            {
+            //                IdTipo = 1
+            //            }
+            //        }
+            //    },
+            //    Borrado = false,
+            //    CodPersonal = "BOY12355",
+            //    FechaIngreso = DateTime.Now,
+            //    Cargo = new Cargo()
+            //    {
+            //        IdCargo = 3
+            //    },
+            //    Sueldo = 10000
+            //};
 
             //PersonalBrl.Insertar(personal);
 
             //Personal personal = PersonalBrl.Get(15);
             //PersonalBrl.Actualizar(personal);
 
-            PersonalBrl.Eliminar(15);
+            //PersonalBrl.Eliminar(15);
 
-            Personal personale = PersonalBrl.Get(15);
+            Personal personale = PersonalBrl.Get(28);
 
             personale.Dump(Console.Out);
             personale.Usuario.Dump(Console.Out);
@@ -192,7 +192,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
                 x.Dump(Console.Out);
             }
 
-            //Console.ReadKey();*/
+            Console.ReadKey();
         }
     }
 }

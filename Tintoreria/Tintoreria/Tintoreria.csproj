@@ -240,6 +240,7 @@
     <Content Include="Views\Cliente\Editar.cshtml" />
     <Content Include="Views\Cliente\Ver.cshtml" />
     <Content Include="Views\Trabajo\Index.cshtml" />
+    <Content Include="Views\Trabajo\Nuevo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

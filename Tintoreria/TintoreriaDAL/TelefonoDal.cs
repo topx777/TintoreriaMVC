@@ -48,6 +48,31 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("TelefonoDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar telefono"));
         }
 
+        /// <summary>
+        /// Inserta un telefono a la base de datos y devuelve el ID aparte me devuelve el comando
+        /// </summary>
+        /// <param name="telefono"></param>
+        /// <param name="idPersona"></param>
+        public static SqlCommand InsertarOUTPUT(Telefono telefono, int idPersona)
+        {
+            Methods.GenerateLogsDebug("TelefonoDal", "Insertar", string.Format("{0} Info: {1}",
+            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un telefono"));
+
+            SqlCommand command = null;
+
+            //Consulta para insertar telefonos
+            string queryString = @"INSERT INTO Telefono(Numero, Tipo, idPersona) VALUES(@numero, @tipo, @idPersona)";
+
+            command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@numero", telefono.Numero);
+            command.Parameters.AddWithValue("@tipo", telefono.Tipo.IdTipo);
+            command.Parameters.AddWithValue("@idPersona", idPersona);
+
+
+            return command;
+
+        }
+
 
         /// <summary>
         /// Elimina telefono de la base de datos

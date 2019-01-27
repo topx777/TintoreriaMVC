@@ -12,61 +12,91 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("PersonalDal", "InsertarPersonal", string.Format("{0} Info: {1}", 
             DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un personal"));
 
-            //List<SqlCommand> commands = new List<SqlCommand>();
-
             SqlCommand command = null;
+            SqlTransaction trans = null;
 
             //Consulta para insertar datos de personal
             string queryString = @"INSERT INTO Personal(IdPersona, CodPersonal, FechaIngreso, Cargo, Sueldo) 
                                VALUES (@idPersona ,@codPersonal, @fechaIngreso, @cargo, @sueldo)";
+
+            SqlConnection conexion = Methods.ObtenerConexion();
+
             try
             {
-                UsuarioDal.Insertar(personal.Usuario);
-                
-                personal.Usuario.IdUsuario = Methods.GetActIDTable("Usuario");
+                conexion.Open();
+                SqlCommand usuarioInsertcmd = UsuarioDal.InsertarOUTPUT(personal.Usuario);
+                //Inicio de Conexion a la Base de Datos
+                trans = conexion.BeginTransaction();
+
+                usuarioInsertcmd.Connection = conexion;
+                usuarioInsertcmd.Transaction = trans;
+                personal.Usuario.IdUsuario = Convert.ToInt32(usuarioInsertcmd.ExecuteScalar());
 
                 Persona persona = personal;
-                PersonaDal.Insertar(persona);
 
-                personal.IdPersona = Methods.GetActIDTable("Persona");
+                SqlCommand personaInsertcmd = PersonaDal.InsertarOUTPUT(persona);
+
+                personaInsertcmd.Connection = conexion;
+                personaInsertcmd.Transaction = trans;
+                personal.IdPersona = Convert.ToInt32(personaInsertcmd.ExecuteScalar());
 
 
-                //Insertar telefonos
-                foreach(Telefono telf in personal.Telefonos)
-                {
-                    TelefonoDal.Insertar(telf, personal.IdPersona);
-                }
-
-                //Insertar direcciones
-                foreach(Direccion direc in personal.Direcciones)
-                {
-                    DireccionDal.Insertar(direc, personal.IdPersona);
-                }
-
-                //Insertar correos
-                foreach (Correo correo in persona.Correos)
-                {
-                    CorreoDal.Insertar(correo, personal.IdPersona);
-                }
-
-                command = Methods.CreateBasicCommand(queryString);
+                // Creacion de Personal Commando y ejecutado
+                command = new SqlCommand(queryString);
                 command.Parameters.AddWithValue("@idPersona", personal.IdPersona);
                 command.Parameters.AddWithValue("@codPersonal", personal.CodPersonal);
                 command.Parameters.AddWithValue("@fechaIngreso", personal.FechaIngreso);
                 command.Parameters.AddWithValue("@cargo", personal.Cargo.IdCargo);
                 command.Parameters.AddWithValue("@sueldo", personal.Sueldo);
-                Methods.ExecuteBasicCommand(command);
-                
+
+                command.Connection = conexion;
+                command.Transaction = trans;
+                command.ExecuteNonQuery();
+
+                //Insertar telefonos
+                foreach (Telefono telf in personal.Telefonos)
+                {
+                    SqlCommand telfcmd = TelefonoDal.InsertarOUTPUT(telf, personal.IdPersona);
+                    telfcmd.Connection = conexion;
+                    telfcmd.Transaction = trans;
+                    telfcmd.ExecuteNonQuery();
+                }
+
+                //Insertar direcciones
+                foreach (Direccion direc in personal.Direcciones)
+                {
+                    SqlCommand direccmd = DireccionDal.InsertarOUTPUT(direc, personal.IdPersona);
+                    direccmd.Connection = conexion;
+                    direccmd.Transaction = trans;
+                    direccmd.ExecuteNonQuery();
+                }
+
+                //Insertar correos
+                foreach (Correo correo in persona.Correos)
+                {
+                    SqlCommand correocmd = CorreoDal.InsertarOUTPUT(correo, personal.IdPersona);
+                    correocmd.Connection = conexion;
+                    correocmd.Transaction = trans;
+                    correocmd.ExecuteNonQuery();
+                }
+
+                trans.Commit();
             }
             catch (SqlException ex)
             {
+                trans.Rollback();
                 Methods.GenerateLogsRelease("PersonalDal", "InsertarPersonal", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
             catch (Exception ex)
             {
+                trans.Rollback();
                 Methods.GenerateLogsRelease("PersonalDal", "InsertarPersonal", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
+            }
+            finally
+            {
+                conexion.Close();
             }
 
             Methods.GenerateLogsDebug("PersonalDal", "InsertarPersonal", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un personal"));

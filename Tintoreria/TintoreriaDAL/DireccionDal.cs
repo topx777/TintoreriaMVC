@@ -48,6 +48,31 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         }
 
         /// <summary>
+        /// Inserta una direccion a una persona devueve ID y nos devuelve el COmando
+        /// </summary>
+        /// <param name="direccion"></param>
+        /// <param name="idPersona"></param>
+        public static SqlCommand InsertarOUTPUT(Direccion direccion, int idPersona)
+        {
+            Methods.GenerateLogsDebug("DireccionDal", "Insertar", string.Format("{0} Info: {1}",
+            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear una direccion"));
+
+            SqlCommand command = null;
+
+            //Consulta para insertar telefonos
+            string queryString = @"INSERT INTO Direccion(Descripcion, Tipo, Latitud, Longitud, idPersona) VALUES(@desc, @tipo, @latitud, @longitud, @idPersona)";
+
+            command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@desc", direccion.Descripcion);
+            command.Parameters.AddWithValue("@tipo", direccion.Tipo.IdTipo);
+            command.Parameters.AddWithValue("@latitud", direccion.Latitud);
+            command.Parameters.AddWithValue("@longitud", direccion.Longitud);
+            command.Parameters.AddWithValue("@idPersona", idPersona);
+
+            return command;
+        }
+
+        /// <summary>
         /// Elimina Direccion ya existente
         /// </summary>
         /// <param name="id"></param>

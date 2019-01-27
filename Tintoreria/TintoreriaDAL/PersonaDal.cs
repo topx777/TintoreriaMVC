@@ -53,6 +53,34 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
 
         /// <summary>
+        /// Inserta nuevo Persona a la base  de datos y devuelve el ID insertado
+        /// </summary>
+        /// <param name="persona"></param>
+        public static SqlCommand InsertarOUTPUT(Persona persona)
+        {
+            Methods.GenerateLogsDebug("PersonaDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar una persona"));
+
+            SqlCommand command = null;
+
+            // Proporcionar la cadena de consulta 
+            string queryString = @"INSERT INTO Persona(Ci, Nombre, PrimerApellido, SegundoApellido, Sexo, FechaNacimiento, Usuario)
+                                  OUTPUT inserted.IdPersona
+                                  VALUES(@ci, @nombre, @primerApellido, @segundoApellido, @sexo, @fechaNacimiento, @usuario)";
+
+            command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@ci", persona.Ci);
+            command.Parameters.AddWithValue("@nombre", persona.Nombre);
+            command.Parameters.AddWithValue("@primerApellido", persona.PrimerApellido);
+            command.Parameters.AddWithValue("@segundoApellido", persona.SegundoApellido);
+            command.Parameters.AddWithValue("@sexo", persona.Sexo.IdSexo);
+            command.Parameters.AddWithValue("@fechaNacimiento", persona.FechaNacimiento);
+            command.Parameters.AddWithValue("@usuario", persona.Usuario.IdUsuario);
+            
+            return command;
+        }
+
+
+        /// <summary>
         /// Actualiza los datos del persona en la base de datos
         /// </summary>
         /// <param name="persona"></param>
