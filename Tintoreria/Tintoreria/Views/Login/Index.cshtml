@@ -27,13 +27,17 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 @Html.ValidationMessageFor(model => model.Username)
-                                @Html.TextBoxFor(model => model.Username, new { @class = "validate", @placeholder = Resource.Resource.Username })
+                                <i class="material-icons prefix">account_circle</i>
+                                @Html.TextBoxFor(model => model.Username, new { @class = "validate", @id = "user" })
+                                @Html.LabelFor(model => model.Username, new { @for = "user", @style = "margin-left:0" })
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
                                 @Html.ValidationMessageFor(model => model.Password)
-                                @Html.PasswordFor(model => model.Password, new { @class = "validate", @placeholder = Resource.Resource.Password })
+                                <i class="material-icons prefix">vpn_key</i>
+                                @Html.PasswordFor(model => model.Password, new { @class = "validate", @id = "pass" })
+                                @Html.LabelFor(model => model.Password, new { @for = "user", @style = "margin-left:0" })
                             </div>
                         </div>
                         <div class="row">

@@ -16,5 +16,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             //int pageSize = 5
             return View();
         }
+
+        public ActionResult Nuevo()
+        {
+            return View();
+        }
     }
 }

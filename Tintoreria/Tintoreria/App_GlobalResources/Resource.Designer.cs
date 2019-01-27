@@ -97,6 +97,15 @@ namespace Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Work.
+        /// </summary>
+        public static string NewWork {
+            get {
+                return ResourceManager.GetString("NewWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
