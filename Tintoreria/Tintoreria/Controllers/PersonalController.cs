@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,13 +12,19 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class PersonalController : Controller
     {
-        // GET: Personal
-        public ActionResult Index()
+        // GET: Categoria
+        [HttpGet]
+        public ActionResult Index(int? page)
         {
-            //PersonalListModel lista = PersonalListModel.Get();
-            return View();
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            PersonalListModel lista = PersonalListModel.Get();
+
+            IPagedList<PersonalModel> personal = null;
+            personal = lista.ToPagedList(pageIndex, pageSize);
+
+            return View(personal);
         }
-
-
     }
 }

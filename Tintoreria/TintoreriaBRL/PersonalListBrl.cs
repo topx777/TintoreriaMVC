@@ -9,7 +9,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 {
-    class PersonalListBrl
+    public class PersonalListBrl
     {
         /// <summary>
         /// Obtiene la lista de personal

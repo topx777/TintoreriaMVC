@@ -217,8 +217,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = @"SELECT * FROM Personal";
-
+            string query = @"SELECT * FROM Personal INNER JOIN Persona 
+                            ON Personal.IdPersona = Persona.IdPersona WHERE Persona.Borrado = 0";
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
