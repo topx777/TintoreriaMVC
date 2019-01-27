@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class ClienteListModel:List<ClienteModel>
@@ -10,7 +10,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         public static ClienteListModel Get()
         {
             ClienteListModel clienteListModel = new ClienteListModel();
-            foreach (var cliente in Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL.ClienteBrl.ListCliente())
+            foreach (var cliente in ClienteBrl.ListCliente())
             {
                 clienteListModel.Add(new ClienteModel {
                     IdPersona=cliente.IdPersona,

@@ -31,7 +31,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         public DateTime? FechaNacimiento { get; set; }
 
         [Display(Name ="Correos")]
-        public List<Correo> Correos { get; set; }
+        public List<CorreoModel> Correos { get; set; }
 
         [Display(Name ="Username")]
         public string Username { get; set; }

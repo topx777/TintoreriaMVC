@@ -10,13 +10,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            ClienteListModel lista = new ClienteListModel();
+            ClienteListModel lista = ClienteListModel.Get();
             return View(lista);
         }
 
 
         // GET: Crear Cliente
-        public ActionResult Crear()
+        public ActionResult Crsear()
         {
             ClienteModel client = new ClienteModel();
             return View(client);

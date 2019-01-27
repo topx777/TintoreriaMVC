@@ -5,7 +5,7 @@
 }
 
 <h2>Lista Clientes</h2>
-<a class="waves-effect waves-light btn blue" href="@Url.Action("../Categoria/Crear")"><i class="material-icons left">add</i>Crear Categoria</a>
+<a class="waves-effect waves-light btn blue" href="@Url.Action("../Cliente/Crear")"><i class="material-icons left">add</i>Crear Categoria</a>
 <table class="table table-striped">
     <tr>
         <th>
@@ -39,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.SegundoApellido)
             </td>
             <td>
-                <a class="waves-effect waves-light btn amber" href="@Url.Action("../Categoria/Ver", new { mCodigo = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cliente/Ver", new { mCodigo = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
                 <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Categoria", new { mCodigo = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
-                <a class="waves-effect waves-light btn red" href="@Url.Action("../Categoria/Eliminar", new { mCodigo = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
+                <a class="waves-effect waves-light btn red" href="@Url.Action("../Cliente/Eliminar", new { mCodigo = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
                 @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
             </td>
         </tr>
