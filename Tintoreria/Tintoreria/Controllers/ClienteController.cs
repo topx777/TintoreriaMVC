@@ -22,9 +22,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             ClienteModel client = new ClienteModel();
             client.Correos = new List<CorreoModel>();
             client.Correos.Add(new CorreoModel());
+
             client.Telefonos = new List<TelefonoModel>();
             client.Telefonos.Add(new TelefonoModel());
             client.Direcciones = new List<DireccionModel>();
+            client.Direcciones.Add(new DireccionModel());
+            client.Direcciones.Add(new DireccionModel());
             client.Direcciones.Add(new DireccionModel());
             return View(client);
         }

@@ -10,7 +10,6 @@
 {
     @Html.ValidationSummary(true)
 
-    <fieldset>
         <div class="row">
             <div class="col s12 m4">
                 <div class="input-field">
@@ -26,17 +25,13 @@
                     @*@Html.ValidationMessageFor(model => model.SegundoApellido)*@
                 </div>
                 <div class="input-field">
-                    @Html.DropDownListFor(model => model.Sexo.IdSexo,(IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { @style = "display:block" })
+                    @Html.DropDownListFor(model => model.Sexo.IdSexo,(IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { style="Display: block"})
                 </div>
            
-                @*<div class="input-field">
-                    @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Fecha de Nacimiento" })
-                    @Html.ValidationMessageFor(model => model.FechaNacimiento)
-                </div>
                 <div class="input-field">
-                    @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Correos" })
-                    @Html.ValidationMessageFor(model => model.Correos)
-                </div>*@
+                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "validate", @placeholder = "Fecha de Nacimiento" })
+                    @*@Html.ValidationMessageFor(model => model.FechaNacimiento)*@
+                </div>
             </div>
             <div class="col s12 m4">
                 <div>
@@ -45,16 +40,16 @@
                         @*@Html.ValidationMessageFor(model => model.Username)*@
                     </div>
                     <div class="input-field">
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Contraseña" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "validate", @placeholder = "Contraseña" })
                         @*@Html.ValidationMessageFor(model => model.Password)*@
                     </div>
                     <br />
                     <div class="input-field">
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nit" })
+                        @Html.TextBoxFor(model => model.Nit, new { @class = "validate", @placeholder = "Nit" })
                         @*@Html.ValidationMessageFor(model => model.Nit)*@
                     </div>
                     <div class="input-field">
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Razon" })
+                        @Html.TextBoxFor(model => model.Razon, new { @class = "validate", @placeholder = "Razon" })
                         @*@Html.ValidationMessageFor(model => model.Razon)*@
                     </div>
 
@@ -66,7 +61,15 @@
                         <h4>
                             Direccion
                         </h4>
+                        @foreach (var item in Model.Direcciones)
+                        {
+                            <div>
+                                @Html.DisplayNameFor(modelitem =>item.Descripccion)
+                                @Html.TextBoxFor(modelitem =>item.Descripccion)
+                                <br />
+                            </div>
 
+                        }
 
                     </div>
                     <div>
@@ -79,7 +82,5 @@
                 </div>
             </div>
         </div>
-    </fieldset>
 }
-
 
