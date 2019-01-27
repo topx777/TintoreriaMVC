@@ -212,6 +212,7 @@
     <Compile Include="Models\DireccionModel.cs" />
     <Compile Include="Models\PersonalListModel.cs" />
     <Compile Include="Models\PersonalModel.cs" />
+    <Compile Include="Models\PersonaModel.cs" />
     <Compile Include="Models\SexoModel.cs" />
     <Compile Include="Models\TelefonoModel.cs" />
     <Compile Include="Models\TipoModel.cs" />
