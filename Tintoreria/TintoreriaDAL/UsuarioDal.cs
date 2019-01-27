@@ -48,7 +48,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Obtener la consulta de insertar nuevo usuario
         /// </summary>
         /// <param name="usuario"></param>
-        public static SqlCommand InsertarCMD(Usuario usuario)
+        public static SqlCommand InsertarOUTPUT(Usuario usuario)
         {
             Methods.GenerateLogsDebug("UsuarioDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para eliminar un usuario"));
 
@@ -56,12 +56,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
             // Proporcionar la cadena de consulta 
             string queryString = @"INSERT INTO Usuario(Username, Password, EsAdmin)
+                                    OUTPUT inserted.IdUsuario
                                     VALUES(@username, @password, @esAdmin)";
-            command = Methods.CreateBasicCommand(queryString);
+            command = new SqlCommand(queryString);
+
             command.Parameters.AddWithValue("@username", usuario.Username);
             command.Parameters.AddWithValue("@password", usuario.Password);
             command.Parameters.AddWithValue("@esAdmin", usuario.EsAdmin);
-
 
             return command;
         }

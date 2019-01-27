@@ -22,6 +22,17 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             cmd.Connection = connection;
             return cmd;
         }
+
+        public static SqlConnection ObtenerConexion()
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            return connection;
+        }
+
+
+
+
+
         /// <summary>
         /// Retorna un comando sql relacionado a la conexion
         /// </summary>

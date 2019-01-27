@@ -48,6 +48,32 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("CorreoDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar correo"));
         }
 
+
+        /// <summary>
+        /// Método para agregar un nuevo correo a la BD.
+        /// </summary>
+        /// <param name="correo">Objeto Correo</param>
+        /// <param name="idPersona">Id de Persona</param>
+        public static SqlCommand InsertarOUTPUT(Correo correo, int idPersona)
+        {
+            Methods.GenerateLogsDebug("CorreoDal", "Insertar", string.Format("{0} Info: {1}",
+            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un correo"));
+
+            SqlCommand command = null;
+
+            //Consulta para insertar telefonos
+            string queryString = @"INSERT INTO Correo(Nombre, Principal, idPersona) VALUES(@nombre, @principal, @idPersona)";
+
+            command = new SqlCommand(queryString);
+            command.Parameters.AddWithValue("@nombre", correo.Nombre);
+            command.Parameters.AddWithValue("@principal", correo.Principal);
+            command.Parameters.AddWithValue("@idPersona", idPersona);
+
+            return command;
+        }
+
+
+
         /// <summary>
         /// Actualiza los datos del correo en la base de datos
         /// </summary>
