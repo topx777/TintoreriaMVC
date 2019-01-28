@@ -20,7 +20,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
         public ActionResult Nuevo()
         {
-            Trab
+            
             return View();
         }
     }
