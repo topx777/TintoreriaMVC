@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
 {
