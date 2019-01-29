@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SexoBrl.cs" />
     <Compile Include="TelefonoBrl.cs" />
+    <Compile Include="TipoBrl.cs" />
     <Compile Include="TrabajoBrl.cs" />
     <Compile Include="TrabajoDetalleBrl.cs" />
     <Compile Include="UsuarioBrl.cs" />

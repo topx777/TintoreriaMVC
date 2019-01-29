@@ -5,52 +5,15 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
-    public class ClienteModel
+    public class ClienteModel:PersonaModel
     {
         #region Propiedades
-
-        [Display(Name ="IdPersona")]
-        public int IdPersona { get; set; }
-
-        [Display(Name ="Ci")]
-        public string Ci { get; set; }
-
-        [Display(Name="Nombre")]
-        public string Nombre { get; set; }
-
-        [Display(Name ="Primer Apellido")]
-        public string PrimerApellido { get; set; }
-
-        [Display(Name ="Segundo Apellido")]
-        public string SegundoApellido { get; set; }
-
-        [Display(Name ="Sexo")]
-        public SexoModel Sexo { get; set; }
-
-        [Display(Name ="Fecha Nacimiento")]
-        public DateTime? FechaNacimiento { get; set; }
-
-        [Display(Name ="Correos")]
-        public List<CorreoModel> Correos { get; set; }
-
-        [Display(Name ="Username")]
-        public string Username { get; set; }
-
-        [Display(Name ="Password")]
-        public string Password { get; set; }
-
-        [Display(Name ="Es Administrador")]
-        public bool EsAdmin { get; set; }
-
-        [Display(Name ="Direcciones")]
-        public List<DireccionModel> Direcciones { get; set; }
-
-        [Display(Name ="Telefonos")]
-        public List<TelefonoModel> Telefonos { get; set; }
-
+        [Required(ErrorMessage ="El campo Nit es Requerido")]
+        [StringLength(25,MinimumLength = 10, ErrorMessage ="El Campo Nit debe tener como minimo 10 Caracteres")]
         [Display(Name ="Nit")]
         public string Nit { get; set; }
 
+        [Required(ErrorMessage ="El Campo Razon es Requerido")]
         [Display(Name ="Razon")]
         public string Razon { get; set; }
 

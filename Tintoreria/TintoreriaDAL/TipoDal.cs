@@ -5,7 +5,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 {
-    class TipoDal
+    public class TipoDal
     {
 
         /// <summary>

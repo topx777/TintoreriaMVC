@@ -19,16 +19,18 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         public ActionResult Crear()
         {
             CargarSexo();
+            CargarTipo();
             ClienteModel client = new ClienteModel();
+
             client.Correos = new List<CorreoModel>();
             client.Correos.Add(new CorreoModel());
 
             client.Telefonos = new List<TelefonoModel>();
             client.Telefonos.Add(new TelefonoModel());
+
             client.Direcciones = new List<DireccionModel>();
             client.Direcciones.Add(new DireccionModel());
-            client.Direcciones.Add(new DireccionModel());
-            client.Direcciones.Add(new DireccionModel());
+
             return View(client);
         }
         public void CargarSexo()
@@ -43,6 +45,17 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                             }
                         )
                         , "Value", "Text");
+        }
+        public void CargarTipo()
+        {
+            ViewBag.ListaTipo = new SelectList((
+                from t in TipoController.TipoList
+                select new SelectListItem
+                {
+                    Text=t.Nombre,
+                    Value=t.IdTipo.ToString()
+                }
+                ), "Value", "Text");
         }
         // GET: Ver Modificar Cliente
         public ActionResult Editar(int mCodigo)
