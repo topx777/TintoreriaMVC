@@ -42,7 +42,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                @Html.Recaptcha()
+                                @Html.Recaptcha(publicKey: "6LeT6IwUAAAAAJNt19ip-Cz-e0qCknVaQGAOFxwK", theme: CaptchaTheme.Dark, type: CaptchaType.Image)
                                 @Html.ValidationMessage("ReCaptcha")
                             </div>
                         </div>

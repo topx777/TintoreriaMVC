@@ -23,7 +23,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
         // POST: Login
         [HttpPost]
-        [CaptchaValidator]
+        [CaptchaValidator(
+            PrivateKey = "6LeT6IwUAAAAAJNt19ip-Cz-e0qCknVaQGAOFxwK",
+            ErrorMessage = "Error captcha invalido.",
+            RequiredMessage = "El captcha es requerido")]
         public ActionResult Index(UsuarioModel model, bool captchaValid)
         {
             try

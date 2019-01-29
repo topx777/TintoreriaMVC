@@ -25,6 +25,20 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             return View(lista);
         }
 
+        public void CargarSexo()
+        {
+            ViewBag.ListaSexos = new SelectList(
+            (
+                from t in SexoController.ListaSexo
+                select new SelectListItem
+                {
+                    Text = t.Nombre,
+                    Value = t.IdSexo.ToString()
+                }
+            )
+            , "Value", "Text");
+        }
+
         public ActionResult Nuevo()
         {
             
