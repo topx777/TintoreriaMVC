@@ -70,5 +70,25 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 }
                 ), "Value", "Text");
         }
+
+        public ActionResult Editar(int mCodigo)
+        {
+            Personal per = PersonalBrl.Get(mCodigo);
+            PersonalModel model = new PersonalModel()
+            {
+                IdPersona = per.IdPersona,
+                Ci = per.Ci,
+                Nombre = per.Nombre,
+                PrimerApellido = per.PrimerApellido,
+                SegundoApellido= per.SegundoApellido,
+                FechaNacimiento=per.FechaNacimiento,
+                CodPersonal=per.CodPersonal,
+                FechaIngreso=per.FechaIngreso,
+                Sueldo=per.Sueldo,
+                
+            };
+
+            return View(model);
+        }
     }
 }
