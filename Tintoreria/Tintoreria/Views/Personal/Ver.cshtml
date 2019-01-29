@@ -1,0 +1,50 @@
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.PersonalModel
+@{
+    ViewBag.Title = "Ver";
+}
+
+<h2>Ver Personal</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div class="row">
+            <div class="col s6">
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Nombre)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Nombre, new { @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.PrimerApellido)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.PrimerApellido, new { @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.PrimerApellido)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.SegundoApellido)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.SegundoApellido, new { @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.SegundoApellido)
+                    </div>
+                </div>
+                <a href="@Url.Action("../Personal/Index")" class="waves-effect waves-light btn red">
+                    <i class="material-icons left">arrow_back</i> Volver Atras
+                </a>
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
