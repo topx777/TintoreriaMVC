@@ -10,6 +10,30 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class ClienteController : Controller
     {
+        private static List<ClienteModel> clienteList;
+        public static List<ClienteModel> ListaCliente
+        {
+
+            get
+            {
+                clienteList = new List<ClienteModel>();
+                foreach (var cliente in ClienteBrl.ListCliente())
+                {
+                    clienteList.Add(new ClienteModel
+                    {
+                        IdPersona = cliente.IdPersona,
+                        Ci = cliente.Ci,
+                        Nombre = cliente.Nombre
+                    });
+                }
+                return clienteList;
+            }
+            set
+            {
+                clienteList = value;
+            }
+        }
+
         // GET: Cliente
         public ActionResult Index()
         {
