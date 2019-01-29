@@ -18,8 +18,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         [Display(Name = "Cargo")]
         public CargoModel Cargo { get; set; }
 
-        [Range(1, double.MaxValue, ErrorMessage = "El rango del sueldo es invalido.")]
+        [Range(1, 99999999.99, ErrorMessage = "El rango del sueldo es invalido.")]
         [Display(Name = "Sueldo")]
-        public double Sueldo { get; set; }
+        public decimal Sueldo { get; set; }
     }
 }

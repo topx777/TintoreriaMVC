@@ -151,7 +151,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         IdTrabajoDetalle = dr.GetInt32(0),
                         CodigoPrenda = dr.GetString(1),
                         Categoria = CategoriaDal.Get(dr.GetInt32(3)),
-                        PrecioFinal = dr.GetSqlDecimal(4).ToDouble(),
+                        PrecioFinal = dr.GetDecimal(4),
                         Peso = dr.GetSqlDecimal(5).ToDouble(),
                         Estado = EstadoDal.Get(dr.GetInt32(6)),
                         Borrado = dr.GetBoolean(7)
@@ -197,7 +197,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         IdTrabajoDetalle = dr.GetInt32(0),
                         CodigoPrenda = dr.GetString(1),
                         Categoria = CategoriaDal.Get(dr.GetInt32(3)),
-                        PrecioFinal = dr.GetSqlDecimal(4).ToDouble(),
+                        PrecioFinal = dr.GetDecimal(4),
                         Peso = dr.GetSqlDecimal(5).ToDouble(),
                         Estado = EstadoDal.Get(dr.GetInt32(6)),
                         Borrado = dr.GetBoolean(7)

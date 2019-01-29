@@ -22,7 +22,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         [Required]
         [Display(Name = "Precio Pedido")]
         [Range(0, 99999999.99, ErrorMessage = "Precio sobrepasa valores permitidos.")]
-        public double PrecioPedido { get; set; }
+        public decimal PrecioPedido { get; set; }
 
         public DireccionModel DireccionPedido { get; set; }
 

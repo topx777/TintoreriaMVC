@@ -13,6 +13,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
             this.Telefonos = new List<TelefonoModel>();
             this.Correos = new List<CorreoModel>();
         }
+
         #region Propiedades
         [Required(ErrorMessage ="El campo Nit es Requerido")]
         [StringLength(25,MinimumLength = 1, ErrorMessage ="El Campo Nit debe tener como minimo 10 Caracteres")]

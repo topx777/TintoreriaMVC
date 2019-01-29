@@ -70,7 +70,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         IdCategoria = dr.GetInt32(0),
                         Nombre = dr.GetString(1),
                         Descripcion = dr.GetString(2),
-                        Precio = dr.GetSqlDecimal(3).ToDouble()
+                        Precio = dr.GetDecimal(3)
                     };
                 }
             }

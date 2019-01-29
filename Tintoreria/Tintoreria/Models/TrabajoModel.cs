@@ -23,7 +23,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         
         [Display(Name = "Total Precio")]
         [Range(0, 99999999.99, ErrorMessage = "El total precio no debe ser negativo")]
-        public double TotalPrecio { get; set; }
+        public decimal TotalPrecio { get; set; }
 
         [Display(Name = "Fecha Entrega")]
         [DataType(DataType.DateTime)]

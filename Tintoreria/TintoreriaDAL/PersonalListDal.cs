@@ -46,7 +46,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         CodPersonal = dr.GetString(1),
                         FechaIngreso = dr.GetDateTime(2),
                         Cargo = CargoDal.Get(dr.GetInt32(3)),
-                        Sueldo = dr.GetSqlDecimal(4).ToDouble()
+                        Sueldo = dr.GetDecimal(4)
                     });
                 }
             }

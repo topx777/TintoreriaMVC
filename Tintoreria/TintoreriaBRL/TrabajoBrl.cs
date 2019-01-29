@@ -29,7 +29,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 
                 foreach(TrabajoDetalle x in trabajo.TrabajoDetalle)
                 {
-                    x.PrecioFinal = x.Categoria.Precio * x.Peso;
+                    x.PrecioFinal = x.Categoria.Precio * Convert.ToDecimal(x.Peso);
                     trabajo.TotalPrecio += x.PrecioFinal;
                 }
 
