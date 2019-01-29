@@ -36,7 +36,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 
         public List<TrabajoDetalleModel> TrabajoDetalle { get; set; }
 
-
+        [Display(Name = "Borrado")]
         public bool Borrado { get; set; }
 
         #endregion   

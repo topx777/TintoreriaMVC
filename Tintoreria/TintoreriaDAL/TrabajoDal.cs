@@ -231,5 +231,64 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             return res;
         }
 
+
+        /// <summary>
+        /// Obtiene Lista de Personal con paginado
+        /// </summary>
+        /// <param name="next">Siguiente cantidad de resultados</param>
+        /// <param name="offset">Inicio resultado</param>
+        /// <returns>Lista de Objetos Personal</returns>
+        public static List<Trabajo> GetList(int offset, int next)
+        {
+            List<Trabajo> res = new List<Trabajo>();
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"SELECT * FROM Trabajo WHERE Borrado = 0 ORDER BY IdTrabajo 
+                        OFFSET @offset ROWS FETCH NEXT @next ROWS ONLY";
+
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@offset", offset);
+                cmd.Parameters.AddWithValue("@next", next);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+
+                while (dr.Read())
+                {
+                    int idTrabajo = dr.GetInt32(0);
+
+                    res.Add(new Trabajo()
+                    {
+                        IdTrabajo = idTrabajo,
+                        Cliente = ClienteDal.Get(dr.GetInt32(1)),
+                        FechaTrabajo = dr.GetDateTime(2),
+                        TotalPrecio = dr.GetSqlDecimal(3).ToDouble(),
+                        FechaEntrega = dr.GetDateTime(4),
+                        PedidoDistancia = PedidoDal.Get(dr.GetInt32(5)),
+                        EntregaDomicilio = dr.GetBoolean(6),
+                        TrabajoDetalle = TrabajoDetalleDal.GetList(idTrabajo),
+                        Borrado = dr.GetBoolean(7)
+                    });
+                }
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("TrabajoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("TrabajoDal", "ObtenerLista", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return res;
+        }
+
     }
 }

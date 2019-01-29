@@ -58,6 +58,7 @@
     <Compile Include="TipoBrl.cs" />
     <Compile Include="TrabajoBrl.cs" />
     <Compile Include="TrabajoDetalleBrl.cs" />
+    <Compile Include="TrabajoListBrl.cs" />
     <Compile Include="UsuarioBrl.cs" />
   </ItemGroup>
   <ItemGroup>

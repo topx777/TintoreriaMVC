@@ -212,6 +212,7 @@
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\CorreoModel.cs" />
     <Compile Include="Models\DireccionModel.cs" />
+    <Compile Include="Models\EstadoModel.cs" />
     <Compile Include="Models\PedidoModel.cs" />
     <Compile Include="Models\PersonalListModel.cs" />
     <Compile Include="Models\PersonalModel.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Models\TelefonoModel.cs" />
     <Compile Include="Models\TipoModel.cs" />
     <Compile Include="Models\TrabajoDetalleModel.cs" />
+    <Compile Include="Models\TrabajoListModel.cs" />
     <Compile Include="Models\TrabajoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
