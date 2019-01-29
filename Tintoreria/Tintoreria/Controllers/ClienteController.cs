@@ -21,6 +21,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Crear Cliente
         public ActionResult Crear()
         {
+
             CargarSexo();
             CargarTipo();
             ClienteModel client = new ClienteModel();
@@ -74,69 +75,74 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                         cliente.Telefonos.Add(new TelefonoModel());
                         break;
                     case "Registrar":
-                        Cliente client = new Cliente()
-                        {
-                            Usuario = new Usuario()
+                            Cliente client = new Cliente()
                             {
-                                Username = cliente.Usuario.Username,
-                                Password = cliente.Usuario.Password,
-                                EsAdmin = cliente.Usuario.EsAdmin
-                            },
-                            Ci = cliente.Ci,
-                            Nombre = cliente.Nombre,
-                            PrimerApellido = cliente.PrimerApellido,
-                            SegundoApellido = cliente.SegundoApellido,
-                            Sexo = new Sexo() {
-                                IdSexo = cliente.Sexo.IdSexo,
-                            },
-                            FechaNacimiento = cliente.FechaNacimiento,
-                            Nit = cliente.Nit,
-                            Razon = cliente.Razon,
-                            FechaRegistro = cliente.FechaRegistro
-                        };
-                        client.Correos = new List<Correo>();
-                        foreach (var correo in cliente.Correos)
-                        {
-                            client.Correos.Add(new Correo(){
-                            Nombre=correo.Nombre,
-                            Principal=correo.Principal
-                            });
-                        }
-
-                        client.Direcciones = new List<Direccion>();
-                        foreach (var direccion in cliente.Direcciones)
-                        {
-                            client.Direcciones.Add(new Direccion() {
-                                Descripcion=direccion.Descripccion,
-                                Tipo=new Tipo()
+                                Usuario = new Usuario()
                                 {
-                                    IdTipo=direccion.Tipo.IdTipo
+                                    Username = cliente.Usuario.Username,
+                                    Password = cliente.Usuario.Password,
+                                    EsAdmin = cliente.Usuario.EsAdmin
                                 },
-                                Latitud=direccion.Latitud,
-                                Longitud=direccion.Latitud
-
-                            });
-                        }
-                        client.Telefonos = new List<Telefono>();
-                        foreach (var telefono in cliente.Telefonos)
-                        {
-                            client.Telefonos.Add(new Telefono()
-                            {
-                                Numero=telefono.Numero,
-                                Tipo=new Tipo()
+                                Ci = cliente.Ci,
+                                Nombre = cliente.Nombre,
+                                PrimerApellido = cliente.PrimerApellido,
+                                SegundoApellido = cliente.SegundoApellido,
+                                Sexo = new Sexo()
                                 {
-                                    IdTipo=telefono.Tipo.IdTipo
-                                }
-                            });
-                        }
+                                    IdSexo = cliente.Sexo.IdSexo,
+                                },
+                                FechaNacimiento = cliente.FechaNacimiento,
+                                Nit = cliente.Nit,
+                                Razon = cliente.Razon,
+                                FechaRegistro = cliente.FechaRegistro
+                            };
+                            client.Correos = new List<Correo>();
+                            foreach (var correo in cliente.Correos)
+                            {
+                                client.Correos.Add(new Correo()
+                                {
+                                    Nombre = correo.Nombre,
+                                    Principal = correo.Principal
+                                });
+                            }
 
-                        ClienteBrl.Insertar(client);
+                            client.Direcciones = new List<Direccion>();
+                            foreach (var direccion in cliente.Direcciones)
+                            {
+                                client.Direcciones.Add(new Direccion()
+                                {
+                                    Descripcion = direccion.Descripccion,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = direccion.Tipo.IdTipo
+                                    },
+                                    Latitud = direccion.Latitud,
+                                    Longitud = direccion.Latitud
+
+                                });
+                            }
+                            client.Telefonos = new List<Telefono>();
+                            foreach (var telefono in cliente.Telefonos)
+                            {
+                                client.Telefonos.Add(new Telefono()
+                                {
+                                    Numero = telefono.Numero,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = telefono.Tipo.IdTipo
+                                    }
+                                });
+                            }
+
+                            ClienteBrl.Insertar(client);
+                          
                         break;
                     default:
                         break;
                 }
 
             }
+
             return View(cliente);
         }
 

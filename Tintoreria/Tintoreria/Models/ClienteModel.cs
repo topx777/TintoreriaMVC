@@ -15,7 +15,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         }
         #region Propiedades
         [Required(ErrorMessage ="El campo Nit es Requerido")]
-        [StringLength(25,MinimumLength = 10, ErrorMessage ="El Campo Nit debe tener como minimo 10 Caracteres")]
+        [StringLength(25,MinimumLength = 1, ErrorMessage ="El Campo Nit debe tener como minimo 10 Caracteres")]
         [Display(Name ="Nit")]
         public string Nit { get; set; }
 

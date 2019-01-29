@@ -11,7 +11,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// Inserta nuevo Cliente a la base  de datos
         /// </summary>
         /// <param name="cliente"></param>
-        public static void Insertar(Cliente cliente)
+        public static void Insert(Cliente cliente)
         {
             Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para Insertar un paciente"));
 
@@ -69,6 +69,100 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
             Methods.GenerateLogsDebug("ClienteDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un Cliente"));
 
+        }
+
+        public static void Insertar(Cliente cliente)
+        {
+            Methods.GenerateLogsDebug("ClienteDal", "InsertarCliente", string.Format("{0} Info: {1}",
+            DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para crear un Cliente"));
+
+            SqlCommand command = null;
+            SqlTransaction trans = null;
+
+            //Consulta para insertar datos de Cliente
+            string queryString = @"INSERT INTO Cliente(IdPersona, Nit, Razon, FechaRegistro)
+                                    VALUES(@idPersona, @nit, @razon, @fechaRagistro)";
+
+            SqlConnection conexion = Methods.ObtenerConexion();
+
+            try
+            {
+                conexion.Open();
+                SqlCommand usuarioInsertcmd = UsuarioDal.InsertarOUTPUT(cliente.Usuario);
+                //Inicio de Conexion a la Base de Datos
+                trans = conexion.BeginTransaction();
+
+                usuarioInsertcmd.Connection = conexion;
+                usuarioInsertcmd.Transaction = trans;
+                cliente.Usuario.IdUsuario = Convert.ToInt32(usuarioInsertcmd.ExecuteScalar());
+
+                Persona persona = cliente;
+
+                SqlCommand personaInsertcmd = PersonaDal.InsertarOUTPUT(persona);
+
+                personaInsertcmd.Connection = conexion;
+                personaInsertcmd.Transaction = trans;
+                cliente.IdPersona = Convert.ToInt32(personaInsertcmd.ExecuteScalar());
+
+
+                // Creacion de Cliente Commando y ejecutado
+                command = new SqlCommand(queryString);
+                command.Parameters.AddWithValue("@idPersona", cliente.IdPersona);
+                command.Parameters.AddWithValue("@nit", cliente.Nit);
+                command.Parameters.AddWithValue("@razon", cliente.Razon);
+                command.Parameters.AddWithValue("@fechaRagistro", cliente.FechaRegistro);
+
+                command.Connection = conexion;
+                command.Transaction = trans;
+                command.ExecuteNonQuery();
+
+                //Insertar telefonos
+                foreach (Telefono telf in cliente.Telefonos)
+                {
+                    SqlCommand telfcmd = TelefonoDal.InsertarOUTPUT(telf, cliente.IdPersona);
+                    telfcmd.Connection = conexion;
+                    telfcmd.Transaction = trans;
+                    telfcmd.ExecuteNonQuery();
+                }
+
+                //Insertar direcciones
+                foreach (Direccion direc in cliente.Direcciones)
+                {
+                    SqlCommand direccmd = DireccionDal.InsertarOUTPUT(direc, cliente.IdPersona);
+                    direccmd.Connection = conexion;
+                    direccmd.Transaction = trans;
+                    direccmd.ExecuteNonQuery();
+                }
+
+                //Insertar correos
+                foreach (Correo correo in persona.Correos)
+                {
+                    SqlCommand correocmd = CorreoDal.InsertarOUTPUT(correo, cliente.IdPersona);
+                    correocmd.Connection = conexion;
+                    correocmd.Transaction = trans;
+                    correocmd.ExecuteNonQuery();
+                }
+
+                trans.Commit();
+            }
+            catch (SqlException ex)
+            {
+                trans.Rollback();
+                Methods.GenerateLogsRelease("ClienteDal", "InsertarCliente", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                trans.Rollback();
+                Methods.GenerateLogsRelease("ClienteDal", "InsertarCliente", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            Methods.GenerateLogsDebug("ClienteDal", "InsertarCliente", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un Cliente"));
         }
 
         /// <summary>
