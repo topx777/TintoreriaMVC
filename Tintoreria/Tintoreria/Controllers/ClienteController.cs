@@ -87,12 +87,15 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                     case "Registrar":
                         Cliente client = new Cliente()
                         {
-                            Usuario=new Usuario()
+                            Usuario = new Usuario()
                             {
-                                Username=cliente.Usuario.Username,
-                                Password=
+                                Username = cliente.Usuario.Username,
+                                Password = cliente.Usuario.Password,
+                                EsAdmin = cliente.Usuario.EsAdmin
                             },
-                        }
+                            Ci = cliente.Ci,
+                            Nombre = cliente.Nombre
+                        };
                        
                         break;
                     default:
