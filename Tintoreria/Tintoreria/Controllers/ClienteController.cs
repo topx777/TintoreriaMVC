@@ -3,11 +3,13 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class ClienteController : Controller
     {
+
         // GET: Cliente
         public ActionResult Index()
         {
@@ -62,8 +64,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpPost]
         public ActionResult Crear(ClienteModel cliente, string resp)
         {
+            CargarSexo();
+            CargarTipo();
             if(!String.IsNullOrWhiteSpace(resp))
             {
+                cliente.Correos = new List<CorreoModel>();
+                cliente.Correos.Add(new CorreoModel());
+                cliente.Direcciones = new List<DireccionModel>();
+                cliente.Direcciones.Add(new DireccionModel());
+                cliente.Telefonos = new List<TelefonoModel>();
+                cliente.Telefonos.Add(new TelefonoModel());
                 switch (resp)
                 {
                     case "AddCorreo":
@@ -72,10 +82,18 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
                         break;
                     case "AddTelefono":
- 
+
                         break;
                     case "Registrar":
-
+                        Cliente client = new Cliente()
+                        {
+                            Usuario=new Usuario()
+                            {
+                                Username=cliente.Usuario.Username,
+                                Password=
+                            },
+                        }
+                       
                         break;
                     default:
                         break;

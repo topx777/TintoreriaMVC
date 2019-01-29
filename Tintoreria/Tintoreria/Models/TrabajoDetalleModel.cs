@@ -16,7 +16,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 
         [Display(Name = "Cod Prenda")]
         [Required(ErrorMessage = "Campo requerido")]
-        [StringLength(25, MinimumLength = 3, ErrorMessage = "El campo debe contener entre 1 y "]
+        [StringLength(25, MinimumLength = 3, ErrorMessage = "El campo debe contener entre 1 y ")]
         public string CodigoPrenda { get; set; }
       
         public CategoriaModel Categoria { get; set; }
