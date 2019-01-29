@@ -7,6 +7,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class ClienteModel:PersonaModel
     {
+        public ClienteModel()
+        {
+            this.Direcciones = new List<DireccionModel>();
+            this.Telefonos = new List<TelefonoModel>();
+            this.Correos = new List<CorreoModel>();
+        }
         #region Propiedades
         [Required(ErrorMessage ="El campo Nit es Requerido")]
         [StringLength(25,MinimumLength = 10, ErrorMessage ="El Campo Nit debe tener como minimo 10 Caracteres")]
