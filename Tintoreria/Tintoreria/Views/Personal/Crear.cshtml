@@ -11,61 +11,79 @@
 {
     @Html.ValidationSummary(true)
 
-    <div class="row">
-        <div class="col s12 m4">
-            
-                <h4>Personal</h4>
+<div class="row">
+    <div class="col s12 m4">
+
+        <h4>Personal</h4>
+        <div>
             <div>
-                <div>
-                    @Html.TextBoxFor(model => model.Ci, new { @placeholder = "Ci" })
-                    @Html.ValidationMessageFor(model => model.Ci)
-                </div>
-                <div>
-                    @Html.TextBoxFor(model => model.Nombre, new { @placeholder = "Nombre" })
-                    @Html.ValidationMessageFor(model => model.Nombre)
-                </div>
-                <div>
-                    @Html.TextBoxFor(model => model.PrimerApellido, new { @placeholder = "Primer Apellido" })
-                    @Html.ValidationMessageFor(model => model.PrimerApellido)
-                </div>
-                <div>
-                    @Html.TextBoxFor(model => model.SegundoApellido, new { @placeholder = "Segundo Apellido" })
-                    @Html.ValidationMessageFor(model => model.SegundoApellido)
-                </div>
-                <div>
-                    @Html.LabelFor(model => model.Sexo)
-                    @Html.DropDownListFor(model => model.Sexo.IdSexo, (IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { @style = "display: block" })
-                    @Html.ValidationMessageFor(model => model.Sexo)
-                </div>
-                <div>
-                    @Html.LabelFor(model => model.FechaNacimiento)
-                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @type = "date" })
-                    @Html.ValidationMessageFor(model => model.FechaNacimiento)
-                </div>
+                @Html.TextBoxFor(model => model.Ci, new { @placeholder = "Ci" })
+                @Html.ValidationMessageFor(model => model.Ci)
             </div>
-        </div>
-        <div class="col s12 m4">
             <div>
-                <h4>Datos Personal</h4>
-                <div>
-                    @Html.TextBoxFor(model => model.CodPersonal, new { @placeholder = "Codigo" })
-                    @Html.ValidationMessageFor(model => model.CodPersonal)
-                </div>
-                <div>
-                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @type = "date" })
-                    @Html.ValidationMessageFor(model => model.FechaNacimiento)
-                </div>
-                <div>
-                    @Html.TextBoxFor(model => model.FechaIngreso, new { @type = "date" })
-                    @Html.ValidationMessageFor(model => model.FechaIngreso)
-                </div>
-                <div>
-                    @Html.TextBoxFor(model => model.Sueldo, new { @placeholder = "Sueldo" })
-                    @Html.ValidationMessageFor(model => model.Sueldo)
-                </div>
+                @Html.TextBoxFor(model => model.Nombre, new { @placeholder = "Nombre" })
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.PrimerApellido, new { @placeholder = "Primer Apellido" })
+                @Html.ValidationMessageFor(model => model.PrimerApellido)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.SegundoApellido, new { @placeholder = "Segundo Apellido" })
+                @Html.ValidationMessageFor(model => model.SegundoApellido)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Sexo)
+                @Html.DropDownListFor(model => model.Sexo.IdSexo, (IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { @style = "display: block" })
+                @Html.ValidationMessageFor(model => model.Sexo)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.FechaNacimiento)
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @type = "date" })
+                @Html.ValidationMessageFor(model => model.FechaNacimiento)
             </div>
         </div>
     </div>
+    <div class="col s12 m4">
+        <div>
+            <h4>Datos Personal</h4>
+            <div>
+                @Html.TextBoxFor(model => model.CodPersonal, new { @placeholder = "Codigo" })
+                @Html.ValidationMessageFor(model => model.CodPersonal)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.FechaIngreso, new { @type = "date" })
+                @Html.ValidationMessageFor(model => model.FechaIngreso)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Sueldo, new { @placeholder = "Sueldo" })
+                @Html.ValidationMessageFor(model => model.Sueldo)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Cargo)
+                @Html.DropDownListFor(model => model.Cargo.IdCargo, (IEnumerable<SelectListItem>)ViewBag.ListaCargo, new { @style = "display: block" })
+                @Html.ValidationMessageFor(model => model.Cargo)
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div>
+            <h4>Usuario</h4>
+            <div>
+                @Html.TextBoxFor(model => model.Usuario.Username, new { @placeholder = "Usuario" })
+                @Html.ValidationMessageFor(model => model.Usuario.Username)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Usuario.Password, new { @type = "password" })
+                @Html.ValidationMessageFor(model => model.Usuario.Password)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Usuario.EsAdmin, new { @placeholder = "Admin" })
+                @Html.ValidationMessageFor(model => model.Usuario.EsAdmin)
+            </div>
+        </div>
+    </div>
+</div>
         <div class="row">
             <div class="col s12 m4">
                 <h4>Correos</h4>
