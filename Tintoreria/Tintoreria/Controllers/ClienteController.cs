@@ -25,7 +25,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             CargarTipo();
             ClienteModel client = new ClienteModel();
             client.Correos.Add(new CorreoModel());
-            client.Correos.Add(new CorreoModel());
             client.Telefonos.Add(new TelefonoModel());
             client.Direcciones.Add(new DireccionModel());
 
@@ -63,21 +62,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             CargarTipo();
             if(!String.IsNullOrWhiteSpace(resp))
             {
-                cliente.Correos = new List<CorreoModel>();
-                cliente.Correos.Add(new CorreoModel());
-                cliente.Direcciones = new List<DireccionModel>();
-                cliente.Direcciones.Add(new DireccionModel());
-                cliente.Telefonos = new List<TelefonoModel>();
-                cliente.Telefonos.Add(new TelefonoModel());
                 switch (resp)
                 {
                     case "AddCorreo":
+                        cliente.Correos.Add(new CorreoModel());
                         break;
                     case "AddDireccion":
-
+                        cliente.Direcciones.Add(new DireccionModel());
                         break;
                     case "AddTelefono":
-
+                        cliente.Telefonos.Add(new TelefonoModel());
                         break;
                     case "Registrar":
                         Cliente client = new Cliente()
