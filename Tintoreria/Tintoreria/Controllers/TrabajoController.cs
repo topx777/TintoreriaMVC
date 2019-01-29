@@ -22,9 +22,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
             lista = TrabajoListBrl.Get(offset.HasValue ? offset.Value : 1, next);
 
-            list
-
-            return View();
+            return View(lista);
         }
 
         public ActionResult Nuevo()

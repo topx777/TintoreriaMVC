@@ -6,7 +6,7 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
-    public class TrabajoListModel
+    public class TrabajoListModel : List<TrabajoModel>
     {
         /// <summary>
         /// Necesita ser public, cuidado todo en poner public
@@ -40,10 +40,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
                             Longitud = trabajo.PedidoDistancia.DireccionPedido.Longitud,
                             Tipo =
                             {
-                                
+                                IdTipo = trabajo.PedidoDistancia.DireccionPedido.Tipo.IdTipo,
+                                Nombre = trabajo.PedidoDistancia.DireccionPedido.Tipo.Nombre
                             }
                         }
-                        
                     },
                     EntregaDomicilio = trabajo.EntregaDomicilio,
                     Borrado = trabajo.Borrado
