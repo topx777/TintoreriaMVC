@@ -33,6 +33,7 @@
                 @Html.ValidationMessageFor(model => model.SegundoApellido)
             </div>
             <div>
+                
                 @Html.LabelFor(model => model.Sexo)
                 @Html.DropDownListFor(model => model.Sexo.IdSexo, (IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { @style = "display: block" })
                 @Html.ValidationMessageFor(model => model.Sexo)

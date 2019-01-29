@@ -1,6 +1,8 @@
 ﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.PersonalModel
 @{
     ViewBag.Title = "Ver";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
 }
 
 <h2>Ver Personal</h2>
@@ -36,6 +38,10 @@
                     <div class="input-field col s10">
                         @Html.TextBoxFor(model => model.SegundoApellido, new { @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.SegundoApellido)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Ci, new { @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Ci)
                     </div>
                 </div>
                 <a href="@Url.Action("../Personal/Index")" class="waves-effect waves-light btn red">
