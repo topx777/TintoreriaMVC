@@ -13,7 +13,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public Sexo Sexo { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
         public List<Correo> Correos { get; set; }
         public Usuario Usuario { get; set; }
         public List<Direccion> Direcciones { get; set; }
