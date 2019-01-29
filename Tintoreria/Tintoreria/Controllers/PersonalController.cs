@@ -12,7 +12,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class PersonalController : Controller
     {
-        // GET: Categoria
+        // GET: Personal
         [HttpGet]
         public ActionResult Index(int? page)
         {
@@ -25,6 +25,50 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             personal = lista.ToPagedList(pageIndex, pageSize);
 
             return View(personal);
+        }
+
+        // GET: Crear Personal
+        public ActionResult Crear()
+        {
+            CargarSexo();
+            CargarTipo();
+            PersonalModel personal = new PersonalModel();
+
+            personal.Correos = new List<CorreoModel>();
+            personal.Correos.Add(new CorreoModel());
+
+            personal.Telefonos = new List<TelefonoModel>();
+            personal.Telefonos.Add(new TelefonoModel());
+
+            personal.Direcciones = new List<DireccionModel>();
+            personal.Direcciones.Add(new DireccionModel());
+
+            return View(personal);
+        }
+        public void CargarSexo()
+        {
+            ViewBag.ListaSexos = new SelectList(
+                        (
+                            from t in SexoController.ListaSexo
+                            select new SelectListItem
+                            {
+                                Text = t.Nombre,
+                                Value = t.IdSexo.ToString()
+                            }
+                        )
+                        , "Value", "Text");
+        }
+
+        public void CargarTipo()
+        {
+            ViewBag.ListaTipo = new SelectList((
+                from t in TipoController.TipoList
+                select new SelectListItem
+                {
+                    Text = t.Nombre,
+                    Value = t.IdTipo.ToString()
+                }
+                ), "Value", "Text");
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
     public class PersonalModel : PersonaModel
     {
         [Display(Name = "Codigo")]
-        public int CodPersonal { get; set; }
+        public string CodPersonal { get; set; }
 
         [Display(Name = "Fecha Ingreso")]
         public DateTime FechaIngreso { get; set; }

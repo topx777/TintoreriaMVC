@@ -246,6 +246,8 @@
     <Content Include="Views\Cliente\Ver.cshtml" />
     <Content Include="Views\Trabajo\Index.cshtml" />
     <Content Include="Views\Trabajo\Nuevo.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
+    <Content Include="Views\Personal\Crear.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -255,7 +257,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Personal\" />
     <Folder Include="Views\Sexo\" />
     <Folder Include="Views\Tipo\" />
   </ItemGroup>
