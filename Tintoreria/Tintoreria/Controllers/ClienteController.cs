@@ -2,6 +2,7 @@
 using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
@@ -57,7 +58,35 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 }
                 ), "Value", "Text");
         }
-        // GET: Ver Modificar Cliente
+
+        [HttpPost]
+        public ActionResult Crear(ClienteModel cliente, string resp)
+        {
+            if(!String.IsNullOrWhiteSpace(resp))
+            {
+                switch (resp)
+                {
+                    case "AddCorreo":
+                        break;
+                    case "AddDireccion":
+
+                        break;
+                    case "AddTelefono":
+ 
+                        break;
+                    case "Registrar":
+
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            return View(cliente);
+        }
+
+
+               // GET: Ver Modificar Cliente
         public ActionResult Editar(int mCodigo)
         {
 

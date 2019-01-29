@@ -1,9 +1,9 @@
 ﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.ClienteModel
 
-@{
+@*@{
     ViewBag.Title = "Crear";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
+}*@
 
 <h2>Crear</h2>
 @using (Html.BeginForm())
@@ -23,7 +23,7 @@
                 </div>
                 <div>
                     @Html.LabelFor(model=>model.Usuario.EsAdmin)
-                    @Html.CheckBoxFor(model=>model.Usuario.EsAdmin)
+                    @Html.CheckBoxFor(model=>model.Usuario.EsAdmin, new { @style="display:block"})
                     @Html.ValidationMessageFor(model => model.Usuario.EsAdmin)
                 </div>
             </div>
@@ -86,11 +86,12 @@
                         @Html.ValidationMessageFor(modelitem => item.Nombre)
 
                         @Html.LabelFor(modelItem => item.Principal)
-                        @Html.CheckBoxFor(modeItem => item.Principal)
+                        @Html.CheckBoxFor(modeItem => item.Principal, new {@style="display:block" })
                         @Html.ValidationMessageFor(modelitem => item.Principal)
 
                     </div>
                 }
+                <input type="submit" name="resp" value="AddCorreo" class="" />
             </div>
             <div class="col s12 m4">
                 <h4>Direcciones</h4>
@@ -103,14 +104,17 @@
                         @Html.LabelFor(modelitem => item.Tipo)
                         @Html.DropDownListFor(model => item.Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style="display: block"} )
 
-                        @Html.TextBoxFor(modelitem => item.Latitud, new { @placeholder = "Latitud" })
+                        @Html.LabelFor(modeitem=>item.Latitud)
+                        @Html.TextBoxFor(modelitem => item.Latitud, new{ @placeholder = "Latitud", @value="" })
                         @Html.ValidationMessageFor(modelitem => item.Latitud)
 
-                        @Html.TextBoxFor(modelitem => item.Longitud, new { @placeholder = "Longitud" })
+                        @Html.LabelFor(modeitem => item.Longitud)
+                        @Html.TextBoxFor(modelitem => item.Longitud, new{ @placeholder = "Longitud", @value=""  })
                         @Html.ValidationMessageFor(modelitem => item.Longitud)
 
                     </div>
                 }
+                <input type="submit" name="resp" value="AddDireccion" class="" />
             </div>
             <div class="col s12 m4">
                 <h4>Telefonos</h4>
@@ -121,7 +125,11 @@
                         @Html.DropDownListFor(model => item.Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style="display: block"} )
                     </div>
                 }
+                <input type="submit" name="resp" value="AddTelefono" class="" />
             </div>
         </div>
+        <input type="submit" name="resp" value="Registrar" class="" />
+   
+
 }
 
