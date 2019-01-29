@@ -141,7 +141,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     {
                         IdPedido = dr.GetInt32(0),
                         Recepcion = dr.GetString(1),
-                        PrecioPedido = dr.GetSqlDecimal(2).ToDouble(),
+                        PrecioPedido = dr.GetDecimal(2),
                         DireccionPedido = DireccionDal.Get(dr.GetInt32(3))
                     };
                 }

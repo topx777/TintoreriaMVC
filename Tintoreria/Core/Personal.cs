@@ -9,7 +9,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
         public string CodPersonal { get; set; }
         public DateTime FechaIngreso { get; set; }
         public Cargo Cargo { get; set; }
-        public double Sueldo { get; set; }
+        public decimal Sueldo { get; set; }
 
         #endregion
     } 

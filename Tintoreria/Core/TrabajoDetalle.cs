@@ -8,7 +8,7 @@
         public int IdTrabajoDetalle { get; set; }
         public string CodigoPrenda { get; set; }
         public Categoria Categoria { get; set; }
-        public double PrecioFinal { get; set; }
+        public decimal PrecioFinal { get; set; }
         public double Peso { get; set; }
         public Estado Estado { get; set; }
         public bool Borrado { get; set; }

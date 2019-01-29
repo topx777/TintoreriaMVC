@@ -18,22 +18,20 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         {
             int next = 5;
 
-            TrabajoList lista = new TrabajoList();
-
-            lista = TrabajoListBrl.Get(offset.HasValue ? offset.Value : 1, next);
+            TrabajoListModel lista = TrabajoListModel.Get(offset.HasValue ? offset.Value : 1, next);
 
             return View(lista);
         }
 
-        public void CargarSexo()
+        public void CargarClientes()
         {
-            ViewBag.ListaSexos = new SelectList(
+            ViewBag.ListaClientes = new SelectList(
             (
-                from t in SexoController.ListaSexo
+                from t in ClienteController.ListaCliente
                 select new SelectListItem
                 {
-                    Text = t.Nombre,
-                    Value = t.IdSexo.ToString()
+                    Text = t.Nombre + " " + t.Ci,
+                    Value = t.IdPersona.ToString()
                 }
             )
             , "Value", "Text");

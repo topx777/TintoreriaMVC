@@ -24,7 +24,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         [Display(Name = "Precio Final")]
         [Required(ErrorMessage = "Precio Final debe ser mayor a 0")]
         [Range(0, 99999999.99, ErrorMessage = "Precio debe ser mayor a 0")]
-        public double PrecioFinal { get; set; }
+        public decimal PrecioFinal { get; set; }
 
         [Display(Name = "Peso")]
         [Required(ErrorMessage = "El campo es requeridos")]

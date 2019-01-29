@@ -21,8 +21,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 
             try
             {
-                lista = (TrabajoList)TrabajoDal.GetList(offset, next);
-
+                //lista = TrabajoDal.GetList(offset, next);
+                lista = TrabajoDal.GetLista(offset, next);
             }
             catch (SqlException ex)
             {
