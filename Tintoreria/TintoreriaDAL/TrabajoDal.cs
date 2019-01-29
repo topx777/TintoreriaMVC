@@ -238,14 +238,15 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <param name="next">Siguiente cantidad de resultados</param>
         /// <param name="offset">Inicio resultado</param>
         /// <returns>Lista de Objetos Personal</returns>
-        public static List<Trabajo> GetList(int offset, int next)
+        public static TrabajoList GetLista(int offset, int next)
         {
-            List<Trabajo> res = new List<Trabajo>();
+            TrabajoList res = new TrabajoList();
 
             SqlCommand cmd = null;
             SqlDataReader dr = null;
             string query = @"SELECT * FROM Trabajo WHERE Borrado = 0 ORDER BY IdTrabajo 
                         OFFSET @offset ROWS FETCH NEXT @next ROWS ONLY";
+            //string query = @"SELECT * FROM Trabajo WHERE Borrado = 0 ORDER BY IdTrabajo;";
 
             try
             {
@@ -267,7 +268,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         FechaEntrega = dr.GetDateTime(4),
                         PedidoDistancia = PedidoDal.Get(dr.GetInt32(5)),
                         EntregaDomicilio = dr.GetBoolean(6),
-                        TrabajoDetalle = TrabajoDetalleDal.GetList(idTrabajo),
+                        //TrabajoDetalle = TrabajoDetalleDal.GetList(idTrabajo),
                         Borrado = dr.GetBoolean(7)
                     });
                 }

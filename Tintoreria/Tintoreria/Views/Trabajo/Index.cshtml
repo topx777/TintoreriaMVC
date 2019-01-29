@@ -1,14 +1,39 @@
-﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel>
+﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoListModel>
 @{
     ViewBag.Title = "Lista Trabajo";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-@using (Html.BeginForm())
-{
-<div class="row">
-    <div class="col s12">
-        @Html.
-    </div>
-</div>
-}
+<h2>Lista de Trabajos</h2>
+<a class="waves-effect waves-light btn blue" href="@Url.Action("../Trabajo/Crear")"><i class="material-icons left">add</i>Crear Trabajo</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.)*@
+            ID
+        </th>
+        <th>Fecha</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTrabajo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaTrabajo)
+            </td>
+            <td>
+                <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cargo/Ver", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Cargo", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">edit</i> Editar</a>
+                <a class="waves-effect waves-light btn red" href="@Url.Action("../Cargo/Eliminar", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">delete</i> Eliminar</a>
+                @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
+            </td>
+        </tr>
+    }
+
+    
+</table>
