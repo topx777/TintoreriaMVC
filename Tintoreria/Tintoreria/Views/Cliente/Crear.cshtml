@@ -1,9 +1,9 @@
 ﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.ClienteModel
 
-@{
+@*@{
     ViewBag.Title = "Crear";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
+}*@
 
 <h2>Crear</h2>
 @using (Html.BeginForm())
@@ -12,75 +12,124 @@
 
         <div class="row">
             <div class="col s12 m4">
-                <div class="input-field">
-                    @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nombre" })
-                    @*@Html.ValidationMessageFor(model => model.Nombre)*@
+                <h4>Usuario</h4>
+                <div>
+                    @Html.TextBoxFor(model => model.Usuario.Username, new { @class = "validate", @placeholder = "Usuario" })
+                    @Html.ValidationMessageFor(model => model.Usuario.Username)
                 </div>
-                <div class="input-field">
-                    @Html.TextBoxFor(model => model.PrimerApellido, new { @class = "validate", @placeholder = "Primer Apellido" })
-                    @*@Html.ValidationMessageFor(model => model.SegundoApellido)*@
+                <div>
+                    @Html.TextBoxFor(model => model.Usuario.Password, new { @class = "validate", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(model => model.Usuario.Password)
                 </div>
-                <div class="input-field">
-                    @Html.TextBoxFor(model => model.SegundoApellido, new { @class = "validate", @placeholder = "Segundo Apellido" })
-                    @*@Html.ValidationMessageFor(model => model.SegundoApellido)*@
-                </div>
-                <div class="input-field">
-                    @Html.DropDownListFor(model => model.Sexo.IdSexo,(IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { style="Display: block"})
-                </div>
-           
-                <div class="input-field">
-                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "validate", @placeholder = "Fecha de Nacimiento" })
-                    @*@Html.ValidationMessageFor(model => model.FechaNacimiento)*@
+                <div>
+                    @Html.LabelFor(model=>model.Usuario.EsAdmin)
+                    @Html.CheckBoxFor(model=>model.Usuario.EsAdmin, new { @style="display:block"})
+                    @Html.ValidationMessageFor(model => model.Usuario.EsAdmin)
                 </div>
             </div>
             <div class="col s12 m4">
-                <div>
-                    <div class="input-field">
-                        @Html.TextBoxFor(model => model.Username, new { @class = "validate", @placeholder = "Nombre Usuario" })
-                        @*@Html.ValidationMessageFor(model => model.Username)*@
-                    </div>
-                    <div class="input-field">
-                        @Html.TextBoxFor(model => model.Password, new { @class = "validate", @placeholder = "Contraseña" })
-                        @*@Html.ValidationMessageFor(model => model.Password)*@
-                    </div>
-                    <br />
-                    <div class="input-field">
-                        @Html.TextBoxFor(model => model.Nit, new { @class = "validate", @placeholder = "Nit" })
-                        @*@Html.ValidationMessageFor(model => model.Nit)*@
-                    </div>
-                    <div class="input-field">
-                        @Html.TextBoxFor(model => model.Razon, new { @class = "validate", @placeholder = "Razon" })
-                        @*@Html.ValidationMessageFor(model => model.Razon)*@
-                    </div>
-
-                </div>
+                  <div>
+                      <h4>Persona</h4>
+                      <div>
+                          @Html.TextBoxFor(model => model.Ci, new{ @placeholder="Ci"})
+                          @Html.ValidationMessageFor(model=>model.Ci)
+                      </div>
+                      <div>
+                          @Html.TextBoxFor(model=>model.Nombre, new{ @placeholder="Nombre"})
+                          @Html.ValidationMessageFor(model=>model.Nombre)
+                      </div>
+                      <div>
+                          @Html.TextBoxFor(model => model.PrimerApellido, new{ @placeholder = "Primer Apellido" })
+                          @Html.ValidationMessageFor(model => model.PrimerApellido) 
+                      </div>
+                      <div>
+                          @Html.TextBoxFor(model => model.SegundoApellido, new{ @placeholder = "Segundo Apellido" })
+                          @Html.ValidationMessageFor(model => model.SegundoApellido)
+                      </div>
+                      <div>
+                          @Html.LabelFor(model => model.Sexo)
+                          @Html.DropDownListFor(model => model.Sexo.IdSexo, (IEnumerable<SelectListItem>)ViewBag.ListaSexos, new {@style="display: block"} )
+                          @Html.ValidationMessageFor(model => model.Sexo)
+                      </div>
+                      <div>
+                          @Html.LabelFor(model => model.FechaNacimiento)
+                          @Html.TextBoxFor(model => model.FechaNacimiento, new{@type="date" })
+                          @Html.ValidationMessageFor(model=> model.FechaNacimiento)
+                      </div>
+                  </div>
             </div>
             <div class="col s12 m4">
                 <div>
+                    <h4>Datos Cliente</h4>
                     <div>
-                        <h4>
-                            Direccion
-                        </h4>
-                        @foreach (var item in Model.Direcciones)
-                        {
-                            <div>
-                                @Html.DisplayNameFor(modelitem =>item.Descripccion)
-                                @Html.TextBoxFor(modelitem =>item.Descripccion)
-                                <br />
-                            </div>
-
-                        }
-
+                        @Html.TextBoxFor(model => model.Nit, new{@placeholder="Nit" })
+                        @Html.ValidationMessageFor(model=>model.Nit)
                     </div>
                     <div>
-                        <h4>
-                            Contacto
-                        </h4>
-
-
+                        @Html.TextBoxFor(model=>model.Razon,  new{ @placeholder="Razon" })
+                        @Html.ValidationMessageFor(model => model.Razon)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.FechaRegistro, new{@type="date" })
+                        @Html.ValidationMessageFor(model => model.FechaRegistro)
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col s12 m4">
+                <h4>Correos</h4>
+                @foreach (var item in Model.Correos)
+                {
+                    <div>
+                        @Html.TextBoxFor(modelitem => item.Nombre, new { @placeholder = "Nombre Correo" })
+                        @Html.ValidationMessageFor(modelitem => item.Nombre)
+
+                        @Html.LabelFor(modelItem => item.Principal)
+                        @Html.CheckBoxFor(modeItem => item.Principal, new {@style="display:block" })
+                        @Html.ValidationMessageFor(modelitem => item.Principal)
+
+                    </div>
+                }
+                <input type="submit" name="resp" value="AddCorreo" class="" />
+            </div>
+            <div class="col s12 m4">
+                <h4>Direcciones</h4>
+                @foreach (var item in Model.Direcciones)
+                {
+                    <div>
+                        @Html.TextBoxFor(modelitem => item.Descripccion, new { @placeholder = "Descripccion" })
+                        @Html.ValidationMessageFor(modeitem => item.Descripccion)
+
+                        @Html.LabelFor(modelitem => item.Tipo)
+                        @Html.DropDownListFor(model => item.Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style="display: block"} )
+
+                        @Html.LabelFor(modeitem=>item.Latitud)
+                        @Html.TextBoxFor(modelitem => item.Latitud, new{ @placeholder = "Latitud", @value="" })
+                        @Html.ValidationMessageFor(modelitem => item.Latitud)
+
+                        @Html.LabelFor(modeitem => item.Longitud)
+                        @Html.TextBoxFor(modelitem => item.Longitud, new{ @placeholder = "Longitud", @value=""  })
+                        @Html.ValidationMessageFor(modelitem => item.Longitud)
+
+                    </div>
+                }
+                <input type="submit" name="resp" value="AddDireccion" class="" />
+            </div>
+            <div class="col s12 m4">
+                <h4>Telefonos</h4>
+                @foreach (var item in Model.Telefonos)
+                {
+                    <div>
+                        @Html.TextBoxFor(modelitem => item.Numero, new { @placeholder = "Numero" })
+                        @Html.DropDownListFor(model => item.Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style="display: block"} )
+                    </div>
+                }
+                <input type="submit" name="resp" value="AddTelefono" class="" />
+            </div>
+        </div>
+        <input type="submit" name="resp" value="Registrar" class="" />
+   
+
 }
 

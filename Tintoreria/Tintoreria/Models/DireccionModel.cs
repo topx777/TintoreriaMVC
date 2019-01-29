@@ -16,7 +16,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         public string Descripccion { get; set; }
 
         [Display(Name = "Tipo")]
-        public string Tipo { get; set; }
+        public TipoModel Tipo { get; set; }
 
         [Display(Name ="Latitud")]
         

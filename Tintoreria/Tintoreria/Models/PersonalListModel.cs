@@ -19,7 +19,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
             {
                 _personalListModel.Add(new PersonalModel
                 {
-                    
+                    IdPersona = personal.IdPersona,
+                    Ci = personal.Ci,
+                    Nombre = personal.Nombre,
+                    PrimerApellido = personal.PrimerApellido,
+                    SegundoApellido = personal.SegundoApellido,
+                    FechaNacimiento = personal.FechaNacimiento,     
+                    CodPersonal = personal.CodPersonal,
+                    FechaIngreso=personal.FechaIngreso,
+                    Sueldo=personal.Sueldo,
+                              
                 });
             }
             return _personalListModel;

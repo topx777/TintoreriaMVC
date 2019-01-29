@@ -16,6 +16,6 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         public string Numero { get; set; }
 
         [Display(Name = "Tipo")]
-        public string Tipo { get; set; }
+        public TipoModel Tipo { get; set; }
     }
 }
