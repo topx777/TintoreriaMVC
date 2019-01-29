@@ -23,7 +23,7 @@
             </td>
             <td>
                 <a class="waves-effect waves-light btn amber" href="@Url.Action("../Personal/Ver", new { mCodigo = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Personal", new { mCodigo = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
+                <a class="waves-effect waves-light btn green" href="@Url.Action("../Personal/Editar", new { mCodigo = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
                 <a class="waves-effect waves-light btn red" href="@Url.Action("../Personal/Eliminar", new { mCodigo = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
             </td>
         </tr>

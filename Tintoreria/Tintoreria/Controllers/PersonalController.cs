@@ -142,25 +142,75 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
            , "Value", "Text");
         }
 
-        public ActionResult Editar(int mCodigo)
-        {
+        
+        
 
+        //ver personal
+        public ActionResult Ver(int mCodigo)
+        {
             Personal per = PersonalBrl.Get(mCodigo);
             PersonalModel model = new PersonalModel()
             {
                 IdPersona = per.IdPersona,
-                Ci = per.Ci,
-                Nombre = per.Nombre,
-                PrimerApellido = per.PrimerApellido,
-                SegundoApellido= per.SegundoApellido,
-                FechaNacimiento=per.FechaNacimiento,
-                CodPersonal=per.CodPersonal,
-                FechaIngreso=per.FechaIngreso,
-                Sueldo=per.Sueldo,
-                
+                Ci=per.Ci,
+                Nombre= per.Nombre,
+                PrimerApellido=per.PrimerApellido,
+                SegundoApellido=per.SegundoApellido,
             };
 
             return View(model);
+        }
+
+        //Editar Personal
+
+        [HttpPost]
+        public ActionResult Editar(int mCodigo, PersonalModel model)
+        {
+            try
+            {
+                Personal personal = new Personal()
+                {
+                    IdPersona = model.IdPersona,
+                    Ci = model.Ci,
+                    Nombre = model.Nombre,
+                    PrimerApellido = model.PrimerApellido,
+                    SegundoApellido = model.SegundoApellido,
+                    Sexo = new Sexo()
+                    {
+                        IdSexo = model.Sexo.IdSexo,
+                        Nombre = model.Sexo.Nombre
+                    },
+                    FechaNacimiento = model.FechaNacimiento.Value,
+                    CodPersonal = model.CodPersonal,
+                    FechaIngreso = model.FechaIngreso,
+                    Sueldo = model.Sueldo,
+                    Correos = null,
+                    Telefonos = null,
+                    Direcciones = null,
+                    Cargo = new Cargo()
+                    {
+                        IdCargo = model.Cargo.IdCargo,
+                        Nombre = model.Cargo.Nombre
+                    },
+                    Borrado = model.Borrado,
+                    Usuario = new Usuario()
+                    {
+                        IdUsuario = model.Usuario.IdUsuario,
+                        Username = model.Usuario.Username,
+                        Password = model.Usuario.Password,
+                        EsAdmin = model.Usuario.EsAdmin
+                    }
+                };
+
+                PersonalBrl.Actualizar(personal);
+
+                return RedirectToAction("../Personal/Index");
+
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

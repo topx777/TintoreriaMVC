@@ -1,0 +1,168 @@
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.PersonalModel
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Editar Personal</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div class="row">
+            <div class="col s6">
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Ci)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Ci, new { @class = "validate", @placeholder = "Carnet de identidad" })
+                        @Html.ValidationMessageFor(model => model.Ci)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Nombre)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "validate", @placeholder = "Nombre" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.PrimerApellido)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.PrimerApellido, new { @class = "validate", @placeholder = "Primer Apellido" })
+                        @Html.ValidationMessageFor(model => model.PrimerApellido)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.SegundoApellido)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.SegundoApellido, new { @class = "validate", @placeholder = "Segundo Apellido" })
+                        @Html.ValidationMessageFor(model => model.SegundoApellido)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Sexo.IdSexo)
+                    </div>
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Sexo)
+                        @Html.DropDownListFor(model => model.Sexo.IdSexo, (IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { @style = "display: block" })
+                        @Html.ValidationMessageFor(model => model.Sexo)
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.FechaNacimiento)
+                    </div>
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.FechaNacimiento)
+                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @type = "date" })
+                        @Html.ValidationMessageFor(model => model.FechaNacimiento)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Usuario.Username)
+                    </div>
+                    <div class="input-field col s2">
+                        @Html.TextBoxFor(model => model.Usuario.Username, new { @placeholder = "Usuario" })
+                        @Html.ValidationMessageFor(model => model.Usuario.Username)
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Direcciones)
+                    </div>
+                    <div class="col s12 m4">
+                        <h4>Direcciones</h4>
+                        @foreach (var item in Model.Direcciones)
+                {
+                            <div class="input-field col s2">
+                                @Html.TextBoxFor(modelitem => item.Descripccion, new { @placeholder = "Descripccion" })
+                                @Html.ValidationMessageFor(modeitem => item.Descripccion)
+
+                                @Html.LabelFor(modelitem => item.Tipo)
+                                @Html.DropDownListFor(model => item.Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style = "display: block" })
+
+                                @Html.TextBoxFor(modelitem => item.Latitud, new { @placeholder = "Latitud" })
+                                @Html.ValidationMessageFor(modelitem => item.Latitud)
+
+                                @Html.TextBoxFor(modelitem => item.Longitud, new { @placeholder = "Longitud" })
+                                @Html.ValidationMessageFor(modelitem => item.Longitud)
+
+                            </div>
+                        }
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Direcciones)
+                    </div>
+                    <div class="col s12 m4">
+                        <h4>Telefonos</h4>
+                        @foreach (var item in Model.Telefonos)
+                {
+                            <div>
+                                @Html.TextBoxFor(modelitem => item.Numero, new { @placeholder = "Numero" })
+                                @Html.DropDownListFor(model => item.Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style = "display: block" })
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                   
+
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.CodPersonal)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.CodPersonal, new { @class = "validate", @placeholder = "Codigo" })
+                        @Html.ValidationMessageFor(model => model.CodPersonal)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.FechaIngreso)
+                    </div>
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.FechaIngreso)
+                        @Html.TextBoxFor(model => model.FechaIngreso, new { @type = "date" })
+                        @Html.ValidationMessageFor(model => model.FechaIngreso)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Cargo)
+                    </div>
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Cargo)
+                        @Html.DropDownListFor(model => model.Cargo.IdCargo, (IEnumerable<SelectListItem>)ViewBag.ListaCargo, new { @style = "display: block" })
+                        @Html.ValidationMessageFor(model => model.Cargo)
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        @Html.LabelFor(model => model.Sueldo)
+                    </div>
+                    <div class="input-field col s10">
+                        @Html.TextBoxFor(model => model.Sueldo, new { @class = "validate", @placeholder = "Sueldo" })
+                        @Html.ValidationMessageFor(model => model.Sueldo)
+                    </div>
+                </div>
+                    <button type="submit" class="waves-effect waves-light btn">
+                        <i class="material-icons left">edit</i> Modificar Personal
+                    </button>
+                </div>
+        </div>
+    </fieldset>
+}
+
