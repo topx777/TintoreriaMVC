@@ -172,10 +172,73 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
 
                // GET: Ver Modificar Cliente
-        public ActionResult Editar(int mCodigo)
+        public ActionResult Editar(int Id)
         {
+            CargarSexo();
+            CargarTipo();
+            Cliente client=ClienteBrl.Get(Id);
+            ClienteModel clientModel = new ClienteModel() {
+                IdPersona = client.IdPersona,
+                Nit = client.Nit,
+                Razon = client.Razon,
+                FechaRegistro = client.FechaRegistro,
+                Ci=client.Ci,
+                Nombre=client.Nombre,
+                PrimerApellido=client.PrimerApellido,
+                SegundoApellido=client.SegundoApellido,
+                Sexo=new SexoModel()
+                {
+                    IdSexo=client.Sexo.IdSexo,
+                    Nombre=client.Sexo.Nombre
+                },
+                FechaNacimiento=client.FechaNacimiento,
+                Usuario=new UsuarioModel()
+                {
+                    IdUsuario=client.Usuario.IdUsuario,
+                    Username=client.Usuario.Username,
+                    Password=client.Usuario.Password,
+                    EsAdmin=client.Usuario.EsAdmin
+                }
+            };
+            foreach (var telefono in client.Telefonos)
+            {
+                clientModel.Telefonos.Add(new TelefonoModel()
+                {
+                    IdTelefono=telefono.IdTelefono,
+                    Numero=telefono.Numero,
+                    Tipo=new TipoModel()
+                    {
+                        IdTipo=telefono.Tipo.IdTipo,
+                        Nombre=telefono.Tipo.Nombre
+                    }
+                });
+            }
 
-            return View();
+            foreach (var direccion in client.Direcciones)
+            {
+                clientModel.Direcciones.Add(new DireccionModel() {
+                    IdDireccion=direccion.IdDireccion,
+                    Descripccion=direccion.Descripcion,
+                    Tipo=new TipoModel()
+                    {
+                        IdTipo=direccion.Tipo.IdTipo,
+                        Nombre=direccion.Tipo.Nombre,
+                    },
+                    Latitud=direccion.Latitud,
+                    Longitud=direccion.Longitud
+                });
+            }
+
+            foreach (var correo in client.Correos)
+            {
+                clientModel.Correos.Add(new CorreoModel() {
+                    idCorreo=correo.IdCorreo,
+                    Nombre=correo.Nombre,
+                    Principal=correo.Principal
+                });
+            }
+
+            return View(clientModel);
         }
 
 

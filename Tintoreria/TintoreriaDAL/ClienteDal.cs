@@ -276,9 +276,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         FechaNacimiento=dr.GetDateTime(6),
                         Usuario=UsuarioDal.Get(dr.GetInt32(7)),
                         Borrado=dr.GetBoolean(8),
-                        //Direcciones=DireccionListDal(dr.GetInt32(0)),
-                        //Telefonos=TelefonoListDal(dr.GetInt32(0)),
-                        //Correos=CorreosListDal(dr.GetInt32(0)),
+                        Direcciones=DireccionDal.GetList(dr.GetInt32(0)),
+                        Telefonos=TelefonoDal.GetList(dr.GetInt32(0)),
+                        Correos=CorreoDal.GetList(dr.GetInt32(0)),
                         Nit= dr.GetString(9),
                         Razon= dr.GetString(10),
                         FechaRegistro=dr.GetDateTime(11)
