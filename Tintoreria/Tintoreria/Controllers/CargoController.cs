@@ -11,6 +11,29 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class CargoController : Controller
     {
+        private static List<CargoModel> ListCargo;
+
+        public static List<CargoModel> CargoList
+        {
+            get
+            {
+                var ListCargo = new List<CargoModel>();
+                foreach (var cargo in CargoBrl.Get())
+                {
+                    ListCargo.Add(new CargoModel
+                    {
+                        IdCargo = cargo.IdCargo,
+                        Nombre = cargo.Nombre
+                    });
+                }
+                return ListCargo;
+            }
+            set
+            {
+                ListCargo = value;
+            }
+        }
+
         // GET: Cargo
         public ActionResult Index()
         {

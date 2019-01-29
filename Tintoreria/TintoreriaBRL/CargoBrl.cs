@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
@@ -26,6 +27,33 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
                 throw ex;
             }
         }
+
+
+        //Metodo para obtener categoria
+
+        public static List<Cargo> Get()
+        {
+            List<Cargo> cargoList = null;
+            try
+            {
+                cargoList = CargoDal.GetList();
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("CargoBrl", "ListCargo",
+                string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(),
+                DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("CargoBrl", "ListCargo", string.Format("{0} {1} Error: {2}",
+                DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            return cargoList;
+        }
+
 
         //Metodo para obtener categoria
 
