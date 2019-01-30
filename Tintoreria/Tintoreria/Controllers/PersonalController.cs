@@ -42,10 +42,104 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Crear(PersonalModel model)
+        public ActionResult Crear(PersonalModel personalM, string resp)
         {
 
-            return View();
+            CargarSexo();
+            CargarTipo();
+            if (!String.IsNullOrWhiteSpace(resp))
+            {
+                switch (resp)
+                {
+                    case "AddCorreo":
+                        personalM.Correos.Add(new CorreoModel());
+                        break;
+                    case "AddDireccion":
+                        personalM.Direcciones.Add(new DireccionModel());
+                        break;
+                    case "AddTelefono":
+                        personalM.Telefonos.Add(new TelefonoModel());
+                        break;
+                    case "Registrar":
+                        {
+
+                            Personal person = new Personal()
+                            {
+                                Usuario = new Usuario()
+                                {
+                                    Username = personalM.Usuario.Username,
+                                    Password = personalM.Usuario.Password,
+                                    EsAdmin = personalM.Usuario.EsAdmin
+                                },
+                                Ci = personalM.Ci,
+                                Nombre = personalM.Nombre,
+                                PrimerApellido = personalM.PrimerApellido,
+                                SegundoApellido = personalM.SegundoApellido,
+                                Sexo = new Sexo()
+                                {
+                                    IdSexo = personalM.Sexo.IdSexo,
+                                },
+                                FechaNacimiento = personalM.FechaNacimiento.Value,
+                                CodPersonal = personalM.CodPersonal,
+                                Sueldo = personalM.Sueldo,
+                                FechaIngreso = personalM.FechaIngreso,
+
+                                Cargo = new Cargo()
+                                {
+                                    IdCargo = personalM.Cargo.IdCargo,
+                                    Nombre = personalM.Cargo.Nombre
+                                },
+                            };
+                            person.Correos = new List<Correo>();
+                            foreach (var correo in personalM.Correos)
+                            {
+                                person.Correos.Add(new Correo()
+                                {
+                                    Nombre = correo.Nombre,
+                                    Principal = correo.Principal
+                                });
+                            }
+
+                            person.Direcciones = new List<Direccion>();
+                            foreach (var direccion in personalM.Direcciones)
+                            {
+                                person.Direcciones.Add(new Direccion()
+                                {
+                                    Descripcion = direccion.Descripccion,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = direccion.Tipo.IdTipo
+                                    },
+                                    Latitud = direccion.Latitud,
+                                    Longitud = direccion.Latitud
+
+                                });
+                            }
+                            person.Telefonos = new List<Telefono>();
+                            foreach (var telefono in personalM.Telefonos)
+                            {
+                                person.Telefonos.Add(new Telefono()
+                                {
+                                    Numero = telefono.Numero,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = telefono.Tipo.IdTipo
+                                    }
+                                });
+                            }
+
+                            PersonalBrl.Insertar(person);
+
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return View(personalM);
+
         }
 
         public void CargarTipo()
