@@ -1,0 +1,158 @@
+﻿@using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
+@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.PersonalModel
+
+@*@{
+        ViewBag.Title = "Crear";
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }*@
+<a class="" href="@Url.Action("../Personal/Index")">Lista Personal</a>
+<h2>Eliminar Cliente?</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="col s12 m4">
+            @Html.TextBoxFor(model => model.IdPersona, new { @style = "display:none" })
+            <h4>Usuario</h4>
+            <div>
+                @Html.LabelFor(model => model.Usuario.Password)
+                @Html.TextBoxFor(model => model.Usuario.Username, new { @class = "validate", @placeholder = "Usuario", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Usuario.Username)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Usuario.Password)
+                @Html.TextBoxFor(model => model.Usuario.Password, new { @class = "validate", @placeholder = "Password", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Usuario.Password)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Usuario.EsAdmin)
+                @Html.CheckBoxFor(model => model.Usuario.EsAdmin, new { @style = "display:block", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.Usuario.EsAdmin)
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div>
+                <h4>Persona</h4>
+                <div>
+                    @Html.LabelFor(model => model.Ci)
+                    @Html.TextBoxFor(model => model.Ci, new { @placeholder = "Ci", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Ci)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.Nombre)
+                    @Html.TextBoxFor(model => model.Nombre, new { @placeholder = "Nombre", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.PrimerApellido)
+                    @Html.TextBoxFor(model => model.PrimerApellido, new { @placeholder = "Primer Apellido", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PrimerApellido)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SegundoApellido)
+                    @Html.TextBoxFor(model => model.SegundoApellido, new { @placeholder = "Segundo Apellido", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.SegundoApellido)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.Sexo)
+                    @Html.DropDownListFor(model => model.Sexo.IdSexo, (IEnumerable<SelectListItem>)ViewBag.ListaSexos, new { @style = "display: block", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Sexo)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.FechaNacimiento)
+                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @type = "date", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.FechaNacimiento)
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div>
+                <h4>Datos Personal</h4>
+                <div>
+                    @Html.LabelFor(model => model.CodPersonal)
+                    @Html.TextBoxFor(model => model.CodPersonal, new { @placeholder = "Codigo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.CodPersonal)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.FechaIngreso)
+                    @Html.TextBoxFor(model => model.FechaIngreso, new { @type = "date", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.FechaIngreso)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.Cargo.Nombre)
+                    @Html.TextBoxFor(model => model.Cargo.Nombre, new { @placeholder = "Cargo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Cargo.Nombre)
+                </div>
+                <div>
+                @Html.LabelFor(model => model.Sueldo)
+                @Html.TextBoxFor(model => model.Sueldo, new { @placeholder = "Sueldo", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Sueldo)
+                </div>
+             </div>
+                <hr />
+            </div>
+        </div>
+    
+    <div class="row">
+        <div class="col s12 m4">
+            <h4>Correos</h4>
+            @for (var i = 0; i < Model.Correos.Count; i++)
+                {
+                <div>
+                    @Html.LabelFor(correo => Model.Correos[i].Nombre)
+                    @Html.TextBoxFor(correo => Model.Correos[i].Nombre, new { @placeholder = "Nombre Correo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(correo => Model.Correos[i].Nombre)
+
+                    @Html.LabelFor(correo => Model.Correos[i].Principal)
+                    @Html.CheckBoxFor(correo => Model.Correos[i].Principal, new { @style = "display:block", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(correo => Model.Correos[i].Principal)
+                    <hr />
+                </div>
+            }
+        </div>
+        <div class="col s12 m4">
+            <h4>Direcciones</h4>
+            @for (var i = 0; i < Model.Direcciones.Count; i++)
+                {
+                <div>
+                    @Html.LabelFor(direccion => Model.Direcciones[i].Descripccion)
+                    @Html.TextBoxFor(direccion => Model.Direcciones[i].Descripccion, new { @placeholder = "Descripccion", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(direccion => Model.Direcciones[i].Descripccion)
+
+                    @Html.LabelFor(direccion => Model.Direcciones[i].Tipo)
+                    @Html.DropDownListFor(direccion => Model.Direcciones[i].Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style = "display: block", @disabled = "disabled" })
+
+                    @Html.LabelFor(direccion => Model.Direcciones[i].Latitud)
+                    @Html.TextBoxFor(direccion => Model.Direcciones[i].Latitud, new { @placeholder = "Latitud", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(direccion => Model.Direcciones[i].Latitud)
+
+                    @Html.LabelFor(direccion => Model.Direcciones[i].Longitud)
+                    @Html.TextBoxFor(direccion => Model.Direcciones[i].Longitud, new { @placeholder = "Longitud", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(direccion => Model.Direcciones[i].Longitud)
+                    <hr />
+                </div>
+            }
+
+        </div>
+        <div class="col s12 m4">
+            <h4>Telefonos</h4>
+            @for (var i = 0; i < Model.Telefonos.Count; i++)
+                {
+                <div>
+                    @Html.LabelFor(telefono => Model.Telefonos[i].Numero)
+                    @Html.TextBoxFor(telefono => Model.Telefonos[i].Numero, new { @placeholder = "Numero", @readonly = "readonly" })
+                    @Html.DropDownListFor(telefono => Model.Telefonos[i].Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style = "display: block", @disabled = "disabled" })
+                    <hr />
+                </div>
+
+            }
+        </div>
+    </div>
+    <input type="submit" name="resp" value="Cancelar" class="" />
+    <input type="submit" name="resp" value="Borrar" class="" />
+
+
+}
+
+

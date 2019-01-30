@@ -8,6 +8,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class PersonalModel : PersonaModel
     {
+        public PersonalModel()
+        {
+            Telefonos = new List<TelefonoModel>();
+            Direcciones = new List<DireccionModel>();
+            Correos = new List<CorreoModel>();
+        }
         [Display(Name = "Codigo")]
         public string CodPersonal { get; set; }
 

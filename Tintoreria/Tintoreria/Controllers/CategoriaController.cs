@@ -1,5 +1,4 @@
-﻿using PagedList;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models;
@@ -13,15 +12,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpGet]
         public ActionResult Index(int? page)
         {
-            int pageSize = 5;
-            int pageIndex = 1;
-            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            CategoriaListModel lista = CategoriaListModel.Get();
+            CategoriaListModel lista = CategoriaListModel.Get(page.HasValue ? page.Value : 1);
 
-            IPagedList<CategoriaModel> categorias = null;
-            categorias = lista.ToPagedList(pageIndex, pageSize);
-
-            return View(categorias);
+            return View(lista);
         }
 
         // GET: Crear Categoria

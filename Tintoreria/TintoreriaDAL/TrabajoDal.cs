@@ -100,13 +100,16 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
             int count = 0;
 
-            string queryString = @"SELECT COUNT(*) FROM Trabajo WHERE Borrado = 0";
+            string queryString = "SELECT COUNT(*) FROM Trabajo WHERE Borrado = 0";
 
             try
             {
                 cmd = new SqlCommand(queryString);
-                    
-                count = Convert.ToInt32(Methods.ExcecuteScalarCommand(cmd));
+                cmd.Connection = Methods.ObtenerConexion();
+                cmd.Connection.Open();
+
+                Object x = cmd.ExecuteScalar();
+                count = Convert.ToInt32(x);
             }
             catch (SqlException ex)
             {
