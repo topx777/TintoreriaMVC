@@ -253,6 +253,8 @@
     <Content Include="Views\Personal\Ver.cshtml" />
     <Content Include="Views\Cliente\Eliminar.cshtml" />
     <Content Include="Views\Personal\Eliminar.cshtml" />
+    <Content Include="Views\Shared\asideNav.cshtml" />
+    <Content Include="Views\Personal\Crear.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
