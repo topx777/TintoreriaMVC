@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel>
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoListModel
 @{
     ViewBag.Title = "Lista Trabajo";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -11,10 +11,10 @@
 {
     <table class="table table-striped">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTrabajo)
-            </th>
+            <th>ID</th>
             <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Total</th>
             <th>Actions</th>
         </tr>
 
@@ -22,10 +22,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(itemModel => item.IdTrabajo)
+                    @item.IdTrabajo
                 </td>
                 <td>
-                    @Html.DisplayFor(itemMode => item.FechaTrabajo)
+                    @item.FechaTrabajo
+                </td>
+                <td>
+                    @(item.Cliente.Nombre + " - " + item.Cliente.Ci)
+                </td>
+                <td>
+                    @item.TotalPrecio
                 </td>
                 <td>
                     <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cargo/Ver", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">remove_red_eye</i> Ver</a>
@@ -41,35 +47,35 @@
     <div id="container" style="margin-left: 20px">
         <div class="pagination" style="margin-left: 400px">
             <!-- pager -->
-            @if (ViewBag.EndPage > 1)
+            @if (Model.Pager.EndPage > 1)
             {
                 <ul class="pagination">
-                @if (ViewBag.CurrentPage > 1)
-                {
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
                         <li>
                             <a href="~/Trabajo/Index">Primero</a>
                         </li>
                         <li>
-                            <a href="~/Trabajo/Index?page=@(ViewBag.CurrentPage - 1)">Anterior</a>
+                            <a href="~/Trabajo/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
                         </li>
-                }
+                    }
 
-                @for (var page = ViewBag.StartPage; page <= ViewBag.EndPage; page++)
-                {
-                        <li class="@(page == ViewBag.CurrentPage ? "active" : "")">
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
                             <a href="~/Trabajo/Index?page=@page">@page</a>
                         </li>
-                }
+                    }
 
-                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-                {
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
                         <li>
-                            <a href="~/Trabajo/Index?page=@(ViewBag.CurrentPage + 1)">Siguiente</a>
+                            <a href="~/Trabajo/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
                         </li>
                         <li>
-                            <a href="~/Trabajo/Index?page=@(ViewBag.TotalPages)">Ultimo</a>
+                            <a href="~/Trabajo/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
                         </li>
-                }
+                    }
                 </ul>
             }
         </div>

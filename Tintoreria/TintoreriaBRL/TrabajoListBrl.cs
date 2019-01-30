@@ -15,14 +15,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
         /// obtiene lista de cargos
         /// </summary>
         /// <returns></returns>
-        public static TrabajoList Get(int offset, int next)
+        public static TrabajoList Get(int page, int pageSize)
         {
             TrabajoList lista = null;
 
             try
             {
                 //lista = TrabajoDal.GetList(offset, next);
-                lista = TrabajoDal.GetLista(offset, next);
+                lista = TrabajoDal.GetLista(page, pageSize);
             }
             catch (SqlException ex)
             {
@@ -35,5 +35,32 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 
             return lista;
         }
+
+
+        /// <summary>
+        /// Obtener Cantidad de Registros de la bd
+        /// </summary>
+        /// <returns></returns>
+        public static int Count()
+        {
+            int count = 0;
+
+            try
+            {
+                count = TrabajoDal.Count();
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return count;
+        }
+
     }
 }
