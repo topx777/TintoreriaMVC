@@ -117,5 +117,28 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             return trabajo;
         }
 
+        /// <summary>
+        /// Metodo para obtener la cantidad total de registros de la BD
+        /// </summary>
+        /// <returns></returns>
+        public static int Count()
+        {
+            int cant = 0;
+            try
+            {
+                cant = TrabajoDal.Count();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return cant;
+        }
+
     }
 }

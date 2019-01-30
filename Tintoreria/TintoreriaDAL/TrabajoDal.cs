@@ -91,6 +91,40 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         }
 
         /// <summary>
+        /// Obtiene la cantidad total de registros de la BD
+        /// </summary>
+        /// <returns></returns>
+        public static int Count()
+        {
+            SqlCommand cmd = null;
+
+            int count = 0;
+
+            string queryString = @"SELECT COUNT(*) FROM Trabajo WHERE Borrado = 0";
+
+            try
+            {
+                cmd = new SqlCommand(queryString);
+                    
+                count = Convert.ToInt32(Methods.ExcecuteScalarCommand(cmd));
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("TrabajoDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("TrabajoDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+
+            Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un trabajo"));
+
+            return count;
+        }
+
+        /// <summary>
         /// Actualiza un trabajo de la base de datos
         /// </summary>
         /// <param name="trabajo"></param>

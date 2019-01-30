@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
-//using PagedList;
+using PagedList;
 using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 
@@ -16,8 +16,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpGet]
         public ActionResult Index(int? offset)
         {
-            int next = 5;
+            int cantResult = TrabajoBrl.Count();
 
+            int next = 2;
+            
             TrabajoListModel lista = TrabajoListModel.Get(offset.HasValue ? offset.Value : 1, next);
 
             return View(lista);
