@@ -213,6 +213,7 @@
     <Compile Include="Models\CorreoModel.cs" />
     <Compile Include="Models\DireccionModel.cs" />
     <Compile Include="Models\EstadoModel.cs" />
+    <Compile Include="Models\Pager.cs" />
     <Compile Include="Models\PedidoModel.cs" />
     <Compile Include="Models\PersonalListModel.cs" />
     <Compile Include="Models\PersonalModel.cs" />

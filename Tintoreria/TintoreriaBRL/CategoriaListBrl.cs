@@ -11,13 +11,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
         /// Obtiene la lista de categorias
         /// </summary>
         /// <returns>Categoria Lista</returns>
-        public static CategoriaList Get()
+        public static CategoriaList Get(int page, int pageSize)
         {
             CategoriaList lista = null;
 
             try
             {
-                lista = CategoriaListDal.Get();
+                lista = CategoriaListDal.Get(page, pageSize);
 
             }
             catch (SqlException ex)
@@ -30,7 +30,32 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
             }
 
             return lista;
-        }       
+        }  
+        
+        /// <summary>
+        /// Obtener Cantidad de Registros de la bd
+        /// </summary>
+        /// <returns></returns>
+        public static int Count()
+        {
+            int count = 0;
+
+            try
+            {
+                count = CategoriaListDal.Count();
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return count;
+        }
 
     }
 }

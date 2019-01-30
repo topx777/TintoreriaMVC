@@ -11,17 +11,63 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
     public class CategoriaListDal
     {
 
-        public static CategoriaList Get()
+        /// <summary>
+        /// Obtiene la cantidad total de registros de la BD
+        /// </summary>
+        /// <returns></returns>
+        public static int Count()
+        {
+            SqlCommand cmd = null;
+
+            int count = 0;
+
+            string queryString = "SELECT COUNT(*) FROM Categoria";
+
+            try
+            {
+                cmd = new SqlCommand(queryString);
+                cmd.Connection = Methods.ObtenerConexion();
+                cmd.Connection.Open();
+
+                Object x = cmd.ExecuteScalar();
+                count = Convert.ToInt32(x);
+            }
+            catch (SqlException ex)
+            {
+                //Methods.GenerateLogsRelease("TrabajoDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                //Methods.GenerateLogsRelease("TrabajoDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+
+            //Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un trabajo"));
+
+            return count;
+        }
+
+        /// <summary>
+        /// Obtener Lista de Categorias
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static CategoriaList Get(int page, int pageSize)
         {
             CategoriaList res = new CategoriaList();
 
             SqlCommand cmd = null;
             SqlDataReader dr = null;
 
-            string query = "SELECT * FROM Categoria";
+            string query = @"SELECT * FROM Categoria ORDER BY Nombre ASC 
+                        OFFSET @pageSize * (@page - 1) ROWS FETCH NEXT @pageSize ROWS ONLY";
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@page", page);
+                cmd.Parameters.AddWithValue("@pageSize", pageSize);
                 dr = Methods.ExecuteDataReaderCommand(cmd);
 
                 while (dr.Read())

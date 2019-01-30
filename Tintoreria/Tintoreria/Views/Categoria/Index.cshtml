@@ -1,8 +1,6 @@
-﻿@using PagedList.Mvc
-@*@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaModel>*@
-@model PagedList.IPagedList<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaModel>
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.CategoriaListModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista Categoria";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -26,19 +24,19 @@
             <th>Actions</th>
         </tr>
 
-        @for (int i = 0; i < Model.Count; i++)
+        @foreach(var item in Model)
         {
             <tr>
                 <td>
-                    @Model[i].Nombre
+                    @item.Nombre
                 </td>
                 <td>
-                    @Model[i].Precio
+                    @item.Precio
                 </td>
                 <td>
-                    <a class="waves-effect waves-light btn amber" href="@Url.Action("../Categoria/Ver", new { mCodigo = Model[i].IdCategoria })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                    <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Categoria", new { mCodigo = Model[i].IdCategoria })"><i class="material-icons left">edit</i> Editar</a>
-                    <a class="waves-effect waves-light btn red" href="@Url.Action("../Categoria/Eliminar", new { mCodigo = Model[i].IdCategoria })"><i class="material-icons left">delete</i> Eliminar</a>
+                    <a class="waves-effect waves-light btn amber" href="@Url.Action("../Categoria/Ver", new { mCodigo = item.IdCategoria })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                    <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Categoria", new { mCodigo = item.IdCategoria })"><i class="material-icons left">edit</i> Editar</a>
+                    <a class="waves-effect waves-light btn red" href="@Url.Action("../Categoria/Eliminar", new { mCodigo = item.IdCategoria })"><i class="material-icons left">delete</i> Eliminar</a>
                     @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
                 </td>
             </tr>
@@ -46,11 +44,39 @@
 
     </table>
     <div id="container" style="margin-left: 20px">
-        <p></p>
-        <p></p>
         <div class="pagination" style="margin-left: 400px">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            <!-- pager -->
+            @if (Model.Pager.EndPage > 1)
+            {
+                <ul class="pagination">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li>
+                            <a href="~/Categoria/Index">Primero</a>
+                        </li>
+                        <li>
+                            <a href="~/Categoria/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
+                        </li>
+                    }
+
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                            <a href="~/Categoria/Index?page=@page">@page</a>
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li>
+                            <a href="~/Categoria/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
+                        </li>
+                        <li>
+                            <a href="~/Categoria/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
+                        </li>
+                    }
+                </ul>
+            }
         </div>
     </div>
 }

@@ -1,15 +1,11 @@
-﻿@*@using PagedList.Mvc*@
-
-@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel>
-@*@model PagedList.IPagedList<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel>*@
-
+﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel>
 @{
     ViewBag.Title = "Lista Trabajo";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Lista de Trabajos</h2>
-<a class="waves-effect waves-light btn blue" href="@Url.Action("../Trabajo/Crear")"><i class="material-icons left">add</i>Crear Trabajo</a>
+<a class="waves-effect waves-light btn blue" href="@Url.Action("../Trabajo/Crear")"><i class="material-icons left">add</i>Nuevo Trabajo</a>
 
 @using (Html.BeginForm())
 {
@@ -43,11 +39,39 @@
 
     </table>
     <div id="container" style="margin-left: 20px">
-        <p></p>
-        <p></p>
-        @*<div class="pagination" style="margin-left: 400px">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-        </div>*@
+        <div class="pagination" style="margin-left: 400px">
+            <!-- pager -->
+            @if (ViewBag.EndPage > 1)
+            {
+                <ul class="pagination">
+                @if (ViewBag.CurrentPage > 1)
+                {
+                        <li>
+                            <a href="~/Trabajo/Index">Primero</a>
+                        </li>
+                        <li>
+                            <a href="~/Trabajo/Index?page=@(ViewBag.CurrentPage - 1)">Anterior</a>
+                        </li>
+                }
+
+                @for (var page = ViewBag.StartPage; page <= ViewBag.EndPage; page++)
+                {
+                        <li class="@(page == ViewBag.CurrentPage ? "active" : "")">
+                            <a href="~/Trabajo/Index?page=@page">@page</a>
+                        </li>
+                }
+
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                        <li>
+                            <a href="~/Trabajo/Index?page=@(ViewBag.CurrentPage + 1)">Siguiente</a>
+                        </li>
+                        <li>
+                            <a href="~/Trabajo/Index?page=@(ViewBag.TotalPages)">Ultimo</a>
+                        </li>
+                }
+                </ul>
+            }
+        </div>
     </div>
 }
