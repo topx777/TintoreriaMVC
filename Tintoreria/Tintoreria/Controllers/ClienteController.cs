@@ -115,7 +115,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                                 {
                                     IdSexo = cliente.Sexo.IdSexo,
                                 },
-                                FechaNacimiento = cliente.FechaNacimiento,
+                                FechaNacimiento = cliente.FechaNacimiento.Value,
                                 Nit = cliente.Nit,
                                 Razon = cliente.Razon,
                                 FechaRegistro = cliente.FechaRegistro
