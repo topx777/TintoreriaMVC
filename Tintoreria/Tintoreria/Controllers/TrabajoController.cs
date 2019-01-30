@@ -37,7 +37,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
         public ActionResult Nuevo()
         {
-            return View();
+            TrabajoModel model = new TrabajoModel();
+            return View(model);
         }
     }
 }

@@ -1,20 +1,22 @@
-﻿
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel
 @{
     ViewBag.Title = Resource.Resource.NewWork;
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>@Resource.Resource.NewWork</h2>
 
 @using(Html.BeginForm())
 {
+    @Html.ValidationSummary(true)
 <div class="container">
     <div class="row">
         <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            @Html.TextBoxFor()
+            <i class="material-icons prefix">date_range</i>
+            @Html.TextBoxFor(model => model.FechaEntrega, new { @type = "date" })
+            @Html.LabelFor(model => model.FechaEntrega)
             @*<input id="icon_prefix" type="text" class="validate">*@
-            <label for="icon_prefix">First Name</label>
+            @*<label for="icon_prefix">Fecha de Entrega</label>*@
         </div>
         <div class="input-field col s6">
             <i class="material-icons prefix">phone</i>
