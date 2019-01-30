@@ -146,9 +146,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         
 
         //ver personal
-        public ActionResult Ver(int mCodigo)
+        public ActionResult Ver(int Id)
         {
-            Personal per = PersonalBrl.Get(mCodigo);
+            Personal per = PersonalBrl.Get(Id);
             PersonalModel model = new PersonalModel()
             {
                 IdPersona = per.IdPersona,
@@ -161,56 +161,106 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             return View(model);
         }
 
-        //Editar Personal
+        //Borrado personal
+        public ActionResult Eliminar(int Id)
+        {
+            CargarSexo();
+            CargarTipo();
+            Personal person = PersonalBrl.Get(Id);
+            PersonalModel personalModel = new PersonalModel()
+            {
+                IdPersona = person.IdPersona,
+                FechaIngreso = person.FechaIngreso,
+                Ci = person.Ci,
+                Nombre = person.Nombre,
+                PrimerApellido = person.PrimerApellido,
+                SegundoApellido = person.SegundoApellido,
+                Sexo = new SexoModel()
+                {
+                    IdSexo = person.Sexo.IdSexo,
+                    Nombre = person.Sexo.Nombre
+                },
+                FechaNacimiento = person.FechaNacimiento.Value,
+                Usuario = new UsuarioModel()
+                {
+                    IdUsuario = person.Usuario.IdUsuario,
+                    Username = person.Usuario.Username,
+                    Password = person.Usuario.Password,
+                    EsAdmin = person.Usuario.EsAdmin
+                },
+                CodPersonal=person.CodPersonal,
+
+                Cargo=new CargoModel()
+                {
+                    IdCargo=person.Cargo.IdCargo,
+                    Nombre=person.Cargo.Nombre,
+                },
+
+               Sueldo=person.Sueldo,
+                
+            };
+            foreach (var telefono in person.Telefonos)
+            {
+                personalModel.Telefonos.Add(new TelefonoModel()
+                {
+                    IdTelefono = telefono.IdTelefono,
+                    Numero = telefono.Numero,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = telefono.Tipo.IdTipo,
+                        Nombre = telefono.Tipo.Nombre
+                    }
+                });
+            }
+
+            foreach (var direccion in person.Direcciones)
+            {
+                personalModel.Direcciones.Add(new DireccionModel()
+                {
+                    IdDireccion = direccion.IdDireccion,
+                    Descripccion = direccion.Descripcion,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = direccion.Tipo.IdTipo,
+                        Nombre = direccion.Tipo.Nombre,
+                    },
+                    Latitud = direccion.Latitud,
+                    Longitud = direccion.Longitud
+                });
+            }
+
+            foreach (var correo in person.Correos)
+            {
+                personalModel.Correos.Add(new CorreoModel()
+                {
+                    idCorreo = correo.IdCorreo,
+                    Nombre = correo.Nombre,
+                    Principal = correo.Principal
+                });
+            }
+
+            return View(personalModel);
+
+        }
 
         [HttpPost]
-        public ActionResult Editar(int mCodigo, PersonalModel model)
+        public ActionResult Eliminar(PersonalModel clientM, string resp)
         {
-            try
+            if (!String.IsNullOrWhiteSpace(resp))
             {
-                Personal personal = new Personal()
+                switch (resp)
                 {
-                    IdPersona = model.IdPersona,
-                    Ci = model.Ci,
-                    Nombre = model.Nombre,
-                    PrimerApellido = model.PrimerApellido,
-                    SegundoApellido = model.SegundoApellido,
-                    Sexo = new Sexo()
-                    {
-                        IdSexo = model.Sexo.IdSexo,
-                        Nombre = model.Sexo.Nombre
-                    },
-                    FechaNacimiento = model.FechaNacimiento.Value,
-                    CodPersonal = model.CodPersonal,
-                    FechaIngreso = model.FechaIngreso,
-                    Sueldo = model.Sueldo,
-                    Correos = null,
-                    Telefonos = null,
-                    Direcciones = null,
-                    Cargo = new Cargo()
-                    {
-                        IdCargo = model.Cargo.IdCargo,
-                        Nombre = model.Cargo.Nombre
-                    },
-                    Borrado = model.Borrado,
-                    Usuario = new Usuario()
-                    {
-                        IdUsuario = model.Usuario.IdUsuario,
-                        Username = model.Usuario.Username,
-                        Password = model.Usuario.Password,
-                        EsAdmin = model.Usuario.EsAdmin
-                    }
-                };
-
-                PersonalBrl.Actualizar(personal);
-
-                return RedirectToAction("../Personal/Index");
-
+                    case "Cancelar":
+                        break;
+                    case "Borrar":
+                        PersonalBrl.Eliminar(clientM.IdPersona);
+                        break;
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("../Personal/Index");
+
         }
+
+        
     }
 }

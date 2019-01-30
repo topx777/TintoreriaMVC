@@ -250,10 +250,9 @@
     <Content Include="Views\Trabajo\Index.cshtml" />
     <Content Include="Views\Trabajo\Nuevo.cshtml" />
     <Content Include="Views\Personal\Index.cshtml" />
-    <Content Include="Views\Personal\Crear.cshtml" />
     <Content Include="Views\Personal\Ver.cshtml" />
-    <Content Include="Views\Personal\Editar.cshtml" />
     <Content Include="Views\Cliente\Eliminar.cshtml" />
+    <Content Include="Views\Personal\Eliminar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
