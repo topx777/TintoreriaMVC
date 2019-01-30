@@ -14,6 +14,9 @@
 
     <div class="row">
         <div class="col s12 m4">
+            <div>
+                @Html.TextBoxFor(model=>model.IdPersona,new {@style="display:none"})
+            </div>
             <h4>Usuario</h4>
             <div>
                 @Html.TextBoxFor(model => model.Usuario.Username, new { @class = "validate", @placeholder = "Usuario" })
@@ -72,7 +75,8 @@
                     @Html.ValidationMessageFor(model => model.Razon)
                 </div>
                 <div>
-                    @Html.TextBoxFor(model => model.FechaRegistro, new { @type = "date" })
+                    @*@Html.EditorFor(model=>model.FechaRegistro, new {@type="date" })*@
+                    @Html.TextBoxFor(model =>model.FechaRegistro, new { @type = "date" })
                     @Html.ValidationMessageFor(model => model.FechaRegistro)
                 </div>
                 <hr />
@@ -133,7 +137,8 @@
                 <input type="submit" name="resp" value="AddTelefono" class="" />
             </div>
         </div>
-        <input type="submit" name="resp" value="Registrar" class="" />
+        <input type="submit" name="resp" value="Actulizar" class="" />
+        <input type="submit" name="resp" value="Cancelar" class="" />
 
 
 }

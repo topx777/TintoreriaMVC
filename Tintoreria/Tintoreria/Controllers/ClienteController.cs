@@ -99,6 +99,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                         cliente.Telefonos.Add(new TelefonoModel());
                         break;
                     case "Registrar":
+                        {
+
                             Cliente client = new Cliente()
                             {
                                 Usuario = new Usuario()
@@ -160,6 +162,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
                             ClienteBrl.Insertar(client);
                           
+                        }
                         break;
                     default:
                         break;
@@ -191,7 +194,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                     IdSexo=client.Sexo.IdSexo,
                     Nombre=client.Sexo.Nombre
                 },
-                FechaNacimiento=client.FechaNacimiento,
+                FechaNacimiento=client.FechaNacimiento.Value,
                 Usuario=new UsuarioModel()
                 {
                     IdUsuario=client.Usuario.IdUsuario,
@@ -241,17 +244,340 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             return View(clientModel);
         }
 
+        [HttpPost]
+        public ActionResult Editar(ClienteModel clientM, string resp)
+        {
+
+            if (!String.IsNullOrWhiteSpace(resp))
+            {
+                switch (resp)
+                {
+                    case "AddCorreo":
+                        clientM.Correos.Add(new CorreoModel());
+                        break;
+                    case "AddDireccion":
+                        clientM.Direcciones.Add(new DireccionModel());
+                        break;
+                    case "AddTelefono":
+                        clientM.Telefonos.Add(new TelefonoModel());
+                        break;
+                    case "Cancelar":
+                        break;
+                    case "Actulizar":
+                        {
+                            Cliente cliente = new Cliente()
+                            {
+                                IdPersona = clientM.IdPersona,
+                                Ci = clientM.Ci,
+                                Nombre = clientM.Nombre,
+                                PrimerApellido = clientM.PrimerApellido,
+                                SegundoApellido = clientM.SegundoApellido,
+                                Sexo = new Sexo()
+                                {
+                                    IdSexo = clientM.Sexo.IdSexo,
+                                    Nombre = clientM.Sexo.Nombre
+                                },
+                                FechaNacimiento = clientM.FechaNacimiento,
+                                Usuario = new Usuario()
+                                {
+                                    IdUsuario = clientM.Usuario.IdUsuario,
+                                    Username = clientM.Usuario.Username,
+                                    Password = clientM.Usuario.Password,
+                                    EsAdmin = clientM.Usuario.EsAdmin
+                                },
+                                Nit = clientM.Nit,
+                                Razon = clientM.Razon,
+                                FechaRegistro = clientM.FechaRegistro
+                            };
+                            cliente.Telefonos = new List<Telefono>();
+                            foreach (var telefono in clientM.Telefonos)
+                            {
+                                cliente.Telefonos.Add(new Telefono()
+                                {
+                                    IdTelefono = telefono.IdTelefono,
+                                    Numero = telefono.Numero,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = telefono.Tipo.IdTipo,
+                                        Nombre = telefono.Tipo.Nombre
+                                    }
+
+                                });
+                            }
+                            cliente.Direcciones = new List<Direccion>();
+                            foreach (var direccion in clientM.Direcciones)
+                            {
+                                cliente.Direcciones.Add(new Direccion()
+                                {
+                                    IdDireccion = direccion.IdDireccion,
+                                    Descripcion = direccion.Descripccion,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = direccion.Tipo.IdTipo,
+                                        Nombre = direccion.Tipo.Nombre
+                                    },
+                                    Latitud = direccion.Latitud,
+                                    Longitud = direccion.Longitud
+                                });
+                            }
+                            cliente.Correos = new List<Correo>();
+                            foreach (var correo in clientM.Correos)
+                            {
+                                cliente.Correos.Add(new Correo()
+                                {
+                                    IdCorreo = correo.idCorreo,
+                                    Nombre = correo.Nombre,
+                                    Principal = correo.Principal
+                                });
+                            }
+                                ClienteBrl.Actualizar(cliente);
+                        }
+                        break;
+                }
+            }
+
+            
+            return RedirectToAction("../Cliente/Index");
+        }
 
         //GET Ver Cliente
-        public ActionResult Ver(int mCodigo)
+        public ActionResult Ver(int Id)
         {
-            return View();
+            CargarSexo();
+            CargarTipo();
+            Cliente client = ClienteBrl.Get(Id);
+            ClienteModel clientModel = new ClienteModel()
+            {
+                IdPersona = client.IdPersona,
+                Nit = client.Nit,
+                Razon = client.Razon,
+                FechaRegistro = client.FechaRegistro,
+                Ci = client.Ci,
+                Nombre = client.Nombre,
+                PrimerApellido = client.PrimerApellido,
+                SegundoApellido = client.SegundoApellido,
+                Sexo = new SexoModel()
+                {
+                    IdSexo = client.Sexo.IdSexo,
+                    Nombre = client.Sexo.Nombre
+                },
+                FechaNacimiento = client.FechaNacimiento.Value,
+                Usuario = new UsuarioModel()
+                {
+                    IdUsuario = client.Usuario.IdUsuario,
+                    Username = client.Usuario.Username,
+                    Password = client.Usuario.Password,
+                    EsAdmin = client.Usuario.EsAdmin
+                }
+            };
+            foreach (var telefono in client.Telefonos)
+            {
+                clientModel.Telefonos.Add(new TelefonoModel()
+                {
+                    IdTelefono = telefono.IdTelefono,
+                    Numero = telefono.Numero,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = telefono.Tipo.IdTipo,
+                        Nombre = telefono.Tipo.Nombre
+                    }
+                });
+            }
+
+            foreach (var direccion in client.Direcciones)
+            {
+                clientModel.Direcciones.Add(new DireccionModel()
+                {
+                    IdDireccion = direccion.IdDireccion,
+                    Descripccion = direccion.Descripcion,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = direccion.Tipo.IdTipo,
+                        Nombre = direccion.Tipo.Nombre,
+                    },
+                    Latitud = direccion.Latitud,
+                    Longitud = direccion.Longitud
+                });
+            }
+
+            foreach (var correo in client.Correos)
+            {
+                clientModel.Correos.Add(new CorreoModel()
+                {
+                    idCorreo = correo.IdCorreo,
+                    Nombre = correo.Nombre,
+                    Principal = correo.Principal
+                });
+            }
+
+            return View(clientModel);
+
+        }
+        [HttpPost]
+        public ActionResult Ver()
+        {
+            return RedirectToAction("../Cliente/Index");
         }
 
         //GET Eliminar
-        public ActionResult Eliminar()
+        public ActionResult Eliminar(int Id)
         {
-            return View();
+            CargarSexo();
+            CargarTipo();
+            Cliente client = ClienteBrl.Get(Id);
+            ClienteModel clientModel = new ClienteModel()
+            {
+                IdPersona = client.IdPersona,
+                Nit = client.Nit,
+                Razon = client.Razon,
+                FechaRegistro = client.FechaRegistro,
+                Ci = client.Ci,
+                Nombre = client.Nombre,
+                PrimerApellido = client.PrimerApellido,
+                SegundoApellido = client.SegundoApellido,
+                Sexo = new SexoModel()
+                {
+                    IdSexo = client.Sexo.IdSexo,
+                    Nombre = client.Sexo.Nombre
+                },
+                FechaNacimiento = client.FechaNacimiento.Value,
+                Usuario = new UsuarioModel()
+                {
+                    IdUsuario = client.Usuario.IdUsuario,
+                    Username = client.Usuario.Username,
+                    Password = client.Usuario.Password,
+                    EsAdmin = client.Usuario.EsAdmin
+                }
+            };
+            foreach (var telefono in client.Telefonos)
+            {
+                clientModel.Telefonos.Add(new TelefonoModel()
+                {
+                    IdTelefono = telefono.IdTelefono,
+                    Numero = telefono.Numero,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = telefono.Tipo.IdTipo,
+                        Nombre = telefono.Tipo.Nombre
+                    }
+                });
+            }
+
+            foreach (var direccion in client.Direcciones)
+            {
+                clientModel.Direcciones.Add(new DireccionModel()
+                {
+                    IdDireccion = direccion.IdDireccion,
+                    Descripccion = direccion.Descripcion,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = direccion.Tipo.IdTipo,
+                        Nombre = direccion.Tipo.Nombre,
+                    },
+                    Latitud = direccion.Latitud,
+                    Longitud = direccion.Longitud
+                });
+            }
+
+            foreach (var correo in client.Correos)
+            {
+                clientModel.Correos.Add(new CorreoModel()
+                {
+                    idCorreo = correo.IdCorreo,
+                    Nombre = correo.Nombre,
+                    Principal = correo.Principal
+                });
+            }
+
+            return View(clientModel);
+
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(ClienteModel clientM, string resp)
+        {
+            if (!String.IsNullOrWhiteSpace(resp))
+            {
+                switch (resp)
+                {
+                    case "Cancelar":
+                        break;
+                    case "Borrar":
+                        ClienteBrl.Eliminar(clientM.IdPersona);
+                        break;
+                }
+            }
+            return RedirectToAction("../Cliente/Index");
+
+        }
+
+        public static Cliente mClientToClient(ClienteModel clientM)
+        {
+            Cliente cliente = new Cliente()
+            {
+                IdPersona = clientM.IdPersona,
+                Nit = clientM.Nit,
+                Razon = clientM.Razon,
+                FechaRegistro = clientM.FechaRegistro,
+                Ci = clientM.Ci,
+                Nombre = clientM.Nombre,
+                PrimerApellido = clientM.PrimerApellido,
+                SegundoApellido = clientM.SegundoApellido,
+                Sexo = new Sexo()
+                {
+                    IdSexo = clientM.Sexo.IdSexo,
+                    Nombre = clientM.Sexo.Nombre
+                },
+                FechaNacimiento = clientM.FechaNacimiento.Value,
+                Usuario = new Usuario()
+                {
+                    IdUsuario = clientM.Usuario.IdUsuario,
+                    Username = clientM.Usuario.Username,
+                    Password = clientM.Usuario.Password,
+                    EsAdmin = clientM.Usuario.EsAdmin
+                }
+            };
+            foreach (var telefono in clientM.Telefonos)
+            {
+                cliente.Telefonos.Add(new Telefono()
+                {
+                    IdTelefono = telefono.IdTelefono,
+                    Numero = telefono.Numero,
+                    Tipo = new Tipo()
+                    {
+                        IdTipo = telefono.Tipo.IdTipo,
+                        Nombre = telefono.Tipo.Nombre
+                    }
+                });
+            }
+
+            foreach (var direccion in clientM.Direcciones)
+            {
+                cliente.Direcciones.Add(new Direccion()
+                {
+                    IdDireccion = direccion.IdDireccion,
+                    Descripcion = direccion.Descripccion,
+                    Tipo = new Tipo()
+                    {
+                        IdTipo = direccion.Tipo.IdTipo,
+                        Nombre = direccion.Tipo.Nombre,
+                    },
+                    Latitud = direccion.Latitud,
+                    Longitud = direccion.Longitud
+                });
+            }
+
+            foreach (var correo in clientM.Correos)
+            {
+                cliente.Correos.Add(new Correo()
+                {
+                    IdCorreo = correo.idCorreo,
+                    Nombre = correo.Nombre,
+                    Principal = correo.Principal
+                });
+            }
+            return cliente;
+
         }
 
     }

@@ -8,6 +8,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class PersonaModel
     {
+
         [Display(Name = "ID")]
         public int IdPersona { get; set; }
 
