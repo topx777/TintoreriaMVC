@@ -8,14 +8,15 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class TrabajoListModel : List<TrabajoModel>
     {
+        public Pager Pager { get; set; }
         /// <summary>
         /// Necesita ser public, cuidado todo en poner public
         /// </summary>
         /// <returns></returns>
-        public static TrabajoListModel Get(int offset, int next)
+        public static TrabajoListModel Get(int page, int pageSize = 10)
         {
             TrabajoListModel _trabajoListModel = new TrabajoListModel();
-            foreach (var trabajo in TrabajoListBrl.Get(offset, next))
+            foreach (var trabajo in TrabajoListBrl.Get(page, pageSize))
             {
                 _trabajoListModel.Add(new TrabajoModel()
                 {
@@ -70,6 +71,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
                     Borrado = trabajo.Borrado
                 });
             }
+
+            _trabajoListModel.Pager = new Pager(TrabajoListBrl.Count(), page);
+
             return _trabajoListModel;
         }
     }

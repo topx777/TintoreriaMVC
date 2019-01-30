@@ -272,24 +272,24 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <summary>
         /// Obtiene Lista de Personal con paginado
         /// </summary>
-        /// <param name="next">Siguiente cantidad de resultados</param>
-        /// <param name="offset">Inicio resultado</param>
+        /// <param name="pageSize">Siguiente cantidad de resultados</param>
+        /// <param name="page">Inicio resultado</param>
         /// <returns>Lista de Objetos Personal</returns>
-        public static TrabajoList GetLista(int offset, int next)
+        public static TrabajoList GetLista(int page, int pageSize)
         {
             TrabajoList res = new TrabajoList();
 
             SqlCommand cmd = null;
             SqlDataReader dr = null;
             string query = @"SELECT * FROM Trabajo WHERE Borrado = 0 ORDER BY IdTrabajo 
-                        OFFSET @offset ROWS FETCH NEXT @next ROWS ONLY";
+                        OFFSET @pageSize * (@page - 1) ROWS FETCH NEXT @pageSize ROWS ONLY";
             //string query = @"SELECT * FROM Trabajo WHERE Borrado = 0 ORDER BY IdTrabajo;";
 
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
-                cmd.Parameters.AddWithValue("@offset", offset);
-                cmd.Parameters.AddWithValue("@next", next);
+                cmd.Parameters.AddWithValue("@page", page);
+                cmd.Parameters.AddWithValue("@pageSize", pageSize);
                 dr = Methods.ExecuteDataReaderCommand(cmd);
 
                 while (dr.Read())
