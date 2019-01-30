@@ -5,6 +5,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
 {
     public class Persona
     {
+
         #region Atributos
 
         public int IdPersona { get; set; }
