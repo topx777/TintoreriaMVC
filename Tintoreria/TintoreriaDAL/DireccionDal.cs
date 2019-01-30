@@ -167,8 +167,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         IdDireccion = dr.GetInt32(0),
                         Descripcion=dr.GetString(1),
                         Tipo=TipoDal.Get(dr.GetInt32(2)),
-                        Latitud=dr.GetDouble(3),
-                        Longitud=dr.GetDouble(4),
+                        Latitud = dr.GetSqlDecimal(3).ToDouble(),
+                        Longitud = dr.GetSqlDecimal(4).ToDouble(),
                     };
                 }
             }

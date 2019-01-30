@@ -1,4 +1,8 @@
-﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoListModel>
+﻿@*@using PagedList.Mvc*@
+
+@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel>
+@*@model PagedList.IPagedList<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel>*@
+
 @{
     ViewBag.Title = "Lista Trabajo";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -7,33 +11,43 @@
 <h2>Lista de Trabajos</h2>
 <a class="waves-effect waves-light btn blue" href="@Url.Action("../Trabajo/Crear")"><i class="material-icons left">add</i>Crear Trabajo</a>
 
-<table class="table table-striped">
-    <tr>
-        <th>
-            @*@Html.DisplayNameFor(model => model.)*@
-            ID
-        </th>
-        <th>Fecha</th>
-        <th>Actions</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@using (Html.BeginForm())
+{
+    <table class="table table-striped">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTrabajo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaTrabajo)
-            </td>
-            <td>
-                <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cargo/Ver", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Cargo", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">edit</i> Editar</a>
-                <a class="waves-effect waves-light btn red" href="@Url.Action("../Cargo/Eliminar", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">delete</i> Eliminar</a>
-                @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTrabajo)
+            </th>
+            <th>Fecha</th>
+            <th>Actions</th>
         </tr>
-    }
 
-    
-</table>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(itemModel => item.IdTrabajo)
+                </td>
+                <td>
+                    @Html.DisplayFor(itemMode => item.FechaTrabajo)
+                </td>
+                <td>
+                    <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cargo/Ver", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                    <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Cargo", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">edit</i> Editar</a>
+                    <a class="waves-effect waves-light btn red" href="@Url.Action("../Cargo/Eliminar", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">delete</i> Eliminar</a>
+                    @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
+                </td>
+            </tr>
+            }
+
+
+    </table>
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        @*<div class="pagination" style="margin-left: 400px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>*@
+    </div>
+}
