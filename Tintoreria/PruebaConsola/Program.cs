@@ -99,98 +99,98 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.PruebaConsola
 
 
 
-            //Personal personal = new Personal()
-            //{
-            //    IdPersona = 15,
-            //    Ci = "78582573",
-            //    Nombre = "Mauricio",
-            //    PrimerApellido = "Gamarra",
-            //    SegundoApellido = "Vargas",
-            //    Sexo = new Sexo
-            //    {
-            //        IdSexo = 1,
-            //    },
-            //    FechaNacimiento = new DateTime(1995, 5, 26),
-            //    Correos = new List<Correo>()
-            //    {
-            //        new Correo()
-            //        {
-            //            Nombre = "mgamarrav@gmail.com",
-            //            Principal = true
-            //        },
-            //        new Correo()
-            //        {
-            //            Nombre = "boyca123@hotmail.com",
-            //            Principal = false
-            //        }
-            //    },
-            //    Usuario = new Usuario()
-            //    {
-            //        Username = "mgamarra",
-            //        Password = "sfakhalhlsan2323",
-            //        EsAdmin = false
-            //    },
-            //    Direcciones = new List<Direccion>()
-            //    {
-            //        new Direccion()
-            //        {
-            //            Descripcion = "Av. America Edificio Karen",
-            //            Latitud = 17.25555345,
-            //            Longitud = 36.66778812,
-            //            Tipo = new Tipo()
-            //            {
-            //                IdTipo = 1
-            //            }
-            //        }
-            //    },
-            //    Telefonos = new List<Telefono>()
-            //    {
-            //        new Telefono()
-            //        {
-            //            Numero = "42993292",
-            //            Tipo = new Tipo()
-            //            {
-            //                IdTipo = 1
-            //            }
-            //        }
-            //    },
-            //    Borrado = false,
-            //    CodPersonal = "BOY12355",
-            //    FechaIngreso = DateTime.Now,
-            //    Cargo = new Cargo()
-            //    {
-            //        IdCargo = 3
-            //    },
-            //    Sueldo = 10000
-            //};
+            Personal personal = new Personal()
+            {
+                IdPersona = 16,
+                Ci = "785256",
+                Nombre = "Pablo",
+                PrimerApellido = "Escobar",
+                SegundoApellido = "hilaquita",
+                Sexo = new Sexo
+                {
+                    IdSexo = 1,
+                },
+                FechaNacimiento = new DateTime(1996, 5, 26),
+                Correos = new List<Correo>()
+                {
+                    new Correo()
+                    {
+                        Nombre = "pescobar@gmail.com",
+                        Principal = true
+                    },
+                    new Correo()
+                    {
+                        Nombre = "escobar123@hotmail.com",
+                        Principal = false
+                    }
+                },
+                Usuario = new Usuario()
+                {
+                    Username = "pescobar",
+                    Password = "cocaina2323",
+                    EsAdmin = false
+                },
+                Direcciones = new List<Direccion>()
+                    {
+                        new Direccion()
+                        {
+                            Descripcion = "Av. cuchillo Edificio sangre",
+                            Latitud = 17.25555345,
+                            Longitud = 36.66778812,
+                            Tipo = new Tipo()
+                            {
+                                IdTipo = 1
+                            }
+                        }
+                    },
+                Telefonos = new List<Telefono>()
+                    {
+                        new Telefono()
+                        {
+                            Numero = "256987",
+                            Tipo = new Tipo()
+                            {
+                                IdTipo = 1
+                            }
+                        }
+                    },
+                Borrado = false,
+                CodPersonal = "ESC12355",
+                FechaIngreso = DateTime.Now,
+                Cargo = new Cargo()
+                {
+                    IdCargo = 7
+                },
+                Sueldo = 1000
+            };
 
-            //PersonalBrl.Insertar(personal);
+            PersonalBrl.Insertar(personal);
 
             //Personal personal = PersonalBrl.Get(15);
             //PersonalBrl.Actualizar(personal);
 
             //PersonalBrl.Eliminar(15);
 
-            Personal personale = PersonalBrl.Get(28);
+            //Personal personale = PersonalBrl.Get(28);
 
-            personale.Dump(Console.Out);
-            personale.Usuario.Dump(Console.Out);
-            personale.Cargo.Dump(Console.Out);
+            //personale.Dump(Console.Out);
+            //personale.Usuario.Dump(Console.Out);
+            //personale.Cargo.Dump(Console.Out);
 
-            foreach (Telefono x in personale.Telefonos)
-            {
-                x.Dump(Console.Out);
-            }
+            //foreach (Telefono x in personale.Telefonos)
+            //{
+            //    x.Dump(Console.Out);
+            //}
 
-            foreach (Direccion x in personale.Direcciones)
-            {
-                x.Dump(Console.Out);
-            }
+            //foreach (Direccion x in personale.Direcciones)
+            //{
+            //    x.Dump(Console.Out);
+            //}
 
-            foreach (Correo x in personale.Correos)
-            {
-                x.Dump(Console.Out);
-            }
+            //foreach (Correo x in personale.Correos)
+            //{
+            //    x.Dump(Console.Out);
+            //}
 
             Console.ReadKey();
         }
