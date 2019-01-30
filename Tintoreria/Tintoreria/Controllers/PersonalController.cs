@@ -33,85 +33,19 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             CargarSexo();
             CargarTipo();
             CargarCargo();
-            PersonalModel personal = new PersonalModel();
+            PersonalModel personM = new PersonalModel ();
+            personM.Correos.Add(new CorreoModel());
+            personM.Telefonos.Add(new TelefonoModel());
+            personM.Direcciones.Add(new DireccionModel());
 
-            personal.Correos = new List<CorreoModel>();
-            personal.Correos.Add(new CorreoModel());
-
-            personal.Telefonos = new List<TelefonoModel>();
-            personal.Telefonos.Add(new TelefonoModel());
-
-            personal.Direcciones = new List<DireccionModel>();
-            personal.Direcciones.Add(new DireccionModel());
-
-            return View(personal);
-        }
-
-
-
-        public void CargarSexo()
-        {
-            ViewBag.ListaSexos = new SelectList(
-            (
-                from t in SexoController.ListaSexo
-                select new SelectListItem
-                {
-                    Text = t.Nombre,
-                    Value = t.IdSexo.ToString()
-                }
-            )
-            , "Value", "Text");
+            return View(personM);
         }
 
         [HttpPost]
         public ActionResult Crear(PersonalModel model)
         {
 
-            Personal per = new Personal()
-            {
-                IdPersona = model.IdPersona,
-                Ci = model.Ci,
-                Nombre = model.Nombre,
-                PrimerApellido = model.PrimerApellido,
-                SegundoApellido = model.SegundoApellido,
-                Sexo = new Sexo()
-                {
-                    IdSexo = model.Sexo.IdSexo,
-                    Nombre = model.Sexo.Nombre
-                },
-                FechaNacimiento = model.FechaNacimiento.Value,
-                CodPersonal = model.CodPersonal,
-                FechaIngreso = model.FechaIngreso,
-                Sueldo = model.Sueldo,
-                Correos = null,
-                Telefonos = null,
-                Direcciones = null,
-                Cargo = new Cargo()
-                {
-                    IdCargo = model.Cargo.IdCargo,
-                    Nombre = model.Cargo.Nombre
-                },
-                Borrado = model.Borrado,
-                Usuario = new Usuario()
-                {
-                    IdUsuario = model.Usuario.IdUsuario,
-                    Username = model.Usuario.Username,
-                    Password = model.Usuario.Password,
-                    EsAdmin = model.Usuario.EsAdmin
-                }
-            };
-
-            try
-            {
-                PersonalBrl.Insertar(per);
-
-                return RedirectToAction("../Personal/Index");
-            }
-            catch
-            {
-                return View(model);
-            }
-
+            return View();
         }
 
         public void CargarTipo()
@@ -142,8 +76,22 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
            , "Value", "Text");
         }
 
-        
-        
+        public void CargarSexo()
+        {
+            ViewBag.ListaSexos = new SelectList(
+            (
+                from t in SexoController.ListaSexo
+                select new SelectListItem
+                {
+                    Text = t.Nombre,
+                    Value = t.IdSexo.ToString()
+                }
+            )
+            , "Value", "Text");
+        }
+
+
+
 
         //ver personal
         public ActionResult Ver(int Id)
