@@ -45,6 +45,7 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="CategoriaList.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="ClienteList.cs" />
     <Compile Include="Correo.cs" />
     <Compile Include="Direccion.cs" />
     <Compile Include="Estado.cs" />

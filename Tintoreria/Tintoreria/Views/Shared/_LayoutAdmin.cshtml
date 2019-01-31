@@ -12,8 +12,26 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script><!--Let browser know website is optimized for mobile-->
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="bg-dark" style="width: 100vw; height: 8vh">
+
+    </div>
+    <div class="d-flex flex-row" style="height: 92vh; width: 100vw">
+        <div class="bg-dark"  style="width: 250px; height: 100%">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="@Url.Action("../Trabajo/Index")">TRABAJO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="@Url.Action("../Cliente/Index")">CLIENTE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="@Url.Action("../Personal/Index")">PERSONAL</a>
+                </li>
+            </ul>
+        </div>
+        <div style="overflow-y: scroll" class="p-4">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>
