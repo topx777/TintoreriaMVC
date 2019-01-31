@@ -138,5 +138,51 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
             return Json(resultado);
         }
+
+        [HttpGet]
+        public ActionResult Detalles(int idTrabajo)
+        {
+
+            Trabajo trabajo = TrabajoBrl.Get(idTrabajo);
+            TrabajoModel model = new TrabajoModel()
+            {
+                IdTrabajo = trabajo.IdTrabajo,
+                Cliente = new ClienteModel()
+                {
+                    Ci = trabajo.Cliente.Ci
+                },
+                FechaTrabajo = trabajo.FechaTrabajo,
+                FechaEntrega = trabajo.FechaEntrega,
+                EntregaDomicilio = trabajo.EntregaDomicilio,
+                PedidoDistancia = trabajo.PedidoDistancia != null ? new PedidoModel()
+                {
+
+                } : null,
+                TotalPrecio = trabajo.TotalPrecio,
+                TrabajoDetalle = new List<TrabajoDetalleModel>()
+            };
+
+            foreach(TrabajoDetalle x in trabajo.TrabajoDetalle)
+            {
+                model.TrabajoDetalle.Add(new TrabajoDetalleModel()
+                {
+                    IdTrabajoDetalle = x.IdTrabajoDetalle,
+                    CodigoPrenda = x.CodigoPrenda,
+                    Peso = x.Peso,
+                    Categoria = new CategoriaModel()
+                    {
+                        Nombre = x.Categoria.Nombre
+                    },
+                    PrecioFinal = x.PrecioFinal,
+                    Estado = new EstadoModel()
+                    {
+                        Nombre = x.Estado.Nombre
+                    }
+                });
+            }
+
+            return View(model);
+        }
+
     }
 }
