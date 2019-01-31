@@ -47,6 +47,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
             CargarSexo();
             CargarTipo();
+            CargarCargo();
             if (!String.IsNullOrWhiteSpace(resp))
             {
                 switch (resp)
