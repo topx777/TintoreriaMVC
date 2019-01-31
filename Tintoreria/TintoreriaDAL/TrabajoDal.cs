@@ -19,25 +19,35 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para insertar un Trabajo"));
 
             SqlCommand command = null;
+            SqlTransaction trans = null;
+
             string queryString = "";
 
             // Proporcionar la cadena de consulta 
             if(trabajo.PedidoDistancia != null)
             {
                 queryString = @"INSERT INTO Trabajo(Cliente, FechaTrabajo, TotalPrecio, FechaEntrega, PedidoDistancia, EntregaDomicilio)
+                                    OUTPUT inserted.IdTrabajo
                                     VALUES
                                    (@Cliente, @FechaTrabajo, @TotalPrecio, @FechaEntrega, @PedidoDistancia, @EntregaDomicilio)";
             }
             else
             {
                 queryString = @"INSERT INTO Trabajo(Cliente, FechaTrabajo, TotalPrecio, FechaEntrega, EntregaDomicilio)
+                                    OUTPUT inserted.IdTrabajo
                                     VALUES
                                    (@Cliente, @FechaTrabajo, @TotalPrecio, @FechaEntrega, @EntregaDomicilio)";
             }
 
+            SqlConnection conexion = Methods.ObtenerConexion();
+
             try
             {
-                command = Methods.CreateBasicCommand(queryString);
+                conexion.Open();
+
+                trans = conexion.BeginTransaction();
+
+                command = new SqlCommand(queryString);
                 command.Parameters.AddWithValue("@Cliente", trabajo.Cliente.IdPersona);
                 command.Parameters.AddWithValue("@FechaTrabajo", DateTime.Now);
                 command.Parameters.AddWithValue("@TotalPrecio", trabajo.TotalPrecio);
@@ -47,23 +57,37 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     command.Parameters.AddWithValue("@PedidoDistancia", trabajo.PedidoDistancia != null ? trabajo.PedidoDistancia.IdPedido : null);
                 }
                 command.Parameters.AddWithValue("@EntregaDomicilio", trabajo.EntregaDomicilio);
-                Methods.ExecuteBasicCommand(command);
 
-                int idTrabajo = Methods.GetActIDTable("Trabajo");
+                command.Connection = conexion;
+                command.Transaction = trans;
+                //Methods.ExecuteBasicCommand(command);
+
+                int idTrabajo = Convert.ToInt32(command.ExecuteScalar());
 
                 foreach(TrabajoDetalle trabajod in trabajo.TrabajoDetalle)
                 {
-                    TrabajoDetalleDal.Insertar(trabajod, idTrabajo);
+                    trabajod.Estado = new Estado()
+                    {
+                        IdEstado = 1
+                    };
+
+                    SqlCommand cmdtmp = TrabajoDetalleDal.InsertarCMD(trabajod, idTrabajo);
+                    cmdtmp.Connection = conexion;
+                    cmdtmp.Transaction = trans;
                 }
+
+                trans.Commit();
             }
             catch (SqlException ex)
             {
                 Methods.GenerateLogsRelease("TrabajoDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                trans.Rollback();
                 throw ex;
             }
             catch (Exception ex)
             {
                 Methods.GenerateLogsRelease("TrabajoDal", "Insertar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                trans.Rollback();
                 throw ex;
             }
 
@@ -317,7 +341,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         FechaTrabajo = dr.GetDateTime(2),
                         TotalPrecio = dr.GetDecimal(3),
                         FechaEntrega = dr.GetDateTime(4),
-                        PedidoDistancia = PedidoDal.Get(dr.GetInt32(5)),
+                        PedidoDistancia = dr.IsDBNull(5) ? null : PedidoDal.Get(dr.GetInt32(5)),
                         EntregaDomicilio = dr.GetBoolean(6),
                         //TrabajoDetalle = TrabajoDetalleDal.GetList(idTrabajo),
                         Borrado = dr.GetBoolean(7)

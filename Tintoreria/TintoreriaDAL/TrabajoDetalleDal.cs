@@ -51,6 +51,34 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         }
 
         /// <summary>
+        /// Inserta nuevo trabajo detalle
+        /// </summary>
+        /// <param name="trabajoDetalle">Objeto TrabajoDetalle</param>
+        /// <param name="idTrabajo">Identificador de Trabajo</param>
+        public static SqlCommand InsertarCMD(TrabajoDetalle trabajoDetalle, int idTrabajo)
+        {
+            Methods.GenerateLogsDebug("TrabajoDetalleDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para insertar un Trabajo Detalle"));
+
+            SqlCommand command = null;
+
+            // Proporcionar la cadena de consulta 
+            string queryString = @"INSERT INTO TrabajoDetalle(CodigoPrenda, Trabajo, Categoria, PrecioFinal, Peso, Estado)
+                                    VALUES
+                                   (@codigoPrenda, @idTrabajo, @categoria, @precioFinal, @peso, @estado)";
+            command = Methods.CreateBasicCommand(queryString);
+            command.Parameters.AddWithValue("@codigoPrenda", trabajoDetalle.CodigoPrenda);
+            command.Parameters.AddWithValue("@idTrabajo", idTrabajo);
+            command.Parameters.AddWithValue("@categoria", trabajoDetalle.Categoria.IdCategoria);
+            command.Parameters.AddWithValue("@precioFinal", trabajoDetalle.PrecioFinal);
+            command.Parameters.AddWithValue("@peso", trabajoDetalle.Peso);
+            command.Parameters.AddWithValue("@estado", trabajoDetalle.Estado.IdEstado);
+
+            Methods.GenerateLogsDebug("TrabajoDetalleDal", "Insertar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para insertar un trabajoDetalle"));
+            return command;
+        }
+
+
+        /// <summary>
         /// Elimina trabajo Detalle ya existente
         /// </summary>
         /// <param name="id"></param>
