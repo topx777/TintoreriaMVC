@@ -47,6 +47,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
             CargarSexo();
             CargarTipo();
+            CargarCargo();
             if (!String.IsNullOrWhiteSpace(resp))
             {
                 switch (resp)
@@ -303,6 +304,176 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
         }
 
-        
+        //Editar personal
+        public ActionResult Editar(int Id)
+        {
+            CargarSexo();
+            CargarTipo();
+            Personal person = PersonalBrl.Get(Id);
+            PersonalModel personM = new PersonalModel()
+            {
+                IdPersona = person.IdPersona,
+                FechaNacimiento = person.FechaNacimiento,
+                Ci = person.Ci,
+                Nombre = person.Nombre,
+                PrimerApellido = person.PrimerApellido,
+                SegundoApellido = person.SegundoApellido,
+                Sexo = new SexoModel()
+                {
+                    IdSexo = person.Sexo.IdSexo,
+                    Nombre = person.Sexo.Nombre
+                },
+                
+                Usuario = new UsuarioModel()
+                {
+                    IdUsuario = person.Usuario.IdUsuario,
+                    Username = person.Usuario.Username,
+                    Password = person.Usuario.Password,
+                    EsAdmin = person.Usuario.EsAdmin
+                }
+            };
+            foreach (var telefono in person.Telefonos)
+            {
+                personM.Telefonos.Add(new TelefonoModel()
+                {
+                    IdTelefono = telefono.IdTelefono,
+                    Numero = telefono.Numero,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = telefono.Tipo.IdTipo,
+                        Nombre = telefono.Tipo.Nombre
+                    }
+                });
+            }
+
+            foreach (var direccion in person.Direcciones)
+            {
+                personM.Direcciones.Add(new DireccionModel()
+                {
+                    IdDireccion = direccion.IdDireccion,
+                    Descripccion = direccion.Descripcion,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = direccion.Tipo.IdTipo,
+                        Nombre = direccion.Tipo.Nombre,
+                    },
+                    Latitud = direccion.Latitud,
+                    Longitud = direccion.Longitud
+                });
+            }
+
+            foreach (var correo in person.Correos)
+            {
+                personM.Correos.Add(new CorreoModel()
+                {
+                    idCorreo = correo.IdCorreo,
+                    Nombre = correo.Nombre,
+                    Principal = correo.Principal
+                });
+            }
+
+            return View(personM);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(PersonalModel personaMod, string resp)
+        {
+
+            if (!String.IsNullOrWhiteSpace(resp))
+            {
+                switch (resp)
+                {
+                    case "AddCorreo":
+                        personaMod.Correos.Add(new CorreoModel());
+                        break;
+                    case "AddDireccion":
+                        personaMod.Direcciones.Add(new DireccionModel());
+                        break;
+                    case "AddTelefono":
+                        personaMod.Telefonos.Add(new TelefonoModel());
+                        break;
+                    case "Cancelar":
+                        break;
+                    case "Actulizar":
+                        {
+                            Personal personal = new Personal()
+                            {
+                                CodPersonal = personaMod.CodPersonal,
+                                FechaIngreso=personaMod.FechaIngreso,
+                                Cargo = new Cargo()
+                                {
+                                    IdCargo = personaMod.Cargo.IdCargo,
+                                    Nombre = personaMod.Cargo.Nombre
+                                },
+                                Sueldo=personaMod.Sueldo,
+
+                                Nombre= personaMod.Nombre,
+                                PrimerApellido = personaMod.PrimerApellido,
+                                SegundoApellido = personaMod.SegundoApellido,
+                                Sexo = new Sexo()
+                                {
+                                    IdSexo = personaMod.Sexo.IdSexo,
+                                    Nombre = personaMod.Sexo.Nombre
+                                },
+                                FechaNacimiento = personaMod.FechaNacimiento,
+                                Usuario = new Usuario()
+                                {
+                                    IdUsuario = personaMod.Usuario.IdUsuario,
+                                    Username = personaMod.Usuario.Username,
+                                    Password = personaMod.Usuario.Password,
+                                    EsAdmin = personaMod.Usuario.EsAdmin
+                                },
+                                
+                            };
+                            personal.Telefonos = new List<Telefono>();
+                            foreach (var telefono in personaMod.Telefonos)
+                            {
+                                personal.Telefonos.Add(new Telefono()
+                                {
+                                    IdTelefono = telefono.IdTelefono,
+                                    Numero = telefono.Numero,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = telefono.Tipo.IdTipo,
+                                        Nombre = telefono.Tipo.Nombre
+                                    }
+
+                                });
+                            }
+                            personal.Direcciones = new List<Direccion>();
+                            foreach (var direccion in personaMod.Direcciones)
+                            {
+                                personal.Direcciones.Add(new Direccion()
+                                {
+                                    IdDireccion = direccion.IdDireccion,
+                                    Descripcion = direccion.Descripccion,
+                                    Tipo = new Tipo()
+                                    {
+                                        IdTipo = direccion.Tipo.IdTipo,
+                                        Nombre = direccion.Tipo.Nombre
+                                    },
+                                    Latitud = direccion.Latitud,
+                                    Longitud = direccion.Longitud
+                                });
+                            }
+                            personal.Correos = new List<Correo>();
+                            foreach (var correo in personaMod.Correos)
+                            {
+                                personal.Correos.Add(new Correo()
+                                {
+                                    IdCorreo = correo.idCorreo,
+                                    Nombre = correo.Nombre,
+                                    Principal = correo.Principal
+                                });
+                            }
+                            PersonalBrl.Actualizar(personal);
+                        }
+                        break;
+                }
+            }
+
+
+            return RedirectToAction("../Personal/Index");
+        }
     }
 }
