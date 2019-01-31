@@ -191,17 +191,87 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         //ver personal
         public ActionResult Ver(int Id)
         {
-            Personal per = PersonalBrl.Get(Id);
-            PersonalModel model = new PersonalModel()
+            CargarSexo();
+            CargarTipo();
+            CargarCargo();
+            Personal person = PersonalBrl.Get(Id);
+            PersonalModel PersonalMod = new PersonalModel()
             {
-                IdPersona = per.IdPersona,
-                Ci=per.Ci,
-                Nombre= per.Nombre,
-                PrimerApellido=per.PrimerApellido,
-                SegundoApellido=per.SegundoApellido,
-            };
+                IdPersona = person.IdPersona,
 
-            return View(model);
+                Ci = person.Ci,
+                CodPersonal = person.CodPersonal,
+                FechaIngreso = person.FechaIngreso,
+                Nombre = person.Nombre,
+                PrimerApellido = person.PrimerApellido,
+                SegundoApellido = person.SegundoApellido,
+                Sueldo=person.Sueldo,
+                Cargo = new CargoModel()
+                {
+                    IdCargo = person.Cargo.IdCargo,
+                    Nombre = person.Cargo.Nombre,
+                },
+                Sexo = new SexoModel()
+                {
+                    IdSexo = person.Sexo.IdSexo,
+                    Nombre = person.Sexo.Nombre
+                },
+                FechaNacimiento = person.FechaNacimiento.Value,
+                Usuario = new UsuarioModel()
+                {
+                    IdUsuario = person.Usuario.IdUsuario,
+                    Username = person.Usuario.Username,
+                    Password = person.Usuario.Password,
+                    EsAdmin = person.Usuario.EsAdmin
+                }
+            };
+            foreach (var telefono in person.Telefonos)
+            {
+                PersonalMod.Telefonos.Add(new TelefonoModel()
+                {
+                    IdTelefono = telefono.IdTelefono,
+                    Numero = telefono.Numero,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = telefono.Tipo.IdTipo,
+                        Nombre = telefono.Tipo.Nombre
+                    }
+                });
+            }
+
+            foreach (var direccion in person.Direcciones)
+            {
+                PersonalMod.Direcciones.Add(new DireccionModel()
+                {
+                    IdDireccion = direccion.IdDireccion,
+                    Descripccion = direccion.Descripcion,
+                    Tipo = new TipoModel()
+                    {
+                        IdTipo = direccion.Tipo.IdTipo,
+                        Nombre = direccion.Tipo.Nombre,
+                    },
+                    Latitud = direccion.Latitud,
+                    Longitud = direccion.Longitud
+                });
+            }
+
+            foreach (var correo in person.Correos)
+            {
+                PersonalMod.Correos.Add(new CorreoModel()
+                {
+                    idCorreo = correo.IdCorreo,
+                    Nombre = correo.Nombre,
+                    Principal = correo.Principal
+                });
+            }
+
+            return View(PersonalMod);
+
+        }
+        [HttpPost]
+        public ActionResult Ver()
+        {
+            return RedirectToAction("../Personal/Index");
         }
 
         //Borrado personal
