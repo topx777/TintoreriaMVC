@@ -16,13 +16,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 
         [Display(Name = "Cod Prenda")]
         [Required(ErrorMessage = "Campo requerido")]
-        [StringLength(25, MinimumLength = 3, ErrorMessage = "El campo debe contener entre 1 y ")]
+        [StringLength(25, MinimumLength = 3, ErrorMessage = "El campo debe contener entre 3 y 25 caracteres")]
         public string CodigoPrenda { get; set; }
       
         public CategoriaModel Categoria { get; set; }
 
         [Display(Name = "Precio Final")]
-        [Required(ErrorMessage = "Precio Final debe ser mayor a 0")]
         [Range(0, 99999999.99, ErrorMessage = "Precio debe ser mayor a 0")]
         public decimal PrecioFinal { get; set; }
 

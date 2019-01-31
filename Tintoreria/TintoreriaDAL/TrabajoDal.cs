@@ -19,11 +19,22 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Methods.GenerateLogsDebug("TrabajoDal", "Insertar", string.Format("{0} Info: {1}", DateTime.Now.ToLongDateString(), "Empezando a ejecutar el metodo acceso a datos para insertar un Trabajo"));
 
             SqlCommand command = null;
+            string queryString = "";
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"INSERT INTO Trabajo(Cliente, FechaTrabajo, TotalPrecio, FechaEntrega, PedidoDistancia, EntregaDomicilio)
+            if(trabajo.PedidoDistancia != null)
+            {
+                queryString = @"INSERT INTO Trabajo(Cliente, FechaTrabajo, TotalPrecio, FechaEntrega, PedidoDistancia, EntregaDomicilio)
                                     VALUES
                                    (@Cliente, @FechaTrabajo, @TotalPrecio, @FechaEntrega, @PedidoDistancia, @EntregaDomicilio)";
+            }
+            else
+            {
+                queryString = @"INSERT INTO Trabajo(Cliente, FechaTrabajo, TotalPrecio, FechaEntrega, EntregaDomicilio)
+                                    VALUES
+                                   (@Cliente, @FechaTrabajo, @TotalPrecio, @FechaEntrega, @EntregaDomicilio)";
+            }
+
             try
             {
                 command = Methods.CreateBasicCommand(queryString);
@@ -31,7 +42,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@FechaTrabajo", DateTime.Now);
                 command.Parameters.AddWithValue("@TotalPrecio", trabajo.TotalPrecio);
                 command.Parameters.AddWithValue("@FechaEntrega", trabajo.FechaEntrega);
-                command.Parameters.AddWithValue("@PedidoDistancia", trabajo.PedidoDistancia != null ? trabajo.PedidoDistancia.IdPedido : null);
+                if(trabajo.PedidoDistancia != null)
+                {
+                    command.Parameters.AddWithValue("@PedidoDistancia", trabajo.PedidoDistancia != null ? trabajo.PedidoDistancia.IdPedido : null);
+                }
                 command.Parameters.AddWithValue("@EntregaDomicilio", trabajo.EntregaDomicilio);
                 Methods.ExecuteBasicCommand(command);
 

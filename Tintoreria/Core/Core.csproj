@@ -48,6 +48,7 @@
     <Compile Include="Correo.cs" />
     <Compile Include="Direccion.cs" />
     <Compile Include="Estado.cs" />
+    <Compile Include="HttpRespuesta.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Personal.cs" />

@@ -3,11 +3,35 @@ using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 using Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class CategoriaController : Controller
     {
+        private static List<CategoriaModel> ListCategoria;
+
+        public static List<CategoriaModel> CategoriaList
+        {
+            get
+            {
+                var ListCategoria = new List<CategoriaModel>();
+                foreach (var categoria in CategoriaListBrl.Get())
+                {
+                    ListCategoria.Add(new CategoriaModel
+                    {
+                        IdCategoria = categoria.IdCategoria,
+                        Nombre = categoria.Nombre,
+                    });
+                }
+                return ListCategoria;
+            }
+            set
+            {
+                ListCategoria = value;
+            }
+        }
+
         // GET: Categoria
         [HttpGet]
         public ActionResult Index(int? page)

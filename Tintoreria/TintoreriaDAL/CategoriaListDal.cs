@@ -51,6 +51,52 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
         /// <summary>
         /// Obtener Lista de Categorias
         /// </summary>
+        /// <returns></returns>
+        public static CategoriaList Get()
+        {
+            CategoriaList res = new CategoriaList();
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+
+            string query = @"SELECT * FROM Categoria";
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+
+                while (dr.Read())
+                {
+                    res.Add(new Categoria()
+                    {
+                        IdCategoria = dr.GetInt32(0),
+                        Nombre = dr.GetString(1),
+                        Descripcion = dr.GetString(2),
+                        Precio = dr.GetDecimal(3)
+                    });
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                //Methods.GenerateLogsRelease("KeyValuePacienteListDal", "Obtener", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                //Methods.GenerateLogsRelease("KeyValuePacienteListDal", "Obtener", ex.Message + " " + ex.StackTrace);
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Obtener Lista de Categorias
+        /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>

@@ -1,7 +1,7 @@
 ﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel
 @{
     ViewBag.Title = Resource.Resource.NewWork;
-    //Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>@Resource.Resource.NewWork</h2>
@@ -11,19 +11,151 @@
     @Html.ValidationSummary(true)
 <div class="container">
     <div class="row">
-        <div class="input-field col s6">
-            <i class="material-icons prefix">date_range</i>
-            @Html.TextBoxFor(model => model.FechaEntrega, new { @type = "date" })
-            @Html.LabelFor(model => model.FechaEntrega)
-            @*<input id="icon_prefix" type="text" class="validate">*@
-            @*<label for="icon_prefix">Fecha de Entrega</label>*@
+        <div class="form-group row col-6">
+            @*<i class="material-icons prefix">date_range</i>*@
+            @Html.LabelFor(model => model.FechaEntrega, new { @class = "col-4 col-form-label" })
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.FechaEntrega, new { @type = "date", @class = "form-control col-8" })
+                @Html.ValidationMessageFor(model => model.FechaEntrega)
+            </div>
         </div>
-        <div class="input-field col s6">
-            <i class="material-icons prefix">phone</i>
-            <input id="icon_telephone" type="tel" class="validate">
-            <label for="icon_telephone">Telephone</label>
+        <div class="form-group row col-6">
+            @*<i class="material-icons prefix">date_range</i>*@
+            @Html.LabelFor(model => model.Cliente, new { @class = "col-2 col-form-label" })
+            <div class="col-6">
+                @Html.TextBoxFor(model => model.Cliente.Ci, new { @type = "text", @id = "ci", @class = "form-control col-8" })
+            </div>
+            <div class="col-2">
+                <button type="button" id="addCliente" data-toggle="modal" data-target="#clienteModal" class="btn btn-primary">Buscar</button>
+            </div>
+            <div class="col-2">
+                <a href="@Url.Action("../Cliente/Crear")" class="btn btn-success" target="_blank">Nuevo</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <button type="submit" name="resp" value="AddTrabajoDetalle" class="btn btn-block btn-success">Agregar Detalle</button>
+        </div>
+        <div class="col-9">
+            <h4>Detalle de Trabajo</h4>
+            @for (var i = 0; i < Model.TrabajoDetalle.Count; i++)
+            {
+                <div class="row">
+                    <div class="form-group col-4">
+                        @*<i class="material-icons prefix">date_range</i>*@
+                        @Html.LabelFor(tdetalle => Model.TrabajoDetalle[i].CodigoPrenda, new { @class = "col-form-label" })
+
+                        @Html.TextBoxFor(tdetalle => Model.TrabajoDetalle[i].CodigoPrenda, new { @type = "text", @class = "form-control" })
+                        @Html.ValidationMessageFor(tdetalle => Model.TrabajoDetalle[i].Peso)
+                    </div>
+                    <div class="form-group col-4">
+                        @*<i class="material-icons prefix">date_range</i>*@
+                        @Html.LabelFor(tdetalle => Model.TrabajoDetalle[i].Peso, new { @class = "col-form-label" })
+
+                        @Html.TextBoxFor(tdetalle => Model.TrabajoDetalle[i].Peso, new { @type = "text", @class = "form-control" })
+                        @Html.ValidationMessageFor(tdetalle => Model.TrabajoDetalle[i].Peso)
+                    </div>
+                    <div class="form-group col-4">
+                        @*<i class="material-icons prefix">date_range</i>*@
+                        @Html.LabelFor(tdetalle => Model.TrabajoDetalle[i].Categoria, new { @class = "col-form-label" })
+
+                        @Html.DropDownListFor(tdetalle => Model.TrabajoDetalle[i].Categoria.IdCategoria, (IEnumerable<SelectListItem>)ViewBag.ListaCategoria, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(tdetalle => Model.TrabajoDetalle[i].Categoria)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <input type="submit" name="resp" value="Registrar" class="btn btn-primary" />
+</div>
+
+}
+
+<!-- Modal Agregar Cliente -->
+<div id="clienteModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buscar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="CrearCliente" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
 
-}
+<script>
+
+    $(document).on('change', '#ci', function () {
+        var ciText = $('#ci');
+        var ci = ciText.val();
+
+        var url = "@Url.Action("VerificarCi", "Trabajo")";
+        var data = { ci: ci }
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response.Ok) {
+                    ciText.removeClass("is-invalid").addClass("is-valid").slideDown();
+                } else {
+                    ciText.removeClass("is-valid").addClass("is-invalid").slideDown();
+                }
+                console.log(response);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+
+    });
+
+    @*$(document).on('click', '#CrearCliente', function () {
+
+        var url = "@Url.Action("NuevoAJAX", "Cliente")";
+        var id = 1;
+        var nombre = "abel";
+        var descripcion = "desc";
+        var precio = "22,5";
+        var data = { IdCategoria: id, Nombre: nombre, Descripcion: descripcion, Precio: precio };
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            content: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response != null) {
+                    //alert("Name : " + response.Name + ", Designation : " + response.Designation + ", Location :" + response.Location);
+                    console.log(response);
+                } else {
+                    alert("Something went wrong");
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }  
+        });
+    });*@
+
+</script>

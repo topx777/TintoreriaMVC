@@ -243,6 +243,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
 
         }
 
+        
         /// <summary>
         /// Obtiene un Cliente de la base de datos
         /// </summary>
@@ -267,21 +268,76 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 {
                     res = new Cliente()
                     {
-                        IdPersona=dr.GetInt32(0),
-                        Ci=dr.GetString(1),
-                        Nombre=dr.GetString(2),
-                        PrimerApellido=dr.GetString(3),
-                        SegundoApellido=dr.GetString(4),
-                        Sexo=SexoDal.Get(dr.GetInt32(5)),
-                        FechaNacimiento=dr.GetDateTime(6),
-                        Usuario=UsuarioDal.Get(dr.GetInt32(7)),
-                        Borrado=dr.GetBoolean(8),
-                        Direcciones=DireccionDal.GetList(dr.GetInt32(0)),
-                        Telefonos=TelefonoDal.GetList(dr.GetInt32(0)),
-                        Correos=CorreoDal.GetList(dr.GetInt32(0)),
-                        Nit= dr.GetString(9),
-                        Razon= dr.GetString(10),
-                        FechaRegistro=dr.GetDateTime(11)
+                        IdPersona = dr.GetInt32(0),
+                        Ci = dr.GetString(1),
+                        Nombre = dr.GetString(2),
+                        PrimerApellido = dr.GetString(3),
+                        SegundoApellido = dr.GetString(4),
+                        Sexo = SexoDal.Get(dr.GetInt32(5)),
+                        FechaNacimiento = dr.GetDateTime(6),
+                        Usuario = UsuarioDal.Get(dr.GetInt32(7)),
+                        Borrado = dr.GetBoolean(8),
+                        Direcciones = DireccionDal.GetList(dr.GetInt32(0)),
+                        Telefonos = TelefonoDal.GetList(dr.GetInt32(0)),
+                        Correos = CorreoDal.GetList(dr.GetInt32(0)),
+                        Nit = dr.GetString(9),
+                        Razon = dr.GetString(10),
+                        FechaRegistro = dr.GetDateTime(11)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("ClienteDal", "Obtenet(Get)", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return res;
+        }
+        
+        
+        /// <summary>
+        /// Obtiene un Cliente de la base de datos
+        /// </summary>
+        /// <param name="ci"></param>
+        /// <returns></returns>
+        public static Cliente GetCI(string ci)
+        {
+            Cliente res = new Cliente();
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            string query = @"Select Persona.*,
+                                    Cliente.Nit, Cliente.Razon, Cliente.FechaRegistro
+                            FROM Persona 
+                            INNER JOIN Cliente ON Persona.IdPersona=Cliente.IdPersona
+                            WHERE Persona.Ci=@ci";
+            try
+            {
+                cmd = Methods.CreateBasicCommand(query);
+                cmd.Parameters.AddWithValue("@ci", ci);
+                dr = Methods.ExecuteDataReaderCommand(cmd);
+                while (dr.Read())
+                {
+                    res = new Cliente()
+                    {
+                        IdPersona = dr.GetInt32(0),
+                        Ci = dr.GetString(1),
+                        Nombre = dr.GetString(2),
+                        PrimerApellido = dr.GetString(3),
+                        SegundoApellido = dr.GetString(4),
+                        Sexo = SexoDal.Get(dr.GetInt32(5)),
+                        FechaNacimiento = dr.GetDateTime(6),
+                        Usuario = UsuarioDal.Get(dr.GetInt32(7)),
+                        Borrado = dr.GetBoolean(8),
+                        Direcciones = DireccionDal.GetList(dr.GetInt32(0)),
+                        Telefonos = TelefonoDal.GetList(dr.GetInt32(0)),
+                        Correos = CorreoDal.GetList(dr.GetInt32(0)),
+                        Nit = dr.GetString(9),
+                        Razon = dr.GetString(10),
+                        FechaRegistro = dr.GetDateTime(11)
                     };
                 }
             }
