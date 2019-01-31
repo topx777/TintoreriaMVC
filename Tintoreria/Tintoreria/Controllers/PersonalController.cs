@@ -402,6 +402,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                         {
                             Personal personal = new Personal()
                             {
+                                IdPersona=personaMod.IdPersona,
                                 CodPersonal = personaMod.CodPersonal,
                                 FechaIngreso=personaMod.FechaIngreso,
                                 Cargo = new Cargo()
