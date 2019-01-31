@@ -72,7 +72,17 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                         IdPersona = dr.GetInt32(0),
                         Nit = dr.GetString(1),
                         Razon = dr.GetString(2),
-                        FechaRegistro = dr.GetDateTime(3)
+                        FechaRegistro = dr.GetDateTime(3),
+                        Ci = dr.GetString(5),
+                        Nombre = dr.GetString(6),
+                        PrimerApellido = dr.GetString(7),
+                        SegundoApellido = dr.GetString(8),
+                        Sexo = SexoDal.Get(dr.GetInt32(9)),
+                        FechaNacimiento = dr.GetDateTime(10),
+                        Usuario = UsuarioDal.Get(dr.GetInt32(11)),
+                        Correos = CorreoDal.GetList(dr.GetInt32(0)),
+                        Telefonos = TelefonoDal.GetList(dr.GetInt32(0)),
+                        Direcciones=DireccionDal.GetList(dr.GetInt32(0))
                     });
                 }
 
