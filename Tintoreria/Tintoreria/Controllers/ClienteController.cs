@@ -35,9 +35,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         }
 
         // GET: Cliente
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            ClienteListModel lista = ClienteListModel.Get();
+            CategoriaListModel lista = CategoriaListModel.Get(page.HasValue ? page.Value : 1);
+
             return View(lista);
         }
 

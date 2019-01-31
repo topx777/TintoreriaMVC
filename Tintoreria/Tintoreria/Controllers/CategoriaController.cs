@@ -14,7 +14,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         public static List<CategoriaModel> CategoriaList
         {
             get
-            {
+            { 
                 var ListCategoria = new List<CategoriaModel>();
                 foreach (var categoria in CategoriaListBrl.Get())
                 {

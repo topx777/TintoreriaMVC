@@ -7,21 +7,46 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class ClienteListModel:List<ClienteModel>
     {
-        public static ClienteListModel Get()
+        public Pager Pager { get; set; }
+
+
+        //public static ClienteListModel Get()
+        //{
+
+        //    ClienteListModel clienteListModel = new ClienteListModel();
+        //    foreach (var cliente in ClienteBrl.ListCliente())
+        //    {
+        //        clienteListModel.Add(new ClienteModel {
+        //            IdPersona=cliente.IdPersona,
+        //            Nombre=cliente.Nombre,
+        //            PrimerApellido=cliente.PrimerApellido,
+        //            SegundoApellido= cliente.SegundoApellido,
+        //            Ci=cliente.Ci
+        //        });
+        //    }
+
+        //    return clienteListModel;
+        //}
+
+        public static ClienteListModel Get(int page, int pageSize = 10)
         {
-            ClienteListModel clienteListModel = new ClienteListModel();
-            foreach (var cliente in ClienteBrl.ListCliente())
+            ClienteListModel _clienteListModel = new ClienteListModel();
+            foreach (var cliente in ClienteListBrl.Get(page, pageSize))
             {
-                clienteListModel.Add(new ClienteModel {
+                _clienteListModel.Add(new ClienteModel
+                {
                     IdPersona=cliente.IdPersona,
                     Nombre=cliente.Nombre,
                     PrimerApellido=cliente.PrimerApellido,
-                    SegundoApellido= cliente.SegundoApellido,
+                    SegundoApellido=cliente.SegundoApellido,
                     Ci=cliente.Ci
+                    
                 });
             }
 
-            return clienteListModel;
+            _clienteListModel.Pager = new Pager(ClienteListBrl.Count(), page);
+
+            return _clienteListModel;
         }
     }
 }
