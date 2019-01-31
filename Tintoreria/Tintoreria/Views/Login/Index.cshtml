@@ -6,59 +6,37 @@
 }
 
 @using reCAPTCHA.MVC
-@using (Html.BeginForm())
+<div id="Error" class="section">
+    <h5 class="text-center text-danger">@ViewBag.Error</h5>
+</div>
+@using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-signin" }))
 {
     @Html.ValidationSummary(true)
-
-<div class="container">
-    <div class="row">
-        <div class="section"></div>
-        <main>
-            <center>
-                <div class="container">
-                    <div class="z-depth-3 y-depth-3 x-depth-3 grey green-text lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px; margin-top: 100px; solid #EEE;">
-                        <div class="section">
-                            <h3>@Resource.Resource.Login</h3>
-                        </div>
-                        <div class="section">
-                            <h5>@ViewBag.Error</h5>
-                        </div>
-
-                        <div class="row">
-                            <div class="input-field col s12">
-                                @Html.ValidationMessageFor(model => model.Username)
-                                <i class="material-icons prefix">account_circle</i>
-                                @Html.TextBoxFor(model => model.Username, new { @class = "validate", @id = "user" })
-                                @Html.LabelFor(model => model.Username, new { @for = "user", @style = "margin-left:0" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                @Html.ValidationMessageFor(model => model.Password)
-                                <i class="material-icons prefix">vpn_key</i>
-                                @Html.PasswordFor(model => model.Password, new { @class = "validate", @id = "pass" })
-                                @Html.LabelFor(model => model.Password, new { @for = "user", @style = "margin-left:0" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                @Html.Recaptcha(publicKey: "6LeT6IwUAAAAAJNt19ip-Cz-e0qCknVaQGAOFxwK", theme: CaptchaTheme.Dark, type: CaptchaType.Image)
-                                @Html.ValidationMessage("ReCaptcha")
-                            </div>
-                        </div>
-                        <br />
-                        <center>
-                            <div class="row">
-                                <button style="margin-left:65px;" type="submit" class="col s6 btn btn-small white black-text  waves-effect z-depth-1 y-depth-1">@Resource.Resource.Login</button>
-                            </div>
-                        </center>
-
-                    </div>
-                </div>
-            </center>
-        </main>
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">@Resource.Resource.Login</h1>
     </div>
-</div>
+    <div class="form-label-group">
+        @Html.TextBoxFor(model => model.Username, new { @type = "text", @class = "form-control", @id = "user", @placeholder = Resource.Resource.Username, @autofocus = true })
+        @Html.LabelFor(model => model.Username, new { @for = "user" })
+        @Html.ValidationMessageFor(model => model.Username)
+    </div>
+
+    <div class="form-label-group">
+        @Html.TextBoxFor(model => model.Password, new { @type = "password", @class = "form-control", @id = "pass", @placeholder = Resource.Resource.Password })
+        @Html.LabelFor(model => model.Password, new { @for = "pass" })
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+    
+    <div class="row">
+        <div class="pl-5 pb-3">
+            @Html.Recaptcha(publicKey: "6LeT6IwUAAAAAJNt19ip-Cz-e0qCknVaQGAOFxwK", theme: CaptchaTheme.Dark, type: CaptchaType.Image)
+            @Html.ValidationMessage("ReCaptcha")
+        </div>
+    </div>
+
+    <button class="btn btn-lg btn-info btn-block" type="submit">
+        @Resource.Resource.Login
+    </button>
 }
 
 
