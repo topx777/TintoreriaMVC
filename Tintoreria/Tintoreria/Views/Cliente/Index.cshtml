@@ -12,16 +12,16 @@
             <table class="table table-striped">
                 <tr>
                     <th>
-                        @Html.LabelFor(model=>model[0].Nombre)
+                        @*@Html.LabelFor(model=>model[0].Nombre)*@Nombre
                     </th>
                     <th>
-                        @Html.LabelFor(model => model[0].PrimerApellido)
+                        @*@Html.LabelFor(model => model[0].PrimerApellido)*@ Apellido1
                     </th>
                     <th>
-                        @Html.LabelFor(model => model[0].SegundoApellido)
+                        @*@Html.LabelFor(model => model[0].SegundoApellido)*@Apellido2
                     </th>
                     <th>
-                        @Html.LabelFor(model => model[0].Ci)
+                        @*@Html.LabelFor(model => model[0].Ci)*@Ci
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -42,9 +42,9 @@
                             @item.Ci
                         </td>
                         <td>
-                            <a class="waves-effect waves-light btn amber" href="@Url.Action("../Categoria/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                            <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Categoria", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
-                            <a class="waves-effect waves-light btn red" href="@Url.Action("../Categoria/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
+                            <a class="btn btn-info" href="@Url.Action("../Cliente/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                            <a class="btn btn-warning" href="@Url.Action("../Cliente/Editar", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
+                            <a class="btn btn-danger" href="@Url.Action("../Cliente/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
                         </td>
                     </tr>
                 }
@@ -59,27 +59,27 @@
                             @if (Model.Pager.CurrentPage > 1)
                     {
                                 <li>
-                                    <a href="~/Categoria/Index">Primero</a>
+                                    <a href="~/Cliente/Index">Primero</a>
                                 </li>
                                 <li>
-                                    <a href="~/Categoria/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
+                                    <a href="~/Cliente/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
                                 </li>
                             }
 
                             @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                     {
                                 <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                                    <a href="~/Categoria/Index?page=@page">@page</a>
+                                    <a href="~/Cliente/Index?page=@page">@page</a>
                                 </li>
                             }
 
                             @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                     {
                                 <li>
-                                    <a href="~/Categoria/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
+                                    <a href="~/Cliente/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
                                 </li>
                                 <li>
-                                    <a href="~/Categoria/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
+                                    <a href="~/Cliente/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
                                 </li>
                             }
                         </ul>
