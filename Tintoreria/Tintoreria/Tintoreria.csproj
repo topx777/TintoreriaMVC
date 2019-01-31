@@ -250,7 +250,6 @@
     <Content Include="Views\Personal\Ver.cshtml" />
     <Content Include="Views\Cliente\Eliminar.cshtml" />
     <Content Include="Views\Personal\Eliminar.cshtml" />
-    <Content Include="Views\Shared\asideNav.cshtml" />
     <Content Include="Views\Personal\Crear.cshtml" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />

@@ -49,7 +49,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
                     FechaTrabajo = trabajo.FechaTrabajo,
                     TotalPrecio = trabajo.TotalPrecio,
                     FechaEntrega = trabajo.FechaEntrega,
-                    PedidoDistancia = new PedidoModel()
+                    PedidoDistancia = trabajo.PedidoDistancia != null ? new PedidoModel()
                     {
                         IdPedido =  trabajo.PedidoDistancia.IdPedido,
                         Recepcion = trabajo.PedidoDistancia.Recepcion,
@@ -66,7 +66,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
                                 Nombre = trabajo.PedidoDistancia.DireccionPedido.Tipo.Nombre
                             }
                         }
-                    },
+                    } : null,
                     EntregaDomicilio = trabajo.EntregaDomicilio,
                     Borrado = trabajo.Borrado
                 });

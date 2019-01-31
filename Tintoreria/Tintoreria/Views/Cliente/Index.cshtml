@@ -4,49 +4,52 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Lista Clientes</h2>
-<a class="waves-effect waves-light btn blue" href="@Url.Action("../Cliente/Crear")"><i class="material-icons left">add</i>Crear Cliente</a>
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model=>model.PrimerApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SegundoApellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ci)
-        </th>
-        <th>Actions</th>
-    </tr>
+    <div class="container">
+        <h2>Lista Clientes</h2>
+        <a class="btn btn-info my-3" href="@Url.Action("../Cliente/Crear")"><i class="material-icons left">add</i>Crear Cliente</a>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model=>model.PrimerApellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SegundoApellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ci)
+                </th>
+                <th>Actions</th>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)  
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimerApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SegundoApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SegundoApellido)
-            </td>
-            <td>
-                <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cliente/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                <a class="waves-effect waves-light btn green" href="@Url.Action("../Cliente/Editar", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
-                <a class="waves-effect waves-light btn red" href="@Url.Action("../Cliente/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
-                @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
-            </td>
-        </tr>
-    }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)  
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrimerApellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SegundoApellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SegundoApellido)
+                    </td>
+                    <td>
+                        <a class=" btn btn-info" href="@Url.Action("../Cliente/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                        <a class=" btn btn-danger" href="@Url.Action("../Cliente/Editar", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
+                        <a class=" btn btn-warning" href="@Url.Action("../Cliente/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
+                        @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+    </div>
 
 
+  
