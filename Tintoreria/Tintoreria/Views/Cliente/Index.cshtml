@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-    <div n>
+    <div class="container">
         <h2>Lista Clientes</h2>
-        <a class="btn blue" href="@Url.Action("../Cliente/Crear")"><i class="material-icons left">add</i>Crear Cliente</a>
+        <a class="btn btn-info my-3" href="@Url.Action("../Cliente/Crear")"><i class="material-icons left">add</i>Crear Cliente</a>
         <table class="table table-striped">
             <tr>
                 <th>
@@ -40,9 +40,9 @@
                         @Html.DisplayFor(modelItem => item.SegundoApellido)
                     </td>
                     <td>
-                        <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cliente/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                        <a class="waves-effect waves-light btn green" href="@Url.Action("../Cliente/Editar", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
-                        <a class="waves-effect waves-light btn red" href="@Url.Action("../Cliente/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
+                        <a class=" btn btn-info" href="@Url.Action("../Cliente/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                        <a class=" btn btn-danger" href="@Url.Action("../Cliente/Editar", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
+                        <a class=" btn btn-warning" href="@Url.Action("../Cliente/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
                         @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
                     </td>
                 </tr>
