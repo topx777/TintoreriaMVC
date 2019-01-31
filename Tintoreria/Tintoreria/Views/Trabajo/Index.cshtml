@@ -4,80 +4,89 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Lista de Trabajos</h2>
-<a class="btn btn-primary" href="@Url.Action("../Trabajo/Nuevo")"><i class="material-icons left">add</i>Nuevo Trabajo</a>
+<div class="row mb-3">
+    <div class="col-12">
+        <h2>Lista de Trabajos</h2>
+    </div>
+    <div class="col-12">
+        <a class="btn btn-primary" href="@Url.Action("../Trabajo/Nuevo")"><i class="fa fa-fw fa-plus"></i> Nuevo Trabajo</a>
+    </div>
+</div>
 
 @using (Html.BeginForm())
 {
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Total</th>
-            <th>Actions</th>
-        </tr>
-
-        @foreach(var item in Model)
-        {
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped table-sm">
             <tr>
-                <td>
-                    @item.IdTrabajo
-                </td>
-                <td>
-                    @item.FechaTrabajo
-                </td>
-                <td>
-                    @(item.Cliente.Nombre + " - " + item.Cliente.Ci)
-                </td>
-                <td>
-                    @item.TotalPrecio
-                </td>
-                <td>
-                    <a class="waves-effect waves-light btn amber" href="@Url.Action("../Cargo/Ver", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                    <a class="waves-effect waves-light btn green" href="@Url.Action("Editar", "Cargo", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">edit</i> Editar</a>
-                    <a class="waves-effect waves-light btn red" href="@Url.Action("../Cargo/Eliminar", new { mCodigo = item.IdTrabajo })"><i class="material-icons left">delete</i> Eliminar</a>
-                    @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
-                </td>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Total(.Bs)</th>
+                <th>Acciones</th>
             </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.IdTrabajo
+                    </td>
+                    <td>
+                        @item.FechaTrabajo
+                    </td>
+                    <td>
+                        @(item.Cliente.Nombre + " - " + item.Cliente.Ci)
+                    </td>
+                    <td>
+                        @item.TotalPrecio
+                    </td>
+                    <td>
+                        <a class="btn btn-info" href="@Url.Action("../Cargo/Ver", new { mCodigo = item.IdTrabajo })"><i class="fa fa-fw fa-eye"></i> Detalles</a>
+                        <a class="btn btn-warning" href="@Url.Action("Editar", "Cargo", new { mCodigo = item.IdTrabajo })"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                        <a class="btn btn-danger" href="@Url.Action("../Cargo/Eliminar", new { mCodigo = item.IdTrabajo })"><i class="fa fa-fw fa-trash"></i> Eliminar</a>
+                    </td>
+                </tr>
             }
 
 
-    </table>
-    <div id="container" style="margin-left: 20px">
-        <div class="pagination" style="margin-left: 400px">
+        </table>
+    </div>
+    <div class="col-12">
+        <nav>
             <!-- pager -->
             @if (Model.Pager.EndPage > 1)
             {
-                <ul class="pagination">
+                <ul class="pagination justify-content-center">
                     @if (Model.Pager.CurrentPage > 1)
                     {
-                        <li>
-                            <a href="~/Trabajo/Index">Primero</a>
+                        <li class="page-item">
+                            <a class="page-link" href="~/Trabajo/Index">Primero</a>
                         </li>
-                        <li>
-                            <a href="~/Trabajo/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
+                        <li class="page-item">
+                            <a class="page-link" href="~/Trabajo/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
                         </li>
                     }
 
                     @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                     {
-                        <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                            <a href="~/Trabajo/Index?page=@page">@page</a>
+                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                            <a class="page-link" href="~/Trabajo/Index?page=@page">@page</a>
                         </li>
                     }
 
                     @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                     {
-                        <li>
-                            <a href="~/Trabajo/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
+                        <li class="page-item">
+                            <a class="page-link" href="~/Trabajo/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
                         </li>
-                        <li>
-                            <a href="~/Trabajo/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
+                        <li class="page-item">
+                            <a class="page-link" href="~/Trabajo/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
                         </li>
                     }
                 </ul>
             }
-        </div>
+        </nav>
     </div>
+</div>
 }
