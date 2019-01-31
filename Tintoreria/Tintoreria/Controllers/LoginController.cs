@@ -24,7 +24,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // POST: Login
         [HttpPost]
         [CaptchaValidator(
-            PrivateKey = "6LeT6IwUAAAAAJNt19ip-Cz-e0qCknVaQGAOFxwK",
+            PrivateKey = "6LeT6IwUAAAAAG7CzrIo3l_URg0DdtfprrPPMTrr",
             ErrorMessage = "Error captcha invalido.",
             RequiredMessage = "El captcha es requerido")]
         public ActionResult Index(UsuarioModel model, bool captchaValid)
@@ -47,7 +47,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = "Error";
+                    ViewBag.Error = "Error, No se pudo iniciar Sesion";
                     return View(model);
                 }
             }
