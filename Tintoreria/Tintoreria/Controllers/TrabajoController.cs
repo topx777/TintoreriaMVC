@@ -149,7 +149,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 IdTrabajo = trabajo.IdTrabajo,
                 Cliente = new ClienteModel()
                 {
-                    Ci = trabajo.Cliente.Ci
+                    Ci = trabajo.Cliente.Ci,
+                    Nombre = trabajo.Cliente.Nombre,
+                    PrimerApellido = trabajo.Cliente.PrimerApellido,
+                    SegundoApellido = trabajo.Cliente.SegundoApellido
                 },
                 FechaTrabajo = trabajo.FechaTrabajo,
                 FechaEntrega = trabajo.FechaEntrega,
