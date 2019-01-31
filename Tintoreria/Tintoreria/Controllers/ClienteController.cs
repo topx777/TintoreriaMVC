@@ -6,7 +6,6 @@ using System;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL;
 
-
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 {
     public class ClienteController : Controller
@@ -579,6 +578,21 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             }
             return cliente;
 
+        }
+
+
+        //Prueba metodo AJAX
+        [HttpPost]
+        public JsonResult NuevoAJAX(Categoria categoria)
+        {
+            Categoria cate = new Categoria()
+            {
+                IdCategoria = categoria.IdCategoria,
+                Nombre = categoria.Nombre,
+                Descripcion = categoria.Descripcion,
+                Precio = categoria.Precio
+            };
+            return Json(cate.Nombre);
         }
 
     }

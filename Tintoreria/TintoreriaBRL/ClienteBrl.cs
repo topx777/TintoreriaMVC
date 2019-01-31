@@ -55,6 +55,31 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
         }
 
         /// <summary>
+        /// Metodo para Obtener un  Cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Cliente GetCI(string ci)
+        {
+            Cliente cliente = null;
+            try
+            {
+                cliente = ClienteDal.GetCI(ci);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return cliente;
+        }
+
+
+        /// <summary>
         /// actualiza un Cliente
         /// </summary>
         /// <param name="cliente"></param>

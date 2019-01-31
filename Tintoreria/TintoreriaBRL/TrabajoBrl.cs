@@ -15,6 +15,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
         {
             try
             {
+                trabajo.Cliente = ClienteBrl.GetCI(trabajo.Cliente.Ci);
+                trabajo.FechaTrabajo = DateTime.Now;
+
                 if(trabajo.EntregaDomicilio)
                 {
                     PedidoDal.Insertar(trabajo.PedidoDistancia);
@@ -29,6 +32,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 
                 foreach(TrabajoDetalle x in trabajo.TrabajoDetalle)
                 {
+                    x.Categoria = CategoriaBrl.Get(x.Categoria.IdCategoria);
                     x.PrecioFinal = x.Categoria.Precio * Convert.ToDecimal(x.Peso);
                     trabajo.TotalPrecio += x.PrecioFinal;
                 }

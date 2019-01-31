@@ -8,13 +8,18 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 {
     public class TrabajoModel
     {
+
+        public TrabajoModel()
+        {
+            this.TrabajoDetalle = new List<TrabajoDetalleModel>();
+        }
+
         #region Atributos
 
         [Key]
         [Display(Name = "IdTrabajo")]
         public int IdTrabajo { get; set; }
-
-        [Required]
+        
         public ClienteModel Cliente { get; set; }
         
         [Display(Name = "Fecha Trabajo")]

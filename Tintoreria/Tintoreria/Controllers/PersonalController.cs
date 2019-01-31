@@ -16,7 +16,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpGet]
         public ActionResult Index(int? page)
         {
-            int pageSize = 5;
+            int pageSize = 15;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             PersonalListModel lista = PersonalListModel.Get();
@@ -139,7 +139,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
             }
 
-            return View(personalM);
+            return RedirectToAction("../Personal/Index");
 
         }
 
@@ -309,6 +309,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         {
             CargarSexo();
             CargarTipo();
+            CargarCargo();
             Personal person = PersonalBrl.Get(Id);
             PersonalModel personM = new PersonalModel()
             {
@@ -378,6 +379,9 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpPost]
         public ActionResult Editar(PersonalModel personaMod, string resp)
         {
+            CargarSexo();
+            CargarTipo();
+            CargarCargo();
 
             if (!String.IsNullOrWhiteSpace(resp))
             {
@@ -408,6 +412,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                                 Sueldo=personaMod.Sueldo,
 
                                 Nombre= personaMod.Nombre,
+                                Ci=personaMod.Ci,
                                 PrimerApellido = personaMod.PrimerApellido,
                                 SegundoApellido = personaMod.SegundoApellido,
                                 Sexo = new Sexo()
