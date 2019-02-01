@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = Resource.Resource.NewWork;
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
 }
 
 <h2>@Resource.Resource.NewWork</h2>
@@ -67,7 +68,39 @@
             }
         </div>
     </div>
-    <input type="submit" name="resp" value="Registrar" class="btn btn-primary" />
+    <div class="row">
+        <div class="custom-control custom-switch m-4">
+            @Html.CheckBoxFor(model => model.EntregaDomicilio, new { @class = "custom-control-input", @id = "entrega" })
+            <label class="custom-control-label" for="entrega">Pedido a Domicilio</label>
+        </div>
+    </div>
+    <div id="pedidoArea" class="row mb-4">
+        <div class="col-12">
+            <h4 >Datos Pedido</h4>
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(model => model.PedidoDistancia.Recepcion, new { @class = "col-form-label" })
+
+            @Html.TextBoxFor(model => model.PedidoDistancia.Recepcion, new { @type = "text", @class = "form-control" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(model => model.PedidoDistancia.PrecioPedido, new { @class = "col-form-label" })
+
+            @Html.TextBoxFor(model => model.PedidoDistancia.PrecioPedido, new { @type = "text", @class = "form-control" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(model => model.PedidoDistancia.DireccionPedido, new { @class = "col-form-label" })
+            
+            <select id="direcciones" name="PedidoDistancia.DireccionPedido.IdDireccion" class="form-control">
+                <option value="">Seleccione una direccion</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <input type="submit" name="resp" value="Registrar" class="btn btn-primary" />
+        </div>
+    </div>
 </div>
 
 }
@@ -94,6 +127,9 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        $('#pedidoArea').hide();
+    });
 
     $(document).on('change', '#ci', function () {
         var ciText = $('#ci');
@@ -123,6 +159,17 @@
                 alert(response.responseText);
             }
         });
+
+    });
+
+
+    $(document).on('change', '#entrega', function () {
+        var domicilio = this.checked;
+        if (domicilio) {
+            $('#pedidoArea').show();
+        } else {
+            $('#pedidoArea').hide();
+        }
 
     });
 

@@ -264,6 +264,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Personal\Editar.cshtml" />
     <Content Include="Views\Trabajo\Detalles.cshtml" />
+    <Content Include="Views\Trabajo\Eliminar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

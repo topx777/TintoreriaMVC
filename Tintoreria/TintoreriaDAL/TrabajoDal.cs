@@ -74,6 +74,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                     SqlCommand cmdtmp = TrabajoDetalleDal.InsertarCMD(trabajod, idTrabajo);
                     cmdtmp.Connection = conexion;
                     cmdtmp.Transaction = trans;
+                    cmdtmp.ExecuteNonQuery();
                 }
 
                 trans.Commit();
@@ -112,6 +113,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@id", id);
                 Methods.ExecuteBasicCommand(command);
+
+                List<TrabajoDetalle> trabajos = TrabajoDetalleDal.GetList(id);
+
+                foreach(TrabajoDetalle x in trabajos)
+                {
+                    TrabajoDetalleDal.Eliminar(x.IdTrabajoDetalle);
+                }
             }
             catch (SqlException ex)
             {
@@ -124,8 +132,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 throw ex;
             }
 
-                Methods.GenerateLogsDebug("TrabajoDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un cliente"));
-
+            Methods.GenerateLogsDebug("TrabajoDal", "Eliminar", string.Format("{0} {1} Info: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Termino de ejecutar  el metodo acceso a datos para Eliminar un cliente"));
         }
 
         /// <summary>

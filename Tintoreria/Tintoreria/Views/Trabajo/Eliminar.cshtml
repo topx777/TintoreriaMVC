@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Eliminar Trabajo</h2>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div class="row">
+            <div class="col-6">
+                @Html.Label("Esta seguro que desea eliminar el Trabajo?", new { @style = "font-size: 17px;" })
+                <br />
+                <div class="row">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-fw fa-trash"></i> Eliminar Trabajo
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <a href="@Url.Action("../Trabajo/Index")" class="btn btn-primary">
+                            <i class="fa fa-fw fa-arrow-left"></i> Volver Atras
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+
