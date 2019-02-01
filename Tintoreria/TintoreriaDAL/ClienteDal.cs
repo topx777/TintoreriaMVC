@@ -37,7 +37,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@idPersona",cliente.IdPersona);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
-                command.Parameters.AddWithValue("@fechaRagistro", DateTime.Now.ToLongDateString());
+                command.Parameters.AddWithValue("@fechaRagistro", DateTime.Now);
                 Methods.ExecuteBasicCommand(command);
 
                 foreach (Telefono telefono in cliente.Telefonos)
@@ -110,7 +110,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@idPersona", cliente.IdPersona);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
-                command.Parameters.AddWithValue("@fechaRagistro", cliente.FechaRegistro);
+                command.Parameters.AddWithValue("@fechaRagistro", DateTime.Now);
 
                 command.Connection = conexion;
                 command.Transaction = trans;
