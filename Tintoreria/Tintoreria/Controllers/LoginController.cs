@@ -57,5 +57,14 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 return View(model);
             }
         }
+
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+
+            return RedirectToAction("../Login/Index");
+        } 
+
     }
 }

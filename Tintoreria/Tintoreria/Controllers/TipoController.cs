@@ -34,6 +34,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Tipo
         public ActionResult Index()
         {
+
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             return View();
         }
     }

@@ -37,6 +37,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Cargo
         public ActionResult Index()
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             CargoListModel lista = CargoListModel.Get();
 
             return View(lista);
@@ -44,6 +49,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Crear Cargo
         public ActionResult Crear()
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             CargoModel cargo = new CargoModel();
             return View(cargo);
         }
@@ -70,6 +80,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Ver Modificar Cargo
         public ActionResult Editar(int mCodigo)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             Cargo car = CargoBrl.Get(mCodigo);
             CargoModel model = new CargoModel()
             {
@@ -106,6 +121,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         //GET Ver Categoria
         public ActionResult Ver(int mCodigo)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             Cargo car = CargoBrl.Get(mCodigo);
             CargoModel model = new CargoModel()
             {
@@ -120,6 +140,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Cargo/Delete
         public ActionResult Eliminar()
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             return View();
         }
 

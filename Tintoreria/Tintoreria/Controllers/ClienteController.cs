@@ -37,6 +37,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Cliente
         public ActionResult Index(int? page)
         {
+
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             ClienteListModel lista = ClienteListModel.Get(page.HasValue ? page.Value : 1);
 
             return View(lista);
@@ -46,6 +52,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Crear Cliente
         public ActionResult Crear()
         {
+
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
 
             CargarSexo();
             CargarTipo();
@@ -199,6 +210,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                // GET: Ver Modificar Cliente
         public ActionResult Editar(int Id)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             CargarSexo();
             CargarTipo();
             Cliente client=ClienteBrl.Get(Id);
@@ -365,6 +381,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         //GET Ver Cliente
         public ActionResult Ver(int Id)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             CargarSexo();
             CargarTipo();
             Cliente client = ClienteBrl.Get(Id);
@@ -438,6 +459,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpPost]
         public ActionResult Ver()
         {
+
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             return RedirectToAction("../Cliente/Index");
         }
 

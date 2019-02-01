@@ -16,6 +16,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpGet]
         public ActionResult Index(int? page)
         {
+
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             int pageSize = 15;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;

@@ -16,6 +16,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpGet]
         public ActionResult Index(int? page)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             TrabajoListModel lista = TrabajoListModel.Get(page.HasValue ? page.Value : 1);
 
             return View(lista);
@@ -37,6 +42,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
         public ActionResult Nuevo()
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             CargarCategoria();
             TrabajoModel model = new TrabajoModel();
             model.TrabajoDetalle.Add(new TrabajoDetalleModel());
@@ -143,6 +153,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpGet]
         public ActionResult Detalles(int idTrabajo)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
 
             Trabajo trabajo = TrabajoBrl.Get(idTrabajo);
             TrabajoModel model = new TrabajoModel()

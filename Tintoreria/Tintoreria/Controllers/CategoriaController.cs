@@ -36,6 +36,12 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         [HttpGet]
         public ActionResult Index(int? page)
         {
+
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             CategoriaListModel lista = CategoriaListModel.Get(page.HasValue ? page.Value : 1);
 
             return View(lista);
@@ -44,6 +50,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Crear Categoria
         public ActionResult Crear()
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             CategoriaModel categoria = new CategoriaModel();
             return View(categoria);
         }
@@ -73,6 +84,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         // GET: Ver Modificar Categoria
         public ActionResult Editar(int mCodigo)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             Categoria cat = CategoriaBrl.Get(mCodigo);
             CategoriaModel model = new CategoriaModel()
             {
@@ -113,6 +129,11 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         //GET Ver Categoria
         public ActionResult Ver(int mCodigo)
         {
+            if (Session["Key"] == null)
+            {
+                return RedirectToAction("../Login/Index");
+            }
+
             Categoria cat = CategoriaBrl.Get(mCodigo);
             CategoriaModel model = new CategoriaModel()
             {
