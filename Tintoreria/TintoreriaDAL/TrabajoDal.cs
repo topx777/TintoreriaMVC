@@ -221,7 +221,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             Trabajo res = new Trabajo();
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            string query = "Select * From Trabajo where IdTrabajo = @id";
+            string query = @"SELECT * FROM Trabajo WHERE IdTrabajo = @id";
             try
             {
                 cmd = Methods.CreateBasicCommand(query);
@@ -231,12 +231,15 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 {
                     res = new Trabajo()
                     {
-                        IdTrabajo=dr.GetInt32(0),
-                        Cliente=ClienteDal.Get(dr.GetInt32(1)),
-                        FechaTrabajo=dr.GetDateTime(2),
-                        PedidoDistancia=PedidoDal.Get(dr.GetInt32(3)),
-                        EntregaDomicilio=dr.GetBoolean(4),
-                        Borrado=dr.GetBoolean(5)
+                        IdTrabajo = dr.GetInt32(0),
+                        Cliente = ClienteDal.Get(dr.GetInt32(1)),
+                        FechaTrabajo = dr.GetDateTime(2),
+                        TotalPrecio = dr.GetDecimal(3),
+                        FechaEntrega = dr.GetDateTime(4),
+                        PedidoDistancia = dr.IsDBNull(5) ? null : PedidoDal.Get(dr.GetInt32(5)),
+                        EntregaDomicilio = dr.GetBoolean(6),
+                        Borrado = dr.GetBoolean(7),
+                        TrabajoDetalle = TrabajoDetalleDal.GetList(dr.GetInt32(0))
                     };
                 }
             }

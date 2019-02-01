@@ -42,9 +42,9 @@
                         @item.TotalPrecio
                     </td>
                     <td>
-                        <a class="btn btn-info" href="@Url.Action("../Cargo/Ver", new { mCodigo = item.IdTrabajo })"><i class="fa fa-fw fa-eye"></i> Detalles</a>
-                        <a class="btn btn-warning" href="@Url.Action("Editar", "Cargo", new { mCodigo = item.IdTrabajo })"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                        <a class="btn btn-danger" href="@Url.Action("../Cargo/Eliminar", new { mCodigo = item.IdTrabajo })"><i class="fa fa-fw fa-trash"></i> Eliminar</a>
+                        <a class="btn btn-info" href="@Url.Action("../Trabajo/Detalles", new { idTrabajo = item.IdTrabajo })"><i class="fa fa-fw fa-eye"></i> Detalles</a>
+                        <a class="btn btn-warning" href="@Url.Action("Editar", "Trabajo", new { idTrabajo = item.IdTrabajo })"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                        <a class="btn btn-danger" href="@Url.Action("../Trabajo/Eliminar", new { idTrabajo = item.IdTrabajo })"><i class="fa fa-fw fa-trash"></i> Eliminar</a>
                     </td>
                 </tr>
             }

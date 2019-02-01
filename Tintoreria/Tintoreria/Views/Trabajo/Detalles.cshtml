@@ -1,8 +1,157 @@
-﻿
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.TrabajoModel
 @{
     ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string fechaEntrega = Model.FechaEntrega.Value.ToShortDateString();
+    string fechaTrabajo = Model.FechaTrabajo.Value.ToShortDateString();
+    string nombreCompleto = Model.Cliente.Nombre + " " + Model.Cliente.PrimerApellido + " " + Model.Cliente.SegundoApellido;
+    string latitud = "-17.378833";
+    string longitud ="-66.165167";
+    if (Model.PedidoDistancia != null)
+    {
+        latitud = Model.PedidoDistancia.DireccionPedido.Latitud.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        longitud = Model.PedidoDistancia.DireccionPedido.Longitud.ToString(System.Globalization.CultureInfo.InvariantCulture);
+    }
 }
 
-<h2>Detalles</h2>
+<div class="container-fluid">
+    <h2>Ver Detalles</h2>
+    <div class="row">
+        <h4 class="col-12">Datos Entrega</h4>
+        <div class="form-group col-4">
+            @Html.LabelFor(model => model.FechaEntrega, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => fechaEntrega, new { @type = "text", @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-4">
+            @Html.LabelFor(model => model.FechaTrabajo, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => fechaTrabajo, new { @type = "text", @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-4">
+            @Html.LabelFor(model => model.TotalPrecio, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.TotalPrecio, new { @type = "text", @id = "ci", @class = "form-control", @disabled = true })
+        </div>
+        
+        <h4 class="col-12">Datos Cliente</h4>
+        <div class="form-group col-6">
+            @Html.LabelFor(model => model.Cliente.Ci, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.Cliente.Ci, new { @type = "text", @id = "ci", @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(model => model.Cliente.Nombre, new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => nombreCompleto, new { @type = "text", @id = "ci", @class = "form-control", @disabled = true })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4>Detalle de Trabajo</h4>
+            @for (var i = 0; i < Model.TrabajoDetalle.Count; i++)
+            {
+            <div class="row">
+                <div class="form-group col-3">
+                    @*<i class="material-icons prefix">date_range</i>*@
+                    @Html.LabelFor(tdetalle => Model.TrabajoDetalle[i].CodigoPrenda, new { @class = "col-form-label" })
 
+                    @Html.TextBoxFor(tdetalle => Model.TrabajoDetalle[i].CodigoPrenda, new { @type = "text", @class = "form-control", @disabled = true })
+                </div>
+                <div class="form-group col-3">
+                    @*<i class="material-icons prefix">date_range</i>*@
+                    @Html.LabelFor(tdetalle => Model.TrabajoDetalle[i].Peso, new { @class = "col-form-label" })
+
+                    @Html.TextBoxFor(tdetalle => Model.TrabajoDetalle[i].Peso, new { @type = "text", @class = "form-control", @disabled = true })
+                </div>
+                <div class="form-group col-3">
+                    @*<i class="material-icons prefix">date_range</i>*@
+                    @Html.LabelFor(tdetalle => Model.TrabajoDetalle[i].Categoria, new { @class = "col-form-label" })
+                    @Html.TextBoxFor(tdetalle => Model.TrabajoDetalle[i].Categoria.Nombre, new { @class = "form-control", @disabled = true })
+                </div>
+                <div class="form-group col-3">
+                    @*<i class="material-icons prefix">date_range</i>*@
+                    @Html.LabelFor(tdetalle => Model.TrabajoDetalle[i].PrecioFinal, new { @class = "col-form-label" })
+                    @Html.TextBoxFor(tdetalle => Model.TrabajoDetalle[i].PrecioFinal, new { @class = "form-control", @disabled = true })
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    @if(Model.EntregaDomicilio)
+    {
+    <div class="row">
+        <h4 class="col-12">Detalles de Pedido</h4>
+        <div class="form-group col-6">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.Recepcion, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.Recepcion, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.PrecioPedido, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.PrecioPedido, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-8">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Descripccion, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Descripccion, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-4">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Tipo.Nombre, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Tipo.Nombre, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="col-12">
+            <div id="map" style="height: 400px;">
+            </div>
+        </div>
+    </div>
+        
+    }
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK-4115IIeoK7i7cFVO6jnjJ5krsxNyZE&callback=initMap" async defer></script>
+<script type="text/javascript">
+
+    var marker;
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: {
+                lat: @latitud,
+                lng: @longitud 
+            }
+        });
+
+        marker = new google.maps.Marker({
+            map: map,
+            //draggable: true,
+            draggable: false,
+            animation: google.maps.Animation.DROP,
+            position: {
+                lat: @latitud,
+                lng: @longitud
+            }
+        });
+        //marker.addListener('click', toggleBounce);
+
+        //marker.addListener('dragend', function (event) {
+            //escribimos las coordenadas de la posicion actual del marcador dentro del input #coords
+            //document.getElementById("coordenadasEquipo").value = this.getPosition().lat()+","+ this.getPosition().lng();
+            //console.log(this.getPosition().lat()+","+ this.getPosition().lng());
+            //$('#latitud_lugar').val(this.getPosition().lat());
+            //$('#longitud_lugar').val(this.getPosition().lng());
+        //});
+    }
+
+    // permite arrastar el marcador
+    //function toggleBounce() {
+    //    if (marker.getAnimation() !== null) {
+    //        marker.setAnimation(null);
+    //    } else {
+    //        marker.setAnimation(google.maps.Animation.BOUNCE);
+    //    }
+    //}
+
+    // captura el evento click sobre le marcador
+    //function funcionClick() {
+    //    if (marker.getAnimation() != null) {
+    //        marker.setAnimation(null);
+    //    } else {
+    //        marker.setAnimation(google.maps.Animation.BOUNCE);
+    //    }
+    //}
+
+</script>
