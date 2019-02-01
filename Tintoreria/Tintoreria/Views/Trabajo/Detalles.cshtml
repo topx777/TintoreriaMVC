@@ -5,9 +5,16 @@
     string fechaEntrega = Model.FechaEntrega.Value.ToShortDateString();
     string fechaTrabajo = Model.FechaTrabajo.Value.ToShortDateString();
     string nombreCompleto = Model.Cliente.Nombre + " " + Model.Cliente.PrimerApellido + " " + Model.Cliente.SegundoApellido;
+    string latitud = "-17.378833";
+    string longitud ="-66.165167";
+    if (Model.PedidoDistancia != null)
+    {
+        latitud = Model.PedidoDistancia.DireccionPedido.Latitud.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        longitud = Model.PedidoDistancia.DireccionPedido.Longitud.ToString(System.Globalization.CultureInfo.InvariantCulture);
+    }
 }
 
-<div class="container">
+<div class="container-fluid">
     <h2>Ver Detalles</h2>
     <div class="row">
         <h4 class="col-12">Datos Entrega</h4>
@@ -68,9 +75,30 @@
     </div>
     @if(Model.EntregaDomicilio)
     {
-        <h4>Detalles de Pedido</h4>
-        <div id="map" style="height: 350px;">
+    <div class="row">
+        <h4 class="col-12">Detalles de Pedido</h4>
+        <div class="form-group col-6">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.Recepcion, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.Recepcion, new { @class = "form-control", @disabled = true })
         </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.PrecioPedido, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.PrecioPedido, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-8">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Descripccion, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Descripccion, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="form-group col-4">
+            @Html.LabelFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Tipo.Nombre, new { @class = "col-form-label" })
+            @Html.TextBoxFor(tdetalle => Model.PedidoDistancia.DireccionPedido.Tipo.Nombre, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="col-12">
+            <div id="map" style="height: 400px;">
+            </div>
+        </div>
+    </div>
+        
     }
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK-4115IIeoK7i7cFVO6jnjJ5krsxNyZE&callback=initMap" async defer></script>
@@ -81,42 +109,49 @@
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
-            center: { lat: -17.378833, lng: -66.165167 }
+            center: {
+                lat: @latitud,
+                lng: @longitud 
+            }
         });
 
         marker = new google.maps.Marker({
             map: map,
-            draggable: true,
+            //draggable: true,
+            draggable: false,
             animation: google.maps.Animation.DROP,
-            position: { lat: -17.378833, lng: -66.165167 }
+            position: {
+                lat: @latitud,
+                lng: @longitud
+            }
         });
-        marker.addListener('click', toggleBounce);
+        //marker.addListener('click', toggleBounce);
 
-        marker.addListener('dragend', function (event) {
+        //marker.addListener('dragend', function (event) {
             //escribimos las coordenadas de la posicion actual del marcador dentro del input #coords
             //document.getElementById("coordenadasEquipo").value = this.getPosition().lat()+","+ this.getPosition().lng();
-            console.log(this.getPosition().lat()+","+ this.getPosition().lng());
+            //console.log(this.getPosition().lat()+","+ this.getPosition().lng());
             //$('#latitud_lugar').val(this.getPosition().lat());
             //$('#longitud_lugar').val(this.getPosition().lng());
-        });
+        //});
     }
 
     // permite arrastar el marcador
-    function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-    }
+    //function toggleBounce() {
+    //    if (marker.getAnimation() !== null) {
+    //        marker.setAnimation(null);
+    //    } else {
+    //        marker.setAnimation(google.maps.Animation.BOUNCE);
+    //    }
+    //}
 
     // captura el evento click sobre le marcador
-    function funcionClick() {
-        if (marker.getAnimation() != null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-    }
+    //function funcionClick() {
+    //    if (marker.getAnimation() != null) {
+    //        marker.setAnimation(null);
+    //    } else {
+    //        marker.setAnimation(google.maps.Animation.BOUNCE);
+    //    }
+    //}
 
 </script>

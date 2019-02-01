@@ -159,7 +159,18 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 EntregaDomicilio = trabajo.EntregaDomicilio,
                 PedidoDistancia = trabajo.PedidoDistancia != null ? new PedidoModel()
                 {
-
+                    Recepcion = trabajo.PedidoDistancia.Recepcion,
+                    PrecioPedido = trabajo.PedidoDistancia.PrecioPedido,
+                    DireccionPedido = new DireccionModel()
+                    {
+                        Descripccion = trabajo.PedidoDistancia.DireccionPedido.Descripcion,
+                        Latitud = trabajo.PedidoDistancia.DireccionPedido.Latitud,
+                        Longitud = trabajo.PedidoDistancia.DireccionPedido.Longitud,
+                        Tipo = new TipoModel()
+                        {
+                            Nombre = trabajo.PedidoDistancia.DireccionPedido.Tipo.Nombre
+                        }
+                    }
                 } : null,
                 TotalPrecio = trabajo.TotalPrecio,
                 TrabajoDetalle = new List<TrabajoDetalleModel>()
