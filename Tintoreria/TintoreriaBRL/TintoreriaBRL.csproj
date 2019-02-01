@@ -45,6 +45,7 @@
     <Compile Include="CategoriaBrl.cs" />
     <Compile Include="CategoriaListBrl.cs" />
     <Compile Include="ClienteBrl.cs" />
+    <Compile Include="ClienteListBrl.cs" />
     <Compile Include="CorreoBrl.cs" />
     <Compile Include="DireccionBrl.cs" />
     <Compile Include="EstadoBrl.cs" />

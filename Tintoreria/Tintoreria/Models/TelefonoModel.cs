@@ -13,6 +13,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
 
         [Required(ErrorMessage ="El campo numero es Requerido")]
         [Display(Name = "Numero")]
+        [StringLength(8,ErrorMessage ="El campo debe contener como maximo 8")]
         public string Numero { get; set; }
 
         [Display(Name = "Tipo")]

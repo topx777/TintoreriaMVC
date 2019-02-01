@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.ClienteModel>
+﻿@model Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models.ClienteListModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -7,48 +7,88 @@
     <div class="container">
         <h2>Lista Clientes</h2>
         <a class="btn btn-info my-3" href="@Url.Action("../Cliente/Crear")"><i class="material-icons left">add</i>Crear Cliente</a>
-        <table class="table table-striped">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model=>model.PrimerApellido)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SegundoApellido)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ci)
-                </th>
-                <th>Actions</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        @using (Html.BeginForm())
+        {
+            <table class="table table-striped">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)  
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PrimerApellido)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SegundoApellido)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SegundoApellido)
-                    </td>
-                    <td>
-                        <a class=" btn btn-info" href="@Url.Action("../Cliente/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
-                        <a class=" btn btn-danger" href="@Url.Action("../Cliente/Editar", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
-                        <a class=" btn btn-warning" href="@Url.Action("../Cliente/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
-                        @*@Html.ActionLink("<i class=\"material - icons left\">pencil</i> Editar", "../Paciente/Ver", new { mCodigo = item.IdCategoria }, new { @class = "waves-effect waves-light btn" }) |*@
-                    </td>
+                    <th>
+                        @*@Html.LabelFor(model=>model[0].Nombre)*@Nombre
+                    </th>
+                    <th>
+                        @*@Html.LabelFor(model => model[0].PrimerApellido)*@ Apellido1
+                    </th>
+                    <th>
+                        @*@Html.LabelFor(model => model[0].SegundoApellido)*@Apellido2
+                    </th>
+                    <th>
+                        @*@Html.LabelFor(model => model[0].Ci)*@Ci
+                    </th>
+                    <th>Actions</th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Nombre
+                        </td>
+                        <td>
+                            @item.PrimerApellido
+                        </td>
+                        <td>
+                            @item.SegundoApellido
+                        </td>
+                        <td>
+                            @item.Ci
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="@Url.Action("../Cliente/Ver", new { Id = item.IdPersona })"><i class="material-icons left">remove_red_eye</i> Ver</a>
+                            <a class="btn btn-warning" href="@Url.Action("../Cliente/Editar", new { Id = item.IdPersona })"><i class="material-icons left">edit</i> Editar</a>
+                            <a class="btn btn-danger" href="@Url.Action("../Cliente/Eliminar", new { Id = item.IdPersona })"><i class="material-icons left">delete</i> Eliminar</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <div id="container" style="margin-left: 20px">
+                <div class="pagination" style="margin-left: 400px">
+                    <!-- pager -->
+                    @if (Model.Pager.EndPage > 1)
+                    {
+                        <ul class="pagination">
+                            @if (Model.Pager.CurrentPage > 1)
+                    {
+                                <li>
+                                    <a href="~/Cliente/Index">Primero</a>
+                                </li>
+                                <li>
+                                    <a href="~/Cliente/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
+                                </li>
+                            }
+
+                            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                    <a href="~/Cliente/Index?page=@page">@page</a>
+                                </li>
+                            }
+
+                            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                                <li>
+                                    <a href="~/Cliente/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
+                                </li>
+                                <li>
+                                    <a href="~/Cliente/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+
+        }
+
     </div>
 
 

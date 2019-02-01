@@ -11,6 +11,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         [Display(Name ="Id Correo")]
         public int idCorreo { get; set; }
 
+        [Required(ErrorMessage ="El campo Nombre Correo es requerido")]
         [Display(Name="Nombre")]
         public string Nombre { get; set; }
 
