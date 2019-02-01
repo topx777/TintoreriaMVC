@@ -37,7 +37,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command.Parameters.AddWithValue("@idPersona",cliente.IdPersona);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
-                command.Parameters.AddWithValue("@fechaRagistro", cliente.FechaRegistro);
+                command.Parameters.AddWithValue("@fechaRagistro", DateTime.Now.ToLongDateString());
                 Methods.ExecuteBasicCommand(command);
 
                 foreach (Telefono telefono in cliente.Telefonos)
@@ -209,7 +209,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
             SqlCommand command = null;
 
             // Proporcionar la cadena de consulta 
-            string queryString = @"UPDATE Cliente SET Nit=@nit, Razon=@razon, FechaRegistro=@fechaRegistro 
+            string queryString = @"UPDATE Cliente SET Nit=@nit, Razon=@razon
                                     WHERE @IdPersona=@idPersona";
             try
             {
@@ -224,9 +224,25 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL
                 command = Methods.CreateBasicCommand(queryString);
                 command.Parameters.AddWithValue("@nit", cliente.Nit);
                 command.Parameters.AddWithValue("@razon", cliente.Razon);
-                command.Parameters.AddWithValue("@fechaRegistro", cliente.FechaRegistro);
                 command.Parameters.AddWithValue("@idPersona", cliente.IdPersona);
                 Methods.ExecuteBasicCommand(command);
+
+                //Actualiza Correos
+                foreach (Correo correo in cliente.Correos)
+                {
+                    CorreoDal.Actualizar(correo);
+                }
+                //Actualiza Telefonos
+                foreach (Telefono telefono in cliente.Telefonos)
+                {
+                    TelefonoDal.Actualizar(telefono);
+                }
+                //Actuliza Direcciones
+                foreach (Direccion direccion in cliente.Direcciones)
+                {
+                    DireccionDal.Actualizar(direccion);
+                }
+
             }
             catch (SqlException ex)
             {
