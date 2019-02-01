@@ -14,12 +14,10 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Models
         [Display(Name = "ID Pedido")]
         public int? IdPedido { get; set; }
 
-        [Required(ErrorMessage = "Campo requerido")]
         [Display(Name = "Recepcion")]
         [StringLength(25, ErrorMessage = "Numero maximo de caracteres es de 25")]
         public string Recepcion { get; set; }
 
-        [Required]
         [Display(Name = "Precio Pedido")]
         [Range(0, 99999999.99, ErrorMessage = "Precio sobrepasa valores permitidos.")]
         public decimal PrecioPedido { get; set; }

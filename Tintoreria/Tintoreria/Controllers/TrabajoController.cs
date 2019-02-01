@@ -198,5 +198,27 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             return View(model);
         }
 
+
+        public ActionResult Eliminar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(int idTrabajo)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                TrabajoBrl.Eliminar(idTrabajo);
+                return RedirectToAction("../Trabajo/Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
     }
 }
