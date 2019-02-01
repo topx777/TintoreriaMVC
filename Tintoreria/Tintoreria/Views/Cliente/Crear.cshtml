@@ -23,9 +23,9 @@
                     @Html.TextBoxFor(model => model.Usuario.Password, new { @class = "form-control", @placeholder = "Password" })
                     @Html.ValidationMessageFor(model => model.Usuario.Password)
                 </div>
-                <div class="form-group">
+                <div class="form-check">
+                    @Html.CheckBoxFor(model=>model.Usuario.EsAdmin, new {@class= "form-check-input" })
                     @Html.LabelFor(model=>model.Usuario.EsAdmin, new { @class= "form-check-label" })
-                    @Html.CheckBoxFor(model=>model.Usuario.EsAdmin, new {@class="form-check-input"})
                     @Html.ValidationMessageFor(model => model.Usuario.EsAdmin)
                 </div>
             </div>
@@ -98,11 +98,15 @@
                             @Html.TextBoxFor(correo => Model.Correos[i].Nombre, new { @placeholder = "Nombre Correo", @class="form-control" })
                             @Html.ValidationMessageFor(correo => Model.Correos[i].Nombre)
                         </div>
-                        <div>
-                            @Html.LabelFor(correo => Model.Correos[i].Principal)
+                        <div class="form-check">
                             @Html.CheckBoxFor(correo => Model.Correos[i].Principal, new { @style = "display:block", @class = "form-check-input" })
+                            @Html.LabelFor(correo => Model.Correos[i].Principal,new { @class= "form-check-label" })
                             @Html.ValidationMessageFor(correo => Model.Correos[i].Principal)
                         </div>
+                          @if (i > 0)
+                          {
+                            <button type="submit" name="bCorreo" value="@i" class="btn btn-outline-warning">Eliminar</button>
+                          }
                         <hr />
                     </div>
                 }
@@ -133,6 +137,10 @@
                             @Html.TextBoxFor(direccion => Model.Direcciones[i].Longitud, new { @placeholder = "Longitud", @value = "", @class="form-control" })
                             @Html.ValidationMessageFor(direccion => Model.Direcciones[i].Longitud)
                          </div>
+                        @if (i > 0)
+                        {
+                            <button type="submit" name="bDireccion" value="@i" class="btn btn-outline-warning">Eliminar</button>
+                        }
                         <hr />
                     </div>
                 }
@@ -153,6 +161,10 @@
                             @Html.LabelFor(telefono=>Model.Telefonos[i].Tipo)
                             @Html.DropDownListFor(telefono => Model.Telefonos[i].Tipo.IdTipo, (IEnumerable<SelectListItem>)ViewBag.ListaTipo, new { @style = "display: block", @class="form-control" })
                         </div>
+                        @if (i > 0)
+                        {
+                            <button type="submit" name="bTelefono" value="@i" class="btn btn-outline-warning">Eliminar</button>
+                        }
                         <hr />
                     </div>
                 }

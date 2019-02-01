@@ -82,8 +82,20 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Crear(ClienteModel cliente, string resp)
+        public ActionResult Crear(ClienteModel cliente, string resp,int? bCorreo, int? bDireccion, int? bTelefono)
         {
+            if (bCorreo!=null)
+            {
+                cliente.Correos.RemoveAt(bCorreo.Value);
+            }
+            if (bDireccion != null)
+            {
+                cliente.Direcciones.RemoveAt(bDireccion.Value);
+            }
+            if (bTelefono != null)
+            {
+                cliente.Telefonos.RemoveAt(bTelefono.Value);
+            }
             ActionResult action=View(cliente);
             CargarSexo();
             CargarTipo();
