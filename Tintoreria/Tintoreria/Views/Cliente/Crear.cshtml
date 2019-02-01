@@ -77,11 +77,11 @@
                         @Html.TextBoxFor(model=>model.Razon,  new{ @placeholder="Razon", @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Razon)
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         @Html.LabelFor(model=>model.FechaRegistro)
                         @Html.TextBoxFor(model => model.FechaRegistro, new{@type="date", @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.FechaRegistro)
-                    </div>
+                    </div>*@
                     <hr />
                 </div>
             </div>
@@ -137,9 +137,12 @@
                             @Html.TextBoxFor(direccion => Model.Direcciones[i].Longitud, new { @placeholder = "Longitud", @value = "", @class="form-control" })
                             @Html.ValidationMessageFor(direccion => Model.Direcciones[i].Longitud)
                          </div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMap" onclick="selectedCampo(@i)">
+                            Posicion en Mapa
+                        </button>
                         @if (i > 0)
                         {
-                            <button type="submit" name="bDireccion" value="@i" class="btn btn-outline-warning">Eliminar</button>
+                            <button type="submit" name="bDireccion" value="@i" class="btn btn-outline-primary">Eliminar</button>
                         }
                         <hr />
                     </div>
@@ -177,4 +180,51 @@
         </div>
     </div>
 }
+<div class="modal fade" id="modalMap">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
 
+            <div class="modal-body d-flex flex-row justify-content-center">
+                <div id="map" style="height: 60vh; width: 80%;">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="setPosition()">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK-4115IIeoK7i7cFVO6jnjJ5krsxNyZE&callback=initMap" async defer></script>
+<script type="text/javascript">
+    var marker;
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: { lat: -17.378833, lng: -66.165167 }
+        });
+
+        marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: { lat: -17.378833, lng: -66.165167 }
+        });
+    }
+    var input;
+    function selectedCampo(id)
+    {
+        input=id;
+    }
+    function setPosition()
+    {
+        document.getElementById(`Direcciones_${input}__Latitud`).value = marker.position.lat().toFixed(5)
+        document.getElementById(`Direcciones_${input}__Longitud`).value = marker.position.lng().toFixed(5)
+    }
+
+</script>
