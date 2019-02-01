@@ -129,6 +129,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
 
                 resultado.Mensaje = "Cliente encontrado";
                 resultado.Ok = true;
+                resultado.Id = cliente.IdPersona;
             }
             catch(Exception ex)
             {
@@ -218,6 +219,8 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
                 return View();
             }
         }
+
+
 
 
     }

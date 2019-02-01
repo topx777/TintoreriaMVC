@@ -617,5 +617,13 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.MVC.Controllers
             return Json(cate.Nombre);
         }
 
+        [HttpPost]
+        public JsonResult Direcciones(int Id)
+        {
+            List<Direccion> list = DireccionBrl.GetList(Id);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

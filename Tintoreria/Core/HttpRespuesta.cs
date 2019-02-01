@@ -13,5 +13,7 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.Core
 
         public bool Ok { get; set; }
 
+        public int Id { get; set; }
+
     }
 }

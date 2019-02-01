@@ -147,6 +147,22 @@
             success: function (response) {
                 if (response.Ok) {
                     ciText.removeClass("is-invalid").addClass("is-valid").slideDown();
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("Direcciones", "Cliente")",
+                        data: { Id: response.Id },
+                        content: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            var input = "";
+                            response.forEach(direc => {
+                                input += `<option value="${direc.IdDireccion}">${direc.Descripcion}</option>`;
+                            });
+                            $('#direcciones').html(input);
+                        }
+
+                    })
+
                 } else {
                     ciText.removeClass("is-valid").addClass("is-invalid").slideDown();
                 }

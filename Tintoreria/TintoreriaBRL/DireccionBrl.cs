@@ -2,6 +2,7 @@
 using Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaDAL;
 using Upds.Sistemas.ProgWeb2.Tintoreria.Core;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
 {
@@ -97,6 +98,31 @@ namespace Upds.Sistemas.ProgWeb2.Tintoreria.TintoreriaBRL
                 Methods.GenerateLogsRelease("CategoriaBrl", "Eliminar", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Obtiene una lista a partir de un id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>List Direcciones</returns>
+        public static List<Direccion> GetList(int id)
+        {
+            List<Direccion> lista = new List<Direccion>();
+            try
+            {
+                lista= DireccionDal.GetList(id);
+            }
+            catch (SqlException ex)
+            {
+                Methods.GenerateLogsRelease("DireccionBrl", "getList", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                Methods.GenerateLogsRelease("DireccionDal", "getList", string.Format("{0} {1} Error: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), ex.Message));
+                throw ex;
+            }
+            return lista;
         }
     }
 }
