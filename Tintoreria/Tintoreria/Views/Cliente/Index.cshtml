@@ -52,34 +52,33 @@
             </table>
             <div id="container" style="margin-left: 20px">
                 <div class="pagination" style="margin-left: 400px">
-                    <!-- pager -->
                     @if (Model.Pager.EndPage > 1)
                     {
-                        <ul class="pagination">
+                        <ul class="pagination justify-content-center">
                             @if (Model.Pager.CurrentPage > 1)
                     {
-                                <li>
-                                    <a href="~/Cliente/Index">Primero</a>
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Cliente/Index">Primero</a>
                                 </li>
-                                <li>
-                                    <a href="~/Cliente/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Cliente/Index?page=@(Model.Pager.CurrentPage - 1)">Anterior</a>
                                 </li>
                             }
 
                             @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                     {
-                                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                                    <a href="~/Cliente/Index?page=@page">@page</a>
+                                <li class="page-item  @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                    <a class="page-link" href="~/Cliente/Index?page=@page">@page</a>
                                 </li>
                             }
 
                             @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                     {
-                                <li>
-                                    <a href="~/Cliente/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Cliente/Index?page=@(Model.Pager.CurrentPage + 1)">Siguiente</a>
                                 </li>
-                                <li>
-                                    <a href="~/Cliente/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Cliente/Index?page=@(Model.Pager.TotalPages)">Ultimo</a>
                                 </li>
                             }
                         </ul>
